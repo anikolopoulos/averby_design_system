@@ -220,7 +220,7 @@
       <!-- Rail Footer: Theme toggle -->
       <div class="rail-footer mt-auto shrink-0 p-2 grid place-items-center">
         <button id="toggleDark" class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 min-h-[44px] min-w-[44px]" aria-pressed="false">
-          <span id="themeIcon" class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible [font-variation-settings:'FILL'_0,'wght'_350,'GRAD'_0,'opsz'_24] group-hover:[font-variation-settings:'FILL'_0,'wght'_600,'GRAD'_0,'opsz'_24] aria-[current=page]:[font-variation-settings:'FILL'_1,'wght'_650,'GRAD'_0,'opsz'_24]" translate="no">dark_mode</span>
+          <span id="themeIcon" class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">dark_mode</span>
           <span class="nav-label">Theme</span>
         </button>
       </div>
@@ -229,11 +229,11 @@
     <!-- Inset shell: drawer and main are peers so the drawer compresses the page content (like Google Fonts) -->
     <div id="insetShell" class="flex-1 min-w-0 flex">
       <!-- Inset Left Drawer (same layer as main, pushes content) -->
-      <aside id="leftInset" class="w-0 overflow-hidden overflow-y-auto [scrollbar-gutter:stable] [will-change:width] transition-all duration-[280ms] ease-[cubic-bezier(.2,.8,.2,1)] bg-neutral-100 dark:bg-neutral-800/60 border-r border-neutral-200/70 dark:border-neutral-800 rounded-tr-2xl rounded-br-2xl">
+      <aside id="leftInset" class="w-0 overflow-hidden overflow-y-auto [scrollbar-gutter:stable] [will-change:width] drawer-slide drawer-slide-width bg-neutral-100 dark:bg-neutral-800/60 border-r border-neutral-200/70 dark:border-neutral-800 rounded-tr-2xl rounded-br-2xl">
         <div class="h-14 px-5 flex items-center justify-between">
           <h2 class="font-semibold">Create</h2>
           <button data-close-inset class="p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/70 min-h-[44px] min-w-[44px] flex items-center justify-center">
-            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible [font-variation-settings:'FILL'_0,'wght'_400,'GRAD'_0,'opsz'_24] group-hover:[font-variation-settings:'FILL'_0,'wght'_650,'GRAD'_0,'opsz'_24]" translate="no">close</span>
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">close</span>
           </button>
         </div>
         <div class="px-5 pb-6 space-y-3 w-[22rem]">
@@ -410,15 +410,15 @@
   </div>
 
   <!-- Scrim that adapts to rail state -->
-  <div id="scrim" class="hidden fixed top-0 right-0 bottom-0 left-[6rem] bg-neutral-900/40 backdrop-blur-[6px] [-webkit-backdrop-filter:blur(6px)] z-30 transition-[left] duration-300"></div>
+  <div id="scrim" class="hidden fixed top-0 right-0 bottom-0 left-[6rem] bg-neutral-900/40 backdrop-blur-[6px] [-webkit-backdrop-filter:blur(6px)] z-30 transition-[left,opacity] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] opacity-0 data-[open=true]:opacity-100"></div>
 
   <!-- Left Drawer (overlay, adapts to rail state) -->
-  <aside id="leftDrawer" class="hidden fixed left-[6rem] top-0 h-screen w-[22rem] max-w-[85vw] z-40 transition-[left] duration-300">
-    <div class="drawer-panel bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-full overflow-y-auto [scrollbar-gutter:stable] shadow-lg [will-change:transform,opacity] transition-all duration-[280ms] ease-out backdrop-blur-[8px] [-webkit-backdrop-filter:blur(8px)] rounded-tr-2xl rounded-br-2xl -translate-x-[22rem] opacity-0">
+  <aside id="leftDrawer" class="fixed top-0 h-screen w-[22rem] max-w-[85vw] z-40 drawer-slide drawer-slide-left">
+    <div class="drawer-panel bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-full overflow-y-auto [scrollbar-gutter:stable] shadow-lg backdrop-blur-[8px] [-webkit-backdrop-filter:blur(8px)] rounded-tr-2xl rounded-br-2xl">
       <div class="h-14 px-5 flex items-center justify-between">
         <h2 class="font-semibold">Programs</h2>
         <button data-close-left class="p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/70 min-h-[44px] min-w-[44px] flex items-center justify-center">
-          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible [font-variation-settings:'FILL'_0,'wght'_400,'GRAD'_0,'opsz'_24] group-hover:[font-variation-settings:'FILL'_0,'wght'_650,'GRAD'_0,'opsz'_24]" translate="no">close</span>
+          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">close</span>
         </button>
       </div>
       <div class="px-5 pb-6 space-y-3">
@@ -430,12 +430,12 @@
   </aside>
 
   <!-- Right Drawer (overlay, browser edge) -->
-  <aside id="rightDrawer" class="hidden fixed right-0 top-0 h-screen w-[28rem] max-w-[92vw] z-40">
-    <div class="drawer-panel bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-full overflow-y-auto [scrollbar-gutter:stable] shadow-lg [will-change:transform,opacity] transition-all duration-[280ms] ease-out backdrop-blur-[8px] [-webkit-backdrop-filter:blur(8px)] rounded-tl-2xl rounded-bl-2xl translate-x-[28rem] opacity-0">
+  <aside id="rightDrawer" class="fixed top-0 h-screen w-[28rem] max-w-[92vw] z-40 drawer-slide drawer-slide-right">
+    <div class="drawer-panel bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-full overflow-y-auto [scrollbar-gutter:stable] shadow-lg backdrop-blur-[8px] [-webkit-backdrop-filter:blur(8px)] rounded-tl-2xl rounded-bl-2xl">
       <div class="h-14 px-5 flex items-center justify-between">
         <h2 class="font-semibold">Content Filters</h2>
         <button data-close-right class="p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/70 min-h-[44px] min-w-[44px] flex items-center justify-center">
-          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible [font-variation-settings:'FILL'_0,'wght'_400,'GRAD'_0,'opsz'_24] group-hover:[font-variation-settings:'FILL'_0,'wght'_650,'GRAD'_0,'opsz'_24]" translate="no">close</span>
+          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">close</span>
         </button>
       </div>
       <div class="px-5 pb-6 space-y-5">
@@ -478,6 +478,10 @@
     const inset       = document.getElementById('leftInset');
     const avatarBtn   = document.getElementById('avatarBtn');
     const avatarMenu  = document.getElementById('avatarMenu');
+    
+    // Ensure drawers are marked as closed initially
+    if (leftDrawer) leftDrawer.dataset.open = 'false';
+    if (rightDrawer) rightDrawer.dataset.open = 'false';
 
     // Small util
     function swapClasses(el, remove = [], add = []) {
@@ -486,8 +490,20 @@
       add.forEach(c => el.classList.add(c));
     }
 
-    function openScrim()  { if (scrim) scrim.classList.remove('hidden'); }
-    function closeScrim() { if (scrim) scrim.classList.add('hidden'); }
+    function openScrim() { 
+      if (scrim) {
+        scrim.classList.remove('hidden');
+        // Force reflow for animation
+        void scrim.offsetWidth;
+        scrim.dataset.open = 'true';
+      }
+    }
+    function closeScrim() { 
+      if (scrim) {
+        scrim.dataset.open = 'false';
+        setTimeout(() => scrim.classList.add('hidden'), 2000);
+      }
+    }
 
     // Theme (robust): persists choice, syncs with system when unset, updates icon and color-scheme
     const THEME_KEY = 'theme';
@@ -563,47 +579,39 @@
     document.querySelectorAll('[data-open-left-drawer]').forEach(b =>
       b.addEventListener('click', () => {
         if (!leftDrawer) return;
-        leftDrawer.classList.remove('hidden');
-        const panel = leftDrawer.querySelector('.drawer-panel');
-        if (!panel) return;
-        // Force reflow so initial classes apply before we swap
-        void panel.offsetWidth;
-        swapClasses(panel, ['-translate-x-[22rem]', 'opacity-0'], ['translate-x-0', 'opacity-100']);
+        
+        // Show drawer and animate position
+        leftDrawer.dataset.open = 'true';
+        leftDrawer.classList.remove('left-[-22rem]');
+        leftDrawer.classList.add('left-[6rem]');
         openScrim();
       })
     );
 
     function closeLeft() {
       if (!leftDrawer) return;
-      const panel = leftDrawer.querySelector('.drawer-panel');
-      if (!panel) return;
-      swapClasses(panel, ['translate-x-0', 'opacity-100'], ['-translate-x-[22rem]', 'opacity-0']);
-      panel.addEventListener('transitionend', () => {
-        leftDrawer.classList.add('hidden');
-        closeScrim();
-      }, { once: true });
+      leftDrawer.dataset.open = 'false';
+      closeScrim();
     }
 
     // RIGHT overlay drawer (Filters)
     const rightPanel = rightDrawer?.querySelector('.drawer-panel');
     document.querySelectorAll('[data-open-right-drawer]').forEach(b =>
       b.addEventListener('click', () => {
-        if (!rightDrawer || !rightPanel) return;
-        rightDrawer.classList.remove('hidden');
-        // Force reflow
-        void rightPanel.offsetWidth;
-        swapClasses(rightPanel, ['translate-x-[28rem]', 'opacity-0'], ['translate-x-0', 'opacity-100']);
+        if (!rightDrawer) return;
+        
+        // Show drawer and animate position
+        rightDrawer.dataset.open = 'true';
+        rightDrawer.classList.remove('right-[-28rem]');
+        rightDrawer.classList.add('right-0');
         openScrim();
       })
     );
 
     function closeRight() {
-      if (!rightDrawer || !rightPanel) return;
-      swapClasses(rightPanel, ['translate-x-0', 'opacity-100'], ['translate-x-[28rem]', 'opacity-0']);
-      rightPanel.addEventListener('transitionend', () => {
-        rightDrawer.classList.add('hidden');
-        closeScrim();
-      }, { once: true });
+      if (!rightDrawer) return;
+      rightDrawer.dataset.open = 'false';
+      closeScrim();
     }
 
     // INSET drawer (pushes content)
@@ -628,8 +636,8 @@
 
     // Scrim + ESC
     scrim?.addEventListener('click', () => {
-      if (!leftDrawer?.classList.contains('hidden')) closeLeft();
-      if (!rightDrawer?.classList.contains('hidden')) closeRight();
+      if (leftDrawer?.dataset.open === 'true') closeLeft();
+      if (rightDrawer?.dataset.open === 'true') closeRight();
     });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
@@ -637,8 +645,8 @@
           avatarMenu.dataset.open = 'false';
           avatarBtn.setAttribute('aria-expanded', 'false');
         }
-        if (!leftDrawer?.classList.contains('hidden')) closeLeft();
-        if (!rightDrawer?.classList.contains('hidden')) closeRight();
+        if (leftDrawer?.dataset.open === 'true') closeLeft();
+        if (rightDrawer?.dataset.open === 'true') closeRight();
         closeInset();
       }
     });
