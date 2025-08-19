@@ -1,3 +1,75 @@
-/* App CSS - All styles now use Tailwind utilities directly */
+/* Essential styles that can't be expressed as Tailwind utilities */
 
-/* No custom CSS needed - everything handled by Tailwind v4.1 */
+/* Material Icons font variations */
+.material-symbols-rounded {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.material-symbols-rounded[data-filled="true"] {
+  font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Rail collapsed state - complex UI logic */
+#desktopRail[data-collapsed="true"] {
+  width: 0 !important;
+  overflow: hidden !important;
+  border-right-width: 0 !important;
+  padding: 0 !important;
+}
+
+#desktopRail[data-collapsed="true"] .nav-label,
+#desktopRail[data-collapsed="true"] .rail-logo,
+#desktopRail[data-collapsed="true"] nav,
+#desktopRail[data-collapsed="true"] .rail-footer {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Adjust scrim and drawers when rail is collapsed */
+body[data-rail-collapsed="true"] #scrim {
+  left: 0 !important;
+}
+
+body[data-rail-collapsed="true"] #leftDrawer {
+  left: 0 !important;
+}
+
+/* Rail transition */
+#desktopRail {
+  transition: width 0.3s ease, padding 0.3s ease, border-width 0.3s ease !important;
+}
+
+#desktopRail * {
+  transition: opacity 0.3s ease !important;
+}
+
+/* Mobile Search Overlay */
+[data-search-overlay] {
+  transition: transform 0.2s ease-out !important;
+}
+
+[data-search-overlay][data-open="true"] {
+  transform: translateY(0) !important;
+}
+
+[data-search-overlay][data-open="false"] {
+  transform: translateY(-100%) !important;
+}
+
+/* Reduced motion support - accessibility requirement */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01s !important;
+    animation-duration: 0.01s !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Enhanced focus states for accessibility */
+button:focus-visible,
+input:focus-visible,
+[role="tab"]:focus-visible {
+  outline: 2px solid rgba(249, 115, 22, 0.5) !important;
+  outline-offset: 2px !important;
+}

@@ -132,8 +132,7 @@
       --color-warning-900: #78350F;
     }
 
-    /* DRY sidebar components (do NOT @apply the `group` utility) */
-    /* Global touch target minimum for all interactive elements on mobile */
+    /* Touch target minimum for mobile interactions */
     @media (max-width: 767px) {
       button {
         min-width: 48px !important;
@@ -141,278 +140,23 @@
       }
     }
 
-    @layer components {
-      .sidebar-item {
-        @apply flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150;
-        min-height: 48px;
-        min-width: 48px;
-      }
-      .sidebar-icon {
-        @apply inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible;
-      }
-    }
-
-    @utility btn {
-      @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-transform transition-colors duration-150;
-      height: 48px;
-    }
-    .btn:active {
+    /* Button active state */
+    button:active {
       transform: scale(0.98);
     }
-    @utility btn-primary {
-      @apply btn bg-primary-500 text-neutral-50 hover:bg-primary-600;
-    }
-    @utility btn-outline {
-      @apply btn border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100;
-    }
 
-    @utility card {
-      @apply rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 p-5 transition-shadow duration-200 shadow-sm hover:shadow-lg;
-    }
 
-    @utility drawer-panel-base {
-      @apply bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-full overflow-y-auto [scrollbar-gutter:stable] shadow-lg [will-change:transform,opacity] transition-all duration-[280ms] ease-out backdrop-blur-[8px] [-webkit-backdrop-filter:blur(8px)];
-    }
 
-    /* menu-popover uses data-attribute variants; define base as a utility, variants as plain CSS below */
-    @utility menu-popover {
-      @apply absolute right-0 mt-2 w-56 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 shadow-float p-1 origin-top-right transition opacity-0 scale-95 pointer-events-none;
-    }
 
-    @utility input {
-      height: 48px;
-      @apply rounded-xl border border-neutral-200 dark:border-neutral-700 bg-transparent px-3 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-primary-400/60;
-    }
 
-    @utility chip {
-      @apply text-xs px-3 py-2 rounded-full min-h-[44px] inline-flex items-center justify-center;
-    }
-    @utility chip-primary {
-      @apply chip bg-primary-50 text-primary-700 dark:bg-primary-900/30 dark:text-primary-100;
-    }
-    @utility chip-info {
-      @apply chip bg-info-50 text-info-700 dark:bg-info-900/30 dark:text-info-100;
-    }
-    @utility chip-success {
-      @apply chip bg-success-50 text-success-700 dark:bg-success-900/30 dark:text-success-100;
-    }
 
-    /* Open state for menu-popover (plain CSS so runtime doesn't try to interpret unknown variant) */
-    .menu-popover[data-open="true"] {
-      opacity: 1;
-      transform: none;
-      pointer-events: auto;
-    }
 
-    /* Sidebar active/hover states without @apply variants */
-    .sidebar-item.is-active {
-      background-color: var(--color-primary-50);
-      color: var(--color-primary-600);
-    }
-    .dark .sidebar-item.is-active {
-      background-color: color-mix(in oklab, var(--color-primary-900) 30%, transparent);
-      color: var(--color-primary-300);
-    }
-    .group:hover .sidebar-icon {
-      font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;
-    }
-    .sidebar-item.is-active .sidebar-icon {
-      font-variation-settings: 'FILL' 1, 'wght' 650, 'GRAD' 0, 'opsz' 24;
-    }
-    .sidebar-item .sidebar-icon {
-      font-variation-settings: 'FILL' 0, 'wght' 350, 'GRAD' 0, 'opsz' 24;
-    }
 
-    @utility shadow-float {
-      box-shadow: 0 10px 30px -10px rgb(0 0 0 / 0.25);
-    }
 
-    /* Lazy loading styles */
-    .loading {
-      filter: blur(4px) !important;
-      transition: filter 0.3s ease;
-    }
-    .loading.loaded {
-      filter: none !important;
-    }
-    .skeleton {
-      animation: pulse 1.5s ease-in-out infinite;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-    .error {
-      filter: grayscale(100%) brightness(0.8);
-    }
-    .broken {
-      filter: grayscale(100%) brightness(0.8);
-    }
-    /* Enhanced hover states */
-    tbody tr {
-      transition: background-color 0.15s ease-out !important;
-    }
     
-    /* Enhanced focus states */
-    button:focus,
-    input:focus,
-    [role="tab"]:focus {
-      @apply ring-2 ring-primary-500/50 ring-offset-2 ring-offset-neutral-50 dark:ring-offset-neutral-900;
-    }
-    
-    /* Theme transitions */
-    html {
-      transition: color-scheme 0.3s ease !important;
-    }
-    body {
-      transition: background-color 0.3s ease, color 0.3s ease !important;
-    }
-    
-    /* Force override Tailwind defaults for specific transitions */
-    .btn-primary, .btn-outline, .btn {
-      transition: transform 0.15s ease-out, background-color 0.15s ease-out, color 0.15s ease-out !important;
-    }
-    
-    .sidebar-item {
-      transition: transform 0.15s ease-out, background-color 0.15s ease-out !important;
-    }
-    
-    .mobile-tab {
-      transition: transform 0.15s ease-out, color 0.15s ease-out, background-color 0.15s ease-out !important;
-    }
-    
-    .card {
-      transition: box-shadow 0.2s ease-out !important;
-    }
-    
-    input[type="search"], .input {
-      transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out !important;
-    }
-    
-    .drawer-panel {
-      transition: transform 0.28s ease-out, opacity 0.28s ease-out !important;
-    }
-    
-    /* Reduced motion support */
-    @media (prefers-reduced-motion: reduce) {
-      .loading {
-        animation-duration: 0s !important;
-        transition-duration: 0s !important;
-      }
-      .skeleton {
-        animation: none;
-      }
-      *, *::before, *::after {
-        transition-duration: 0.01s !important;
-        animation-duration: 0.01s !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-      }
-    }
 
-    /* Mobile tab styles */
-    .mobile-tab {
-      @apply text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px];
-    }
-    .mobile-tab.active {
-      @apply text-primary-600 dark:text-primary-400;
-      background-color: var(--color-primary-50);
-    }
-    .dark .mobile-tab.active {
-      background-color: color-mix(in oklab, var(--color-primary-900) 30%, transparent);
-    }
-    .mobile-tab .material-symbols-rounded {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
-    .mobile-tab.active .material-symbols-rounded {
-      font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
-    }
   </style>
   
-  <!-- Post-Tailwind customizations -->
-  <style>
-    /* Rail collapsed state */
-    #desktopRail[data-collapsed="true"] {
-      width: 0 !important;
-      overflow: hidden !important;
-      border-right-width: 0 !important;
-      padding: 0 !important;
-    }
-
-    /* Mobile Search Overlay */
-    [data-search-overlay] {
-      transition: transform 0.2s ease-out !important;
-    }
-    
-    [data-search-overlay][data-open="true"] {
-      transform: translateY(0) !important;
-    }
-    
-    [data-search-overlay][data-open="false"] {
-      transform: translateY(-100%) !important;
-    }
-    
-    #desktopRail[data-collapsed="true"] .nav-label,
-    #desktopRail[data-collapsed="true"] .rail-logo,
-    #desktopRail[data-collapsed="true"] nav,
-    #desktopRail[data-collapsed="true"] .rail-footer {
-      opacity: 0 !important;
-      pointer-events: none !important;
-    }
-    
-    /* Adjust scrim and drawers when rail is collapsed */
-    body[data-rail-collapsed="true"] #scrim {
-      left: 0 !important;
-    }
-    
-    body[data-rail-collapsed="true"] #leftDrawer {
-      left: 0 !important;
-    }
-    
-    /* Ensure smooth transitions */
-    #desktopRail {
-      transition: width 0.3s ease, padding 0.3s ease, border-width 0.3s ease !important;
-    }
-    
-    #desktopRail * {
-      transition: opacity 0.3s ease !important;
-    }
-    
-    #scrim, #leftDrawer {
-      transition: left 0.3s ease !important;
-    }
-    
-    /* Micro-interaction overrides */
-    .btn-primary, .btn-outline, .btn,
-    .sidebar-item,
-    .mobile-tab {
-      transition: transform 150ms ease-out, background-color 150ms ease-out, color 150ms ease-out !important;
-    }
-    
-    .btn-primary:active, .btn-outline:active, .btn:active,
-    .sidebar-item:active,
-    .mobile-tab:active {
-      transform: scale(0.98) !important;
-    }
-    
-    .card {
-      transition: box-shadow 200ms ease-out !important;
-    }
-    
-    .drawer-panel {
-      transition: transform 280ms ease-out, opacity 280ms ease-out !important;
-    }
-    
-    /* Enhanced focus states */
-    button:focus-visible,
-    input:focus-visible,
-    [role="tab"]:focus-visible {
-      outline: 2px solid rgba(245, 115, 22, 0.5) !important;
-      outline-offset: 2px !important;
-      border-color: rgba(245, 115, 22, 0.5) !important;
-    }
-  </style>
   <!-- Using Tailwind via CDN runtime for now. Do not also include a built Tailwind stylesheet; it will override variant order (e.g., dark:) and cause conflicts. -->
 </head>
 
@@ -437,38 +181,38 @@
       <!-- Nav icons with vertical labels (13px, bold) -->
       <nav class="mt-2 flex-1 flex flex-col gap-1 px-2">
         <!-- DASHBOARD -->
-        <button aria-current="page" class="group sidebar-item is-active">
-          <span class="material-symbols-rounded sidebar-icon" translate="no">dashboard</span>
+        <button aria-current="page" class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px] bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300" data-active="true">
+          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" data-filled="true" translate="no">dashboard</span>
           <span class="nav-label font-bold">My Snapshot</span>
         </button>
         <!-- CONTENT HUB -->
-        <button class="group sidebar-item" data-open-right-drawer>
-          <span class="material-symbols-rounded sidebar-icon" translate="no">library_books</span>
+        <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]" data-open-right-drawer>
+          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">library_books</span>
           <span class="nav-label">Content Hub</span>
         </button>
         <!-- TASKS -->
-        <button id="toastDemoBtn" class="group sidebar-item">
-          <span class="material-symbols-rounded sidebar-icon" translate="no">task_alt</span>
+        <button id="toastDemoBtn" class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]">
+          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">task_alt</span>
           <span class="nav-label">Tasks</span>
         </button>
         <!-- JOURNAL -->
-        <button class="group sidebar-item">
-          <span class="material-symbols-rounded sidebar-icon" translate="no">edit_note</span>
+        <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]">
+          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">edit_note</span>
           <span class="nav-label">Journal</span>
         </button>
         <!-- PATHS -->
-        <button class="group sidebar-item">
-          <span class="material-symbols-rounded sidebar-icon" translate="no">route</span>
+        <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]">
+          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">route</span>
           <span class="nav-label">Learning Paths</span>
         </button>
         <!-- PROGRAMS -> LEFT overlay drawer -->
-        <button class="group sidebar-item" data-open-left-drawer>
-          <span class="material-symbols-rounded sidebar-icon" translate="no">video_library</span>
+        <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]" data-open-left-drawer>
+          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">video_library</span>
           <span class="nav-label">Programs</span>
         </button>
         <!-- CREATE -> INSET drawer example -->
-        <button id="openInsetFromCreate" class="group sidebar-item">
-          <span class="material-symbols-rounded sidebar-icon" translate="no">add_circle</span>
+        <button id="openInsetFromCreate" class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]">
+          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">add_circle</span>
           <span class="nav-label">Create</span>
         </button>
       </nav>
@@ -493,9 +237,9 @@
           </button>
         </div>
         <div class="px-5 pb-6 space-y-3 w-[22rem]">
-          <button class="btn-primary w-full h-11" id="openInsetFromButton">New Program</button>
-          <button class="btn-outline w-full h-11">New Path</button>
-          <button class="btn-outline w-full h-11">Upload Content</button>
+          <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold bg-primary-500 text-neutral-50 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11" id="openInsetFromButton">New Program</button>
+          <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">New Path</button>
+          <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Upload Content</button>
         </div>
       </aside>
 
@@ -540,7 +284,7 @@
             <button id="avatarBtn" class="flex items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-primary-500" style="width: 48px; height: 48px;" aria-controls="avatarMenu" aria-expanded="false">
               <img class="h-9 w-9 rounded-full ring-1 ring-neutral-200 dark:ring-neutral-700" src="https://i.pravatar.cc/80?img=3" alt="User avatar" loading="lazy" data-src="https://i.pravatar.cc/80?img=3" data-critical="true" fetchpriority="high" />
             </button>
-            <div id="avatarMenu" class="menu-popover" role="menu" aria-labelledby="avatarBtn">
+            <div id="avatarMenu" class="absolute right-0 mt-2 w-56 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 shadow-2xl p-1 origin-top-right transition-all duration-150 opacity-0 scale-95 pointer-events-none data-[open=true]:opacity-100 data-[open=true]:scale-100 data-[open=true]:pointer-events-auto" role="menu" aria-labelledby="avatarBtn">
               <div class="px-3 py-2">
                 <p class="text-sm font-semibold">Nora G.</p>
                 <p class="text-xs text-neutral-500">Head of People Development</p>
@@ -564,18 +308,18 @@
                 <p class="text-sm text-neutral-500">Quick insight into usage, programs, and actions.</p>
               </div>
               <div class="flex items-center gap-2">
-                <button class="btn-primary" id="openInsetFromButton2">New Program</button>
-                <button class="btn-outline" data-open-right-drawer>Filters</button>
+                <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold bg-primary-500 text-neutral-50 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98]" id="openInsetFromButton2">New Program</button>
+                <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98]" data-open-right-drawer>Filters</button>
               </div>
             </div>
           </div>
 
           <section class="px-6 pb-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            <article class="card skeleton-container">
+            <article class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 p-5 transition-shadow duration-200 shadow-sm hover:shadow-lg skeleton-container">
               <div class="skeleton-content">
                 <div class="flex items-center justify-between">
                   <h3 class="font-semibold">Active Programs</h3>
-                  <span class="chip-primary">Live</span>
+                  <span class="text-xs px-3 py-2 rounded-full min-h-[44px] inline-flex items-center justify-center bg-primary-50 text-primary-700 dark:bg-primary-900/30 dark:text-primary-100">Live</span>
                 </div>
                 <p class="mt-6 text-4xl font-extrabold tracking-tight">24</p>
                 <p class="mt-2 text-sm text-neutral-500">(+3 this week)</p>
@@ -587,11 +331,11 @@
               </div>
             </article>
 
-            <article class="card skeleton-container">
+            <article class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 p-5 transition-shadow duration-200 shadow-sm hover:shadow-lg skeleton-container">
               <div class="skeleton-content">
                 <div class="flex items-center justify-between">
                   <h3 class="font-semibold">Participants</h3>
-                  <span class="chip-info">New</span>
+                  <span class="text-xs px-3 py-2 rounded-full min-h-[44px] inline-flex items-center justify-center bg-info-50 text-info-700 dark:bg-info-900/30 dark:text-info-100">New</span>
                 </div>
                 <p class="mt-6 text-4xl font-extrabold tracking-tight">1,482</p>
                 <p class="mt-2 text-sm text-neutral-500">Last 30 days</p>
@@ -603,11 +347,11 @@
               </div>
             </article>
 
-            <article class="card skeleton-container">
+            <article class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 p-5 transition-shadow duration-200 shadow-sm hover:shadow-lg skeleton-container">
               <div class="skeleton-content">
                 <div class="flex items-center justify-between">
                   <h3 class="font-semibold">Completion Rate</h3>
-                  <span class="chip-success">Up</span>
+                  <span class="text-xs px-3 py-2 rounded-full min-h-[44px] inline-flex items-center justify-center bg-success-50 text-success-700 dark:bg-success-900/30 dark:text-success-100">Up</span>
                 </div>
                 <p class="mt-6 text-4xl font-extrabold tracking-tight">78%</p>
                 <p class="mt-2 text-sm text-neutral-500">+6% vs. prior</p>
@@ -619,11 +363,11 @@
               </div>
             </article>
 
-            <div class="md:col-span-2 xl:col-span-3 card overflow-hidden">
+            <div class="md:col-span-2 xl:col-span-3 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 p-5 transition-shadow duration-200 shadow-sm hover:shadow-lg overflow-hidden">
               <div class="flex items-center justify-between mb-4">
                 <h3 class="font-semibold">Recent Activity</h3>
                 <div class="flex items-center gap-2">
-                  <button class="btn-outline px-3 rounded-lg" style="height: 48px;">Export</button>
+                  <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] px-3 rounded-lg" style="height: 48px;">Export</button>
                 </div>
               </div>
               <div class="overflow-x-auto -mx-5">
@@ -670,7 +414,7 @@
 
   <!-- Left Drawer (overlay, adapts to rail state) -->
   <aside id="leftDrawer" class="hidden fixed left-[6rem] top-0 h-screen w-[22rem] max-w-[85vw] z-40 transition-[left] duration-300">
-    <div class="drawer-panel drawer-panel-base rounded-tr-2xl rounded-br-2xl -translate-x-[22rem] opacity-0">
+    <div class="drawer-panel bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-full overflow-y-auto [scrollbar-gutter:stable] shadow-lg [will-change:transform,opacity] transition-all duration-[280ms] ease-out backdrop-blur-[8px] [-webkit-backdrop-filter:blur(8px)] rounded-tr-2xl rounded-br-2xl -translate-x-[22rem] opacity-0">
       <div class="h-14 px-5 flex items-center justify-between">
         <h2 class="font-semibold">Programs</h2>
         <button data-close-left class="p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/70 min-h-[44px] min-w-[44px] flex items-center justify-center">
@@ -678,16 +422,16 @@
         </button>
       </div>
       <div class="px-5 pb-6 space-y-3">
-        <button class="btn-primary w-full h-11">Create Program</button>
-        <button class="btn-outline w-full h-11">Invite Owners</button>
-        <button class="btn-outline w-full h-11">Import CSV</button>
+        <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold bg-primary-500 text-neutral-50 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Create Program</button>
+        <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Invite Owners</button>
+        <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Import CSV</button>
       </div>
     </div>
   </aside>
 
   <!-- Right Drawer (overlay, browser edge) -->
   <aside id="rightDrawer" class="hidden fixed right-0 top-0 h-screen w-[28rem] max-w-[92vw] z-40">
-    <div class="drawer-panel drawer-panel-base rounded-tl-2xl rounded-bl-2xl translate-x-[28rem] opacity-0">
+    <div class="drawer-panel bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-full overflow-y-auto [scrollbar-gutter:stable] shadow-lg [will-change:transform,opacity] transition-all duration-[280ms] ease-out backdrop-blur-[8px] [-webkit-backdrop-filter:blur(8px)] rounded-tl-2xl rounded-bl-2xl translate-x-[28rem] opacity-0">
       <div class="h-14 px-5 flex items-center justify-between">
         <h2 class="font-semibold">Content Filters</h2>
         <button data-close-right class="p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/70 min-h-[44px] min-w-[44px] flex items-center justify-center">
@@ -716,7 +460,7 @@
           </div>
         </div>
         <div class="pt-2 flex items-center justify-end gap-2">
-          <button data-close-right class="btn-outline">Cancel</button>
+          <button data-close-right class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98]">Cancel</button>
           <button class="btn bg-accent-500 text-neutral-50 hover:bg-accent-600">Apply</button>
         </div>
       </div>
@@ -1031,13 +775,15 @@
     function setActiveTab(activeTabId) {
       // Remove active class from all tabs
       document.querySelectorAll('.mobile-tab').forEach(tab => {
-        tab.classList.remove('active');
+        tab.classList.remove('text-primary-600', 'dark:text-primary-400', 'bg-primary-50', 'dark:bg-primary-900/30');
+        tab.classList.add('text-neutral-600', 'dark:text-neutral-400');
       });
       
       // Add active class to the selected tab
       const activeTab = document.querySelector(`[data-testid="${activeTabId}"]`);
       if (activeTab) {
-        activeTab.classList.add('active');
+        activeTab.classList.remove('text-neutral-600', 'dark:text-neutral-400');
+        activeTab.classList.add('text-primary-600', 'dark:text-primary-400', 'bg-primary-50', 'dark:bg-primary-900/30');
       }
     }
 
@@ -1414,31 +1160,31 @@
   <nav data-testid="mobile-bottom-tabs" class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-neutral-50 dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800" role="tablist">
     <div class="flex items-center justify-between px-4 py-2">
       <!-- Dashboard Tab -->
-      <button data-testid="tab-dashboard" role="tab" aria-label="Dashboard" class="mobile-tab active flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
+      <button data-testid="tab-dashboard" role="tab" aria-label="Dashboard" class="text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
         <span class="material-symbols-rounded text-lg mb-1 invisible [[data-icons-ready=true]_&]:visible" translate="no">dashboard</span>
         <span>Dashboard</span>
       </button>
       
       <!-- Content Hub Tab -->
-      <button data-testid="tab-content-hub" role="tab" aria-label="Content Hub" class="mobile-tab flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
+      <button data-testid="tab-content-hub" role="tab" aria-label="Content Hub" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
         <span class="material-symbols-rounded text-lg mb-1 invisible [[data-icons-ready=true]_&]:visible" translate="no">library_books</span>
         <span>Content Hub</span>
       </button>
       
       <!-- Tasks Tab -->
-      <button data-testid="tab-tasks" role="tab" aria-label="Tasks" class="mobile-tab flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
+      <button data-testid="tab-tasks" role="tab" aria-label="Tasks" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
         <span class="material-symbols-rounded text-lg mb-1 invisible [[data-icons-ready=true]_&]:visible" translate="no">task_alt</span>
         <span>Tasks</span>
       </button>
       
       <!-- Journal Tab -->
-      <button data-testid="tab-journal" role="tab" aria-label="Journal" class="mobile-tab flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
+      <button data-testid="tab-journal" role="tab" aria-label="Journal" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
         <span class="material-symbols-rounded text-lg mb-1 invisible [[data-icons-ready=true]_&]:visible" translate="no">edit_note</span>
         <span>Journal</span>
       </button>
       
       <!-- Create Tab -->
-      <button data-testid="tab-create" role="tab" aria-label="Create" class="mobile-tab flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
+      <button data-testid="tab-create" role="tab" aria-label="Create" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
         <span class="material-symbols-rounded text-lg mb-1 invisible [[data-icons-ready=true]_&]:visible" translate="no">add_circle</span>
         <span>Create</span>
       </button>
