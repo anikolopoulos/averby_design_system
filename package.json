@@ -1,0 +1,24 @@
+{
+  "name": "averby-admin-console",
+  "version": "1.0.0",
+  "description": "Averby Admin Console with modern UI improvements",
+  "scripts": {
+    "start": "./launch.sh",
+    "start:no-browser": "./launch.sh --no-browser",
+    "start:build": "./launch.sh --build",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "serve": "bunx http-server . -p 8030",
+    "build:css": "bunx tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "build": "bun run build:css",
+    "dev": "bunx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "tailwindcss": "^3.4.0"
+  },
+  "keywords": ["admin", "dashboard", "ui"],
+  "author": "",
+  "license": "MIT"
+}
