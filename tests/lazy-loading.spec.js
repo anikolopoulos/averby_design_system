@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Image Lazy Loading', () => {
   test.beforeEach(async ({ page }) => {
     // Navigate to the application
-    await page.goto('/base.html');
+    await page.goto('/');
     // Wait for page to be fully loaded
     await page.waitForLoadState('networkidle');
   });
@@ -56,7 +56,7 @@ test.describe('Image Lazy Loading', () => {
     });
 
     // Navigate to fresh page
-    await page.goto('/base.html');
+    await page.goto('/');
     
     // Check if avatar has placeholder styling
     const avatarContainer = page.locator('[id="avatarBtn"]');
@@ -100,7 +100,7 @@ test.describe('Image Lazy Loading', () => {
       delete HTMLImageElement.prototype.loading;
     });
 
-    await page.goto('/base.html');
+    await page.goto('/');
     
     // Check for Intersection Observer implementation
     const hasIntersectionObserver = await page.evaluate(() => {
@@ -171,7 +171,7 @@ test.describe('Image Lazy Loading', () => {
 
   test('should improve performance metrics with lazy loading', async ({ page }) => {
     // Start performance measurement
-    await page.goto('/base.html');
+    await page.goto('/');
     
     // Measure initial page load performance
     const performanceMetrics = await page.evaluate(() => {
@@ -238,7 +238,7 @@ test.describe('Image Lazy Loading', () => {
   });
 
   test('should preload critical images while lazy loading others', async ({ page }) => {
-    await page.goto('/base.html');
+    await page.goto('/');
     
     // Avatar is critical and should be loaded immediately
     const avatarImage = page.locator('img[alt="User avatar"]');
@@ -261,7 +261,7 @@ test.describe('Image Lazy Loading', () => {
     // Set reduced motion preference
     await page.emulateMedia({ reducedMotion: 'reduce' });
     
-    await page.goto('/base.html');
+    await page.goto('/');
     
     // Check if animations are disabled or reduced for lazy loading
     const hasReducedMotion = await page.evaluate(() => {
@@ -291,7 +291,7 @@ test.describe('Image Lazy Loading', () => {
   test.describe('Responsive Image Lazy Loading', () => {
     test('should work on mobile viewports', async ({ page }) => {
       await page.setViewportSize({ width: 375, height: 667 }); // iPhone 8 size
-      await page.goto('/base.html');
+      await page.goto('/');
       
       const avatarImage = page.locator('img[alt="User avatar"]');
       await expect(avatarImage).toHaveAttribute('loading', 'lazy');
@@ -303,7 +303,7 @@ test.describe('Image Lazy Loading', () => {
 
     test('should work on tablet viewports', async ({ page }) => {
       await page.setViewportSize({ width: 768, height: 1024 }); // iPad size
-      await page.goto('/base.html');
+      await page.goto('/');
       
       const avatarImage = page.locator('img[alt="User avatar"]');
       await expect(avatarImage).toHaveAttribute('loading', 'lazy');
@@ -311,7 +311,7 @@ test.describe('Image Lazy Loading', () => {
 
     test('should work on desktop viewports', async ({ page }) => {
       await page.setViewportSize({ width: 1440, height: 900 });
-      await page.goto('/base.html');
+      await page.goto('/');
       
       const avatarImage = page.locator('img[alt="User avatar"]');
       await expect(avatarImage).toHaveAttribute('loading', 'lazy');
@@ -320,7 +320,7 @@ test.describe('Image Lazy Loading', () => {
 
   test.describe('Accessibility', () => {
     test('should maintain alt text during lazy loading', async ({ page }) => {
-      await page.goto('/base.html');
+      await page.goto('/');
       
       const avatarImage = page.locator('img[alt="User avatar"]');
       
@@ -333,7 +333,7 @@ test.describe('Image Lazy Loading', () => {
     });
 
     test('should not interfere with screen readers', async ({ page }) => {
-      await page.goto('/base.html');
+      await page.goto('/');
       
       const avatarImage = page.locator('img[alt="User avatar"]');
       
@@ -347,7 +347,7 @@ test.describe('Image Lazy Loading', () => {
     });
 
     test('should provide loading state announcements', async ({ page }) => {
-      await page.goto('/base.html');
+      await page.goto('/');
       
       // Check for ARIA live regions for loading states
       const hasLiveRegion = await page.locator('[aria-live]').count();

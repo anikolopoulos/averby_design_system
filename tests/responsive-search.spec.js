@@ -4,7 +4,7 @@ test.describe('Responsive Search Bar', () => {
   test.describe('Desktop View', () => {
     test.beforeEach(async ({ page }) => {
       await page.setViewportSize({ width: 1440, height: 900 });
-      await page.goto('/base.html');
+      await page.goto('/');
     });
 
     test('should display full search bar with input field on desktop', async ({ page }) => {
@@ -28,7 +28,7 @@ test.describe('Responsive Search Bar', () => {
   test.describe('Medium Screen View', () => {
     test.beforeEach(async ({ page }) => {
       await page.setViewportSize({ width: 768, height: 900 });
-      await page.goto('/base.html');
+      await page.goto('/');
     });
 
     test('should display narrower search bar on medium screens', async ({ page }) => {
@@ -51,7 +51,7 @@ test.describe('Responsive Search Bar', () => {
   test.describe('Mobile View', () => {
     test.beforeEach(async ({ page }) => {
       await page.setViewportSize({ width: 375, height: 667 });
-      await page.goto('/base.html');
+      await page.goto('/');
     });
 
     test('should hide search input and show search icon button on mobile', async ({ page }) => {
@@ -213,7 +213,7 @@ test.describe('Responsive Search Bar', () => {
   test.describe('Responsive Behavior', () => {
     test('should transition smoothly when resizing from desktop to mobile', async ({ page }) => {
       await page.setViewportSize({ width: 1440, height: 900 });
-      await page.goto('/base.html');
+      await page.goto('/');
       
       const searchInput = page.locator('#searchInput');
       const searchButton = page.locator('[data-search-trigger]');
@@ -232,7 +232,7 @@ test.describe('Responsive Search Bar', () => {
 
     test('should transition smoothly when resizing from mobile to desktop', async ({ page }) => {
       await page.setViewportSize({ width: 375, height: 667 });
-      await page.goto('/base.html');
+      await page.goto('/');
       
       const searchInput = page.locator('#searchInput');
       const searchButton = page.locator('[data-search-trigger]');
@@ -251,7 +251,7 @@ test.describe('Responsive Search Bar', () => {
 
     test('should close overlay when resizing from mobile to desktop', async ({ page }) => {
       await page.setViewportSize({ width: 375, height: 667 });
-      await page.goto('/base.html');
+      await page.goto('/');
       
       const searchButton = page.locator('[data-search-trigger]');
       const searchOverlay = page.locator('[data-search-overlay]');

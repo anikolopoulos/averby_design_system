@@ -5,7 +5,7 @@ test.describe('Collapsible Rail Feature', () => {
     test.beforeEach(async ({ page }) => {
       // Set desktop viewport
       await page.setViewportSize({ width: 1440, height: 900 });
-      await page.goto('/base.html');
+      await page.goto('/');
       // Clear localStorage to reset rail state
       await page.evaluate(() => localStorage.removeItem('railCollapsed'));
       await page.reload();
