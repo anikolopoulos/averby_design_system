@@ -1,6 +1,14 @@
-# Averby Admin Console
+# Averby Design System
 
-A modern, responsive admin dashboard with comprehensive UI improvements implemented using Test-Driven Development (TDD).
+A modern, responsive design system and admin dashboard with comprehensive UI improvements implemented using Test-Driven Development (TDD).
+
+## 🎯 Repository Structure
+
+This repository contains:
+- **Main Branch**: Design specifications, HTML prototypes, and interactive documentation
+- **Django Implementation Branch**: Production Django templates and implementation (`django-implementation` branch)
+
+📋 **For Django Integration**: See the `django-implementation` branch for ready-to-use Django templates, CSS, and configuration files.
 
 ## 🚀 Quick Start
 
