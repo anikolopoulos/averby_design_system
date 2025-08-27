@@ -1,0 +1,186 @@
+/* Essential styles that can't be expressed as Tailwind utilities */
+
+/* Primary color system - Orange theme for active states */
+:root {
+  --primary-50: rgb(255 247 237);    /* Orange-50 */
+  --primary-100: rgb(255 237 213);   /* Orange-100 */
+  --primary-200: rgb(254 215 170);   /* Orange-200 */
+  --primary-300: rgb(253 186 116);   /* Orange-300 */
+  --primary-400: rgb(251 146 60);    /* Orange-400 */
+  --primary-500: rgb(249 115 22);    /* Orange-500 */
+  --primary-600: rgb(234 88 12);     /* Orange-600 */
+  --primary-700: rgb(194 65 12);     /* Orange-700 */
+  --primary-800: rgb(154 52 18);     /* Orange-800 */
+  --primary-900: rgb(124 45 18);     /* Orange-900 */
+}
+
+.dark {
+  --primary-50: rgb(124 45 18);      /* Orange-900 inverted for dark */
+  --primary-100: rgb(154 52 18);     /* Orange-800 inverted for dark */
+  --primary-200: rgb(194 65 12);     /* Orange-700 inverted for dark */
+  --primary-300: rgb(234 88 12);     /* Orange-600 inverted for dark */
+  --primary-400: rgb(249 115 22);    /* Orange-500 inverted for dark */
+  --primary-500: rgb(251 146 60);    /* Orange-400 inverted for dark */
+  --primary-600: rgb(253 186 116);   /* Orange-300 inverted for dark */
+  --primary-700: rgb(254 215 170);   /* Orange-200 inverted for dark */
+  --primary-800: rgb(255 237 213);   /* Orange-100 inverted for dark */
+  --primary-900: rgb(255 247 237);   /* Orange-50 inverted for dark */
+}
+
+/* Material Icons font variations */
+.material-symbols-rounded {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  transition: font-variation-settings 0.2s ease;
+}
+
+.material-symbols-rounded[data-filled="true"] {
+  font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Icon hover effect when inside a group */
+.group:hover .material-symbols-rounded:not([data-filled="true"]) {
+  font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+}
+
+.group:hover .material-symbols-rounded[data-filled="true"] {
+  font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Rail collapsed state - complex UI logic */
+#desktopRail[data-collapsed="true"] {
+  width: 0 !important;
+  overflow: hidden !important;
+  border-right-width: 0 !important;
+  padding: 0 !important;
+}
+
+#desktopRail[data-collapsed="true"] .nav-label,
+#desktopRail[data-collapsed="true"] .rail-logo,
+#desktopRail[data-collapsed="true"] nav,
+#desktopRail[data-collapsed="true"] .rail-footer {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Adjust scrim when rail is collapsed */
+body[data-rail-collapsed="true"] #scrim {
+  left: 0 !important;
+}
+
+/* Don't auto-show drawer when rail is collapsed */
+body[data-rail-collapsed="true"] #leftDrawer[data-open="false"] {
+  left: -22rem !important;
+}
+
+body[data-rail-collapsed="true"] #leftDrawer[data-open="true"] {
+  left: 0 !important;
+}
+
+/* Rail transition */
+#desktopRail {
+  transition: width 0.3s ease, padding 0.3s ease, border-width 0.3s ease !important;
+}
+
+#desktopRail * {
+  transition: opacity 0.3s ease !important;
+}
+
+/* Mobile Search Overlay */
+[data-search-overlay] {
+  transition: transform 0.2s ease-out !important;
+}
+
+[data-search-overlay][data-open="true"] {
+  transform: translateY(0) !important;
+}
+
+[data-search-overlay][data-open="false"] {
+  transform: translateY(-100%) !important;
+}
+
+/* Reduced motion support - accessibility requirement */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01s !important;
+    animation-duration: 0.01s !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Enhanced focus states for accessibility */
+button:focus-visible,
+input:focus-visible,
+[role="tab"]:focus-visible {
+  outline: 2px solid rgba(249, 115, 22, 0.5) !important;
+  outline-offset: 2px !important;
+}
+
+/* Force dark mode styles for specific elements that may not be responding */
+.dark input[type="search"] {
+  background-color: rgb(64 64 64 / 0.7) !important;
+  border-color: rgb(82 82 82) !important;
+  color: rgb(245 245 245) !important;
+}
+
+.dark select {
+  background-color: rgb(64 64 64 / 0.7) !important;
+  border-color: rgb(82 82 82) !important;
+  color: rgb(245 245 245) !important;
+}
+
+.dark .bg-neutral-50 {
+  background-color: rgb(38 38 38 / 0.5) !important;
+}
+
+.dark .bg-purple-50 {
+  background-color: rgb(88 28 135 / 0.2) !important;
+}
+
+.dark .bg-neutral-200 {
+  background-color: rgb(82 82 82) !important;
+}
+
+.dark thead {
+  background-color: rgb(38 38 38 / 0.5) !important;
+}
+
+/* Drawer slide animations - consistent timing and easing for all drawers */
+.drawer-slide {
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.drawer-slide-left {
+  transition-property: left;
+}
+
+.drawer-slide-right {
+  transition-property: right;
+}
+
+.drawer-slide-width {
+  transition-property: width;
+}
+
+/* Ensure overlay drawers are properly positioned off-screen initially */
+#leftDrawer[data-open="false"] {
+  left: -22rem !important;
+}
+
+#rightDrawer[data-open="false"] {
+  right: -28rem !important;
+}
+
+/* Override when opened - adapt to rail state */
+#leftDrawer[data-open="true"] {
+  left: 6rem !important;
+}
+
+body[data-rail-collapsed="true"] #leftDrawer[data-open="true"] {
+  left: 0 !important;
+}
+
+#rightDrawer[data-open="true"] {
+  right: 0 !important;
+}

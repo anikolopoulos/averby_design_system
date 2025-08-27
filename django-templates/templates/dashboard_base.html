@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Averby Platform{% endblock %}</title>
+
+  {% block extra_head %}
+  {% endblock %}
+
+  <!-- Preconnects stay -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Preload fonts CSS, then load stylesheet (with noscript fallback) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap"></noscript>
+
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"></noscript>
+
+  <script>
+    // Early theme bootstrap: set .dark before Tailwind runtime scans the DOM
+    (function(){
+      try {
+        var root = document.documentElement;
+        var stored = localStorage.getItem('theme');
+        var isDark;
+        if (stored === 'dark' || stored === 'light') {
+          isDark = stored === 'dark';
+        } else {
+          var mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+          isDark = !!(mq && mq.matches);
+        }
+        if (isDark) {
+          root.classList.add('dark');
+          root.style.colorScheme = 'dark';
+        } else {
+          root.classList.remove('dark');
+          root.style.colorScheme = 'light';
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <!-- Using Tailwind CSS v4 browser runtime for development -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/static/main.css">
+  <link rel="stylesheet" href="/static/css/mobile-invitations.css">
+  <style>
+
+
+
+    /* Explicit dark mode styles as fallback for Tailwind browser runtime */
+    html.dark body {
+      background-color: rgb(23 23 23) !important; /* neutral-900 */
+      color: rgb(245 245 245) !important; /* neutral-100 */
+    }
+
+    html.dark .dark\:bg-neutral-900 {
+      background-color: rgb(23 23 23) !important;
+    }
+
+    html.dark .dark\:bg-neutral-900\/60 {
+      background-color: rgb(23 23 23 / 0.6) !important;
+    }
+
+    html.dark .dark\:bg-neutral-900\/70 {
+      background-color: rgb(23 23 23 / 0.7) !important;
+    }
+
+    html.dark .dark\:bg-neutral-800 {
+      background-color: rgb(38 38 38) !important;
+    }
+
+    html.dark .dark\:bg-neutral-800\/60 {
+      background-color: rgb(38 38 38 / 0.6) !important;
+    }
+
+    html.dark .dark\:bg-neutral-800\/70 {
+      background-color: rgb(38 38 38 / 0.7) !important;
+    }
+
+    html.dark .dark\:text-neutral-100 {
+      color: rgb(245 245 245) !important;
+    }
+
+    html.dark .dark\:text-neutral-200 {
+      color: rgb(229 229 229) !important;
+    }
+
+    html.dark .dark\:text-neutral-300 {
+      color: rgb(212 212 212) !important;
+    }
+
+    html.dark .dark\:text-neutral-400 {
+      color: rgb(163 163 163) !important;
+    }
+
+    html.dark .dark\:text-neutral-50 {
+      color: rgb(250 250 250) !important;
+    }
+
+    html.dark .dark\:border-neutral-700 {
+      border-color: rgb(64 64 64) !important;
+    }
+
+    html.dark .dark\:border-neutral-800 {
+      border-color: rgb(38 38 38) !important;
+    }
+
+    html.dark .dark\:hover\:bg-neutral-700\/40:hover {
+      background-color: rgb(64 64 64 / 0.4) !important;
+    }
+
+    html.dark .dark\:hover\:bg-neutral-700\/60:hover {
+      background-color: rgb(64 64 64 / 0.6) !important;
+    }
+
+    html.dark .dark\:hover\:bg-neutral-800\/70:hover {
+      background-color: rgb(38 38 38 / 0.7) !important;
+    }
+
+    html.dark .dark\:ring-neutral-700 {
+      --tw-ring-color: rgb(64 64 64) !important;
+    }
+
+    /* Primary colors - light mode */
+    .bg-primary-50 { background-color: var(--primary-50) !important; }
+    .bg-primary-500 { background-color: var(--primary-500) !important; }
+    .bg-primary-600 { background-color: var(--primary-600) !important; }
+    .text-primary-600 { color: var(--primary-600) !important; }
+    .text-primary-700 { color: var(--primary-700) !important; }
+    .border-primary-500 { border-color: var(--primary-500) !important; }
+    .hover\:bg-primary-600:hover { background-color: var(--primary-600) !important; }
+    .hover\:bg-primary-700:hover { background-color: var(--primary-700) !important; }
+
+    /* Dark mode primary colors */
+    .dark .dark\:bg-primary-900\/30 { background-color: rgb(124 45 18 / 0.3) !important; }
+    .dark .dark\:text-primary-300 { color: var(--primary-300) !important; }
+    .dark .dark\:text-primary-100 { color: var(--primary-100) !important; }
+
+    /* Button active state */
+    button:active {
+      transform: scale(0.98);
+    }
+
+
+
+
+
+
+
+
+
+
+
+  </style>
+
+  <!-- Using Tailwind CSS v4.1 built stylesheet -->
+</head>
+
+<body class="h-full bg-neutral-50 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100 antialiased">
+  <div class="flex h-screen w-screen overflow-hidden pb-0 md:pb-0">
+
+    <!-- Fixed Vertical Rail with inline SVG logo on top -->
+    <aside id="desktopRail" data-rail class="hidden md:flex flex-col w-24 bg-neutral-200 dark:bg-neutral-900/60 border-r border-neutral-200/70 dark:border-neutral-800 sticky left-0 top-0 h-screen z-50 pt-2 overflow-y-auto [box-shadow:4px_0_12px_-8px_rgb(0_0_0_/_0.25)] transition-all duration-300" data-collapsed="false">
+      <!-- Logo area (20% larger) -->
+      <div class="rail-logo shrink-0 h-14 px-3 flex items-center justify-center">
+        <div class="h-[2.88rem] w-[2.88rem] text-neutral-900 dark:text-neutral-50" aria-label="Averby">
+          <!-- Inline logo SVG with currentColor so it flips in dark mode -->
+          <svg viewBox="0 0 807.55 807.55" xmlns="http://www.w3.org/2000/svg" class="h-[2.88rem] w-[2.88rem]">
+            <path fill="currentColor" d="M366.88,371.83c-12.67-.09-24.86,8.24-26.3,18.48h50.47C390.1,382,380.57,371.93,366.88,371.83Z"/>
+            <path fill="currentColor" d="M560.1,374.42c-15.82,0-27.43,11.63-27.45,27.6,0,16.17,11.87,28.41,27.47,28.28,15.77-.13,27.4-12,27.43-28.06S576.1,374.46,560.1,374.42Z"/>
+            <path fill="currentColor" d="M139.27,374.32c-16.09,0-27.49,11.46-27.5,27.66s11.49,28.09,27.42,28.19c15.61.1,27.47-12.09,27.46-28.24C166.64,386,155.09,374.34,139.27,374.32Z"/>
+            <path fill="currentColor" d="M403.78-.16C180.69-.16-.16,180.69-.16,403.78S180.69,807.71,403.78,807.71,807.71,626.87,807.71,403.78,626.87-.16,403.78-.16ZM196.94,455.06H168.57V440.7c-1.21,1.41-2,2.41-2.87,3.33-8.24,8.74-18.51,12.82-30.37,13.36-16.05.72-29.67-4.63-40.54-16.45-10.64-11.58-14.51-25.67-14-41.08.4-13.07,4.37-24.94,12.87-35.07,9.48-11.28,21.7-17.22,36.3-18.2,9.27-.61,18.3.7,26.39,5.53,4,2.39,7.51,5.57,11.26,8.4V349.67h29.37Zm23.94-72.33h0l-16.56-33.05h32l21.48,47.13,19.65-43.11h0l1.83-4H310l-52.82,105.4ZM421,412.51H340.71a23.59,23.59,0,0,0,12.8,15.11,32.62,32.62,0,0,0,40.79-9.57c.3-.39.62-.76,1-1.22l22.55,15.47c-1.52,2-2.83,3.94-4.42,5.67a58,58,0,0,1-35.8,18.76c-12.81,1.72-25.32.69-37.29-4.5-18.37-8-28.82-22.12-31.46-41.82-2.31-17.22,1.68-32.84,13.65-45.86s26.91-18.24,44.15-18.14c10.73.06,20.92,2.4,30.07,8.16,12.49,7.87,19.5,19.51,22.73,33.7C421.3,396.2,421.06,404.2,421,412.51Zm61.34-38.61c-14.87,4.28-23.75,16.12-23.81,31.69s0,31.07,0,46.61V455h-30V349.63h27.95v12.74c7.79-11.84,19.81-14.9,32.91-16.68,1.91,8.53,3.78,16.88,5.67,25.28C490.47,372,486.32,372.74,482.29,373.9Zm135.29,40a52.71,52.71,0,0,1-16.67,31c-9.73,8.83-21.41,12.78-34.4,12.79a47.82,47.82,0,0,1-22.8-5.23,39.18,39.18,0,0,1-13-11.23v14H502.32V308.55h29.77V361c3-2.51,5.53-5.08,8.49-7a43.21,43.21,0,0,1,9.76-4.81,50.83,50.83,0,0,1,58.39,19.76C618.12,382.56,620.32,397.81,617.58,413.9Zm79,80c-14,6-28.36,6.27-42.93,3.37a75.8,75.8,0,0,1-28.31-11.56c-.6-.41-1.17-.88-2-1.54,4.26-7.79,8.48-15.54,12.82-23.48a55.13,55.13,0,0,0,17.62,8.63c8.31,2.34,16.69,3.14,25.19,1.39,12.5-2.57,20.33-12.47,19.93-25.17a10.25,10.25,0,0,0-.18-1l-2.39,2.22c-9.33,8.71-20.4,11.68-32.46,10.48-12.44-1.24-23-6.74-30.76-17.4a35.56,35.56,0,0,1-7-21.46q0-33,0-65.95V349.7h29.57v3c0,18.73,0,37.45,0,56.17,0,10,5.57,17.38,14.71,19.22s17-.8,23.19-8.3c2.79-3.37,3.84-7.48,3.84-11.9q0-27.43,0-54.88v-3.37h29.43V353q0,46.63,0,93.26C726.86,468.25,715.84,485.62,696.6,493.85Z"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Nav icons with vertical labels (13px, bold) -->
+      <nav class="mt-2 flex-1 flex flex-col gap-1 px-2">
+        {% block rail_navigation %}
+        {% comment %}
+        Context-Aware Navigation:
+        - Provider Console: URLs starting with /provider/
+        - Participant Console: URLs starting with /participant/
+        - Default: Basic navigation
+        {% endcomment %}
+
+        {% if request.resolver_match and request.resolver_match.app_name == 'provider' %}
+          <!-- PROVIDER CONSOLE NAVIGATION -->
+          <!-- DASHBOARD -->
+          <a href="{% url 'provider:dashboard' %}"
+             aria-current="{% if request.resolver_match and request.resolver_match.url_name == 'dashboard' %}page{% endif %}"
+             class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px] {% if request.resolver_match and request.resolver_match.url_name == 'dashboard' %}bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300{% endif %}"
+             {% if request.resolver_match and request.resolver_match.url_name == 'dashboard' %}data-active="true"{% endif %}>
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible" {% if request.resolver_match and request.resolver_match.url_name == 'dashboard' %}data-filled="true"{% endif %} translate="no">dashboard</span>
+            <span class="nav-label font-bold">Dashboard</span>
+          </a>
+          <!-- CONTENT HUB - Navigate to page -->
+          <a href="#" class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]" onclick="if (typeof makeToast === 'function') makeToast({title: 'Content Hub', message: 'Navigating to Content Hub...', variant: 'info', style: 'glass'});">
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible" translate="no">library_books</span>
+            <span class="nav-label">Content Hub</span>
+          </a>
+          <!-- TASKS -->
+          <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]">
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible" translate="no">task_alt</span>
+            <span class="nav-label">Tasks</span>
+          </button>
+          <!-- PROGRAMS -> LEFT overlay drawer -->
+          <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]" data-open-left-drawer>
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible" translate="no">video_library</span>
+            <span class="nav-label">Programs</span>
+          </button>
+          <!-- USERS -> Opens drawer with submenu -->
+          <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold {% if request.resolver_match.url_name == 'user_list' or request.resolver_match.url_name == 'user_detail' or 'user' in request.resolver_match.url_name %}bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300{% else %}text-neutral-700 dark:text-neutral-200{% endif %} hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]" data-open-left-drawer="provider-users" {% if request.resolver_match.url_name == 'user_list' or request.resolver_match.url_name == 'user_detail' or 'user' in request.resolver_match.url_name %}data-active="true"{% endif %}>
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible" {% if request.resolver_match.url_name == 'user_list' or request.resolver_match.url_name == 'user_detail' or 'user' in request.resolver_match.url_name %}data-filled="true"{% endif %} translate="no">group</span>
+            <span class="nav-label">Users</span>
+          </button>
+          <!-- INVITATIONS -> Opens drawer with submenu -->
+          <button id="invitationsDrawerBtn" class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold {% if request.resolver_match.url_name == 'invitation_dashboard' or request.resolver_match.url_name == 'invite_user' or request.resolver_match.url_name == 'invitation_list' %}bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300{% else %}text-neutral-700 dark:text-neutral-200{% endif %} hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]" data-open-left-drawer="invitations" {% if request.resolver_match.url_name == 'invitation_dashboard' or request.resolver_match.url_name == 'invite_user' or request.resolver_match.url_name == 'invitation_list' %}data-active="true"{% endif %}>
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible" {% if request.resolver_match.url_name == 'invitation_dashboard' or request.resolver_match.url_name == 'invite_user' or request.resolver_match.url_name == 'invitation_list' %}data-filled="true"{% endif %} translate="no">mail</span>
+            <span class="nav-label">Invitations</span>
+          </button>
+
+        {% elif request.resolver_match and request.resolver_match.app_name == 'admin_console' %}
+          <!-- ADMIN CONSOLE NAVIGATION -->
+          <!-- DASHBOARD -->
+          <a href="{% url 'admin_console:dashboard' %}"
+             aria-current="{% if request.resolver_match and request.resolver_match.url_name == 'dashboard' %}page{% endif %}"
+             class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px] {% if request.resolver_match and request.resolver_match.url_name == 'dashboard' %}bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300{% endif %}"
+             {% if request.resolver_match and request.resolver_match.url_name == 'dashboard' %}data-active="true"{% endif %}>
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible" {% if request.resolver_match and request.resolver_match.url_name == 'dashboard' %}data-filled="true"{% endif %} translate="no">dashboard</span>
+            <span class="nav-label font-bold">Admin Dashboard</span>
+          </a>
+          <!-- TENANTS -->
+          <a href="{% url 'admin_console:tenant_management' %}"
+             aria-current="{% if request.resolver_match and request.resolver_match.url_name == 'tenant_management' %}page{% endif %}"
+             class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px] {% if request.resolver_match and request.resolver_match.url_name == 'tenant_management' %}bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300{% endif %}"
+             {% if request.resolver_match and request.resolver_match.url_name == 'tenant_management' %}data-active="true"{% endif %}>
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible" {% if request.resolver_match and request.resolver_match.url_name == 'tenant_management' %}data-filled="true"{% endif %} translate="no">apartment</span>
+            <span class="nav-label">Tenants</span>
+          </a>
+          <!-- USERS -> Opens drawer -->
+          <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px] {% if request.resolver_match and 'user_management' in request.resolver_match.url_name or 'impersonation' in request.resolver_match.url_name %}bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300{% endif %}" data-open-left-drawer="users">
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible" translate="no">group</span>
+            <span class="nav-label">Users</span>
+          </button>
+          <!-- BILLING -->
+          <a href="{% url 'admin_console:billing_management' %}"
+             aria-current="{% if request.resolver_match and request.resolver_match.url_name == 'billing_management' %}page{% endif %}"
+             class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px] {% if request.resolver_match and request.resolver_match.url_name == 'billing_management' %}bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300{% endif %}"
+             {% if request.resolver_match and request.resolver_match.url_name == 'billing_management' %}data-active="true"{% endif %}>
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible" {% if request.resolver_match and request.resolver_match.url_name == 'billing_management' %}data-filled="true"{% endif %} translate="no">payments</span>
+            <span class="nav-label">Billing</span>
+          </a>
+          <!-- SYSTEM INSIGHTS -> Opens drawer -->
+          <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px] {% if request.resolver_match and 'monitoring' in request.resolver_match.url_name or 'analytics' in request.resolver_match.url_name or 'audit' in request.resolver_match.url_name %}bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300{% endif %}" data-open-left-drawer="system-insights">
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible" translate="no">insights</span>
+            <span class="nav-label">System Insights</span>
+          </button>
+          <!-- INVITATIONS -->
+          <a href="{% url 'admin_console:admin_invitations' %}"
+             aria-current="{% if request.resolver_match and request.resolver_match.url_name == 'admin_invitations' %}page{% endif %}"
+             class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px] {% if request.resolver_match and request.resolver_match.url_name == 'admin_invitations' %}bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300{% endif %}"
+             {% if request.resolver_match and request.resolver_match.url_name == 'admin_invitations' %}data-active="true"{% endif %}>
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible" {% if request.resolver_match and request.resolver_match.url_name == 'admin_invitations' %}data-filled="true"{% endif %} translate="no">mail</span>
+            <span class="nav-label">Invitations</span>
+          </a>
+          <!-- STYLE GUIDE -->
+          <a href="{% url 'admin_console:style_guide' %}"
+             aria-current="{% if request.resolver_match and request.resolver_match.url_name == 'style_guide' %}page{% endif %}"
+             class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px] {% if request.resolver_match and request.resolver_match.url_name == 'style_guide' %}bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300{% endif %}"
+             {% if request.resolver_match and request.resolver_match.url_name == 'style_guide' %}data-active="true"{% endif %}>
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible" {% if request.resolver_match and request.resolver_match.url_name == 'style_guide' %}data-filled="true"{% endif %} translate="no">palette</span>
+            <span class="nav-label">Style Guide</span>
+          </a>
+
+        {% elif request.resolver_match and request.resolver_match.app_name == 'participant' %}
+          <!-- PARTICIPANT CONSOLE NAVIGATION -->
+          <!-- DASHBOARD -->
+          <a href="{% url 'participant:dashboard' %}"
+             aria-current="{% if request.resolver_match and request.resolver_match.url_name == 'dashboard' %}page{% endif %}"
+             class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px] {% if request.resolver_match and request.resolver_match.url_name == 'dashboard' %}bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300{% endif %}"
+             {% if request.resolver_match and request.resolver_match.url_name == 'dashboard' %}data-active="true"{% endif %}>
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" {% if request.resolver_match and request.resolver_match.url_name == 'dashboard' %}data-filled="true"{% endif %} translate="no">dashboard</span>
+            <span class="nav-label font-bold">My Learning</span>
+          </a>
+          <!-- CONTENT HUB -->
+          <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]" data-open-right-drawer>
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">library_books</span>
+            <span class="nav-label">Content Hub</span>
+          </button>
+          <!-- TASKS -->
+          <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]">
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">task_alt</span>
+            <span class="nav-label">Tasks</span>
+          </button>
+          <!-- JOURNAL -->
+          <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]">
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">edit_note</span>
+            <span class="nav-label">Journal</span>
+          </button>
+          <!-- PROGRESS -->
+          <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]">
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">trending_up</span>
+            <span class="nav-label">Progress</span>
+          </button>
+          <!-- COMMUNITY -> LEFT overlay drawer -->
+          <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]" data-open-left-drawer>
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">forum</span>
+            <span class="nav-label">Community</span>
+          </button>
+          <!-- SCHEDULE -->
+          <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]">
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">calendar_month</span>
+            <span class="nav-label">Schedule</span>
+          </button>
+
+        {% else %}
+          <!-- DEFAULT NAVIGATION -->
+          <!-- DASHBOARD -->
+          <button aria-current="page" class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px] bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300" data-active="true">
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible " data-filled="true" translate="no">dashboard</span>
+            <span class="nav-label font-bold">My Snapshot</span>
+          </button>
+          <!-- CONTENT HUB -->
+          <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]" data-open-right-drawer>
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible " translate="no">library_books</span>
+            <span class="nav-label">Content Hub</span>
+          </button>
+          <!-- TASKS -->
+          <button id="toastDemoBtn" class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]">
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible " translate="no">task_alt</span>
+            <span class="nav-label">Tasks</span>
+          </button>
+          <!-- CREATE -> INSET drawer example -->
+          <button id="openInsetFromCreate" class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]">
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible " translate="no">add_circle</span>
+            <span class="nav-label">Create</span>
+          </button>
+        {% endif %}
+        {% endblock %}
+      </nav>
+
+      <!-- Rail Footer: Theme toggle -->
+      <div class="rail-footer mt-auto shrink-0 p-2 grid place-items-center">
+        <button id="toggleDark" class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 min-h-[44px] min-w-[44px]" aria-pressed="false">
+          <span id="themeIcon" class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible " translate="no">dark_mode</span>
+          <span class="nav-label">Theme</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Inset shell: drawer and main are peers so the drawer compresses the page content (like Google Fonts) -->
+    <div id="insetShell" class="flex-1 min-w-0 flex">
+      <!-- Inset Left Drawer (same layer as main, pushes content) -->
+      <aside id="leftInset" class="w-0 overflow-hidden overflow-y-auto [scrollbar-gutter:stable] [will-change:width] drawer-slide drawer-slide-width bg-neutral-100 dark:bg-neutral-800/60 border-r border-neutral-200/70 dark:border-neutral-800 rounded-tr-2xl rounded-br-2xl">
+        <div class="h-14 px-5 flex items-center justify-between">
+          <h2 class="font-semibold">Create</h2>
+          <button data-close-inset class="p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/70 min-h-[44px] min-w-[44px] flex items-center justify-center">
+            <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible " translate="no">close</span>
+          </button>
+        </div>
+        <div class="px-5 pb-6 space-y-3 w-[22rem]">
+          <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold bg-primary-500 text-neutral-50 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11" id="openInsetFromButton">New Program</button>
+          <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">New Path</button>
+          <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Upload Content</button>
+        </div>
+      </aside>
+
+      <!-- Main Column -->
+      <div class="flex-1 min-w-0 flex flex-col">
+        <!-- Top App Bar: page title left, avatar right, centered search -->
+        <header class="h-14 px-4 md:px-6 flex items-center gap-3 bg-neutral-50/70 dark:bg-neutral-900/70 backdrop-blur supports-[backdrop-filter]:bg-neutral-50/50 sticky top-0 z-30">
+          <!-- Rail Toggle Button (visible on desktop only) -->
+          <button id="railToggle" class="hidden md:flex items-center justify-center w-10 h-10 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/70 transition-colors" aria-label="Toggle navigation rail" aria-expanded="true">
+            <span class="material-symbols-rounded text-neutral-700 dark:text-neutral-200" translate="no">menu_open</span>
+          </button>
+          <h1 class="text-base md:text-lg font-semibold tracking-tight whitespace-nowrap flex-shrink-0">{% block page_title %}Management Console{% endblock %}</h1>
+
+          <!-- Responsive Search -->
+          <!-- Desktop Search Bar -->
+          <div data-search-container class="hidden lg:flex flex-1 justify-center items-center px-8">
+            <label class="relative block w-full max-w-xl">
+              <input id="searchInput" type="search" placeholder="Search programs, people, content…" aria-label="Search programs, people, and content" class="w-full rounded-full pl-10 pr-4 bg-neutral-100/80 dark:bg-neutral-800/70 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-400/60" style="height: 48px;" />
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+            </label>
+          </div>
+
+          <!-- Mobile/Tablet Search Button -->
+          <button data-search-trigger class="lg:hidden flex items-center justify-center w-11 h-11 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800/70 transition-colors ml-auto mr-2" aria-label="Open search">
+            <span class="material-symbols-rounded text-neutral-700 dark:text-neutral-200" translate="no">search</span>
+          </button>
+
+          <!-- Mobile/Tablet Search Overlay -->
+          <div data-search-overlay data-open="false" class="fixed inset-x-0 top-0 h-14 bg-white dark:bg-neutral-900 z-50 lg:hidden">
+            <div class="flex items-center h-full px-4 gap-2">
+              <button data-search-close class="flex items-center justify-center w-11 h-11 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800/70 transition-colors" aria-label="Close search">
+                <span class="material-symbols-rounded text-neutral-700 dark:text-neutral-200" translate="no">arrow_back</span>
+              </button>
+              <label class="relative flex-1">
+                <input id="mobileSearchInput" type="search" placeholder="Search programs, people, and content" aria-label="Search" class="w-full h-11 rounded-full pl-10 pr-4 bg-neutral-100/80 dark:bg-neutral-800/70 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-400/60" />
+                <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+              </label>
+            </div>
+          </div>
+
+          {% if user.is_authenticated %}
+          <div class="relative">
+            <!-- Enhanced Avatar Button -->
+            <button id="avatarBtn" class="flex items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-primary-500 hover:ring-2 hover:ring-primary-200 dark:hover:ring-primary-800 transition-all duration-200 transform hover:scale-105 active:scale-95" style="width: 48px; height: 48px;" aria-controls="avatarMenu" aria-expanded="false" aria-label="Open user menu">
+              <div class="relative">
+                <img class="h-9 w-9 rounded-full ring-1 ring-neutral-200 dark:ring-neutral-700 object-cover"
+                     src="{% if user.avatar %}{{ user.avatar.url }}{% else %}https://ui-avatars.com/api/?name={{ user.get_full_name|default:user.email|urlencode }}&background=6366f1&color=ffffff&size=80{% endif %}"
+                     alt="{{ user.get_full_name|default:'User' }}'s avatar"
+                     loading="lazy"
+                     data-critical="true"
+                     fetchpriority="high" />
+                <!-- Online Status Indicator -->
+                <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full ring-2 ring-neutral-50 dark:ring-neutral-900 transition-colors" aria-label="Online"></div>
+              </div>
+            </button>
+
+            <!-- Enhanced Avatar Dropdown Menu -->
+            <div id="avatarMenu" class="absolute right-0 mt-2 w-72 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-2xl origin-top-right transition-all duration-300 ease-out opacity-0 scale-95 pointer-events-none data-[open=true]:opacity-100 data-[open=true]:scale-100 data-[open=true]:pointer-events-auto z-50" role="menu" aria-labelledby="avatarBtn">
+
+              <!-- User Information Section -->
+              <div class="px-4 py-4 border-b border-neutral-200 dark:border-neutral-700">
+                <div class="flex items-start gap-3">
+                  <!-- Larger Avatar in Dropdown -->
+                  <div class="relative flex-shrink-0">
+                    <img class="h-12 w-12 rounded-full object-cover ring-1 ring-neutral-200 dark:ring-neutral-700"
+                         src="{% if user.avatar %}{{ user.avatar.url }}{% else %}https://ui-avatars.com/api/?name={{ user.get_full_name|default:user.email|urlencode }}&background=6366f1&color=ffffff&size=96{% endif %}"
+                         alt="{{ user.get_full_name|default:'User' }}'s avatar" />
+                    <!-- Online Status Indicator -->
+                    <div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full ring-2 ring-white dark:ring-neutral-800" aria-label="Online"></div>
+                  </div>
+
+                  <!-- User Details -->
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate" data-user-name>
+                      {{ user.get_full_name|default:user.email }}
+                    </p>
+                    <p class="text-xs text-neutral-500 dark:text-neutral-400 truncate">
+                      {{ user.email }}
+                    </p>
+
+                    <!-- Enhanced Role Badge -->
+                    <div class="mt-2">
+                      {% if user.role == 'subscriber_admin' %}
+                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-200">
+                          <span class="material-symbols-rounded text-xs">admin_panel_settings</span>
+                          Account Owner
+                        </span>
+                      {% elif user.role == 'facilitator' %}
+                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200">
+                          <span class="material-symbols-rounded text-xs">school</span>
+                          Facilitator
+                        </span>
+                      {% elif user.role == 'participant' %}
+                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200">
+                          <span class="material-symbols-rounded text-xs">person</span>
+                          Participant
+                        </span>
+                      {% elif user.role == 'content_creator' %}
+                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-200">
+                          <span class="material-symbols-rounded text-xs">create</span>
+                          Content Creator
+                        </span>
+                      {% elif user.role == 'data_analyst' %}
+                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-teal-100 text-teal-800 dark:bg-teal-900/30 dark:text-teal-200">
+                          <span class="material-symbols-rounded text-xs">analytics</span>
+                          Data Analyst
+                        </span>
+                      {% else %}
+                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-neutral-100 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200">
+                          <span class="material-symbols-rounded text-xs">person</span>
+                          {{ user.get_role_display|default:'User' }}
+                        </span>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Actions Menu -->
+              <div class="py-2">
+                <!-- Profile Link -->
+                <a href="/accounts/profile/" class="flex items-center gap-3 w-full px-4 py-3 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors focus:outline-none focus:bg-neutral-50 dark:focus:bg-neutral-700/50" role="menuitem">
+                  <span class="material-symbols-rounded text-lg text-neutral-500">person</span>
+                  <div class="flex-1">
+                    <div class="font-medium">Profile</div>
+                    <div class="text-xs text-neutral-500">View and edit profile</div>
+                  </div>
+                </a>
+
+                <!-- Account Settings -->
+                <button class="flex items-center gap-3 w-full px-4 py-3 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors focus:outline-none focus:bg-neutral-50 dark:focus:bg-neutral-700/50" role="menuitem">
+                  <span class="material-symbols-rounded text-lg text-neutral-500">settings</span>
+                  <div class="flex-1 text-left">
+                    <div class="font-medium">Account Settings</div>
+                    <div class="text-xs text-neutral-500">Preferences and security</div>
+                  </div>
+                </button>
+
+                <!-- Theme Toggle -->
+                <button id="menuThemeToggle" class="flex items-center gap-3 w-full px-4 py-3 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors focus:outline-none focus:bg-neutral-50 dark:focus:bg-neutral-700/50" role="menuitem">
+                  <span class="material-symbols-rounded text-lg text-neutral-500" id="themeToggleIcon">light_mode</span>
+                  <div class="flex-1 text-left">
+                    <div class="font-medium" id="themeToggleText">Switch to Dark Mode</div>
+                    <div class="text-xs text-neutral-500">Change appearance</div>
+                  </div>
+                </button>
+
+                <!-- Keyboard Shortcuts -->
+                <button class="flex items-center gap-3 w-full px-4 py-3 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors focus:outline-none focus:bg-neutral-50 dark:focus:bg-neutral-700/50" role="menuitem">
+                  <span class="material-symbols-rounded text-lg text-neutral-500">keyboard</span>
+                  <div class="flex-1 text-left">
+                    <div class="font-medium">Keyboard Shortcuts</div>
+                    <div class="text-xs text-neutral-500">View shortcuts</div>
+                  </div>
+                  <kbd class="text-xs text-neutral-400 bg-neutral-100 dark:bg-neutral-700 px-1.5 py-0.5 rounded">?</kbd>
+                </button>
+
+                <!-- Help & Support -->
+                <button class="flex items-center gap-3 w-full px-4 py-3 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors focus:outline-none focus:bg-neutral-50 dark:focus:bg-neutral-700/50" role="menuitem">
+                  <span class="material-symbols-rounded text-lg text-neutral-500">help</span>
+                  <div class="flex-1 text-left">
+                    <div class="font-medium">Help & Support</div>
+                    <div class="text-xs text-neutral-500">Get help and contact support</div>
+                  </div>
+                </button>
+
+                <!-- Divider -->
+                <div class="my-2 border-t border-neutral-200 dark:border-neutral-700" role="separator"></div>
+
+                <!-- Sign Out -->
+                <button class="flex items-center gap-3 w-full px-4 py-3 text-sm text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors focus:outline-none focus:bg-red-50 dark:focus:bg-red-900/20" role="menuitem">
+                  <span class="material-symbols-rounded text-lg text-red-500">logout</span>
+                  <div class="flex-1 text-left">
+                    <div class="font-medium">Sign Out</div>
+                    <div class="text-xs text-red-500">End current session</div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+          {% else %}
+          <!-- Login/Sign Up for Unauthenticated Users -->
+          <div class="flex items-center gap-3">
+            <a href="/accounts/login/" class="inline-flex items-center justify-center gap-2 rounded-xl h-10 px-4 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150">
+              Log In
+            </a>
+            <a href="/accounts/signup/" class="inline-flex items-center justify-center gap-2 rounded-xl h-10 px-4 text-sm font-semibold bg-primary-500 text-neutral-50 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150">
+              Sign Up
+            </a>
+          </div>
+          {% endif %}
+        </header>
+
+        <!-- Content -->
+        <main class="flex-1 overflow-y-auto [scrollbar-gutter:stable] pb-20 md:pb-0 px-4 md:px-6 lg:px-8">
+          {% block content %}
+          <div class="py-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="text-xl md:text-2xl font-bold tracking-tight">Dashboard</h2>
+                <p class="text-sm text-neutral-500">Quick insight into usage, programs, and actions.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold bg-primary-500 text-neutral-50 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98]" id="openInsetFromButton2">New Program</button>
+                <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98]" data-open-right-drawer>Filters</button>
+              </div>
+            </div>
+          </div>
+
+          <section class="px-6 pb-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <article class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 p-5 transition-shadow duration-200 shadow-sm hover:shadow-lg skeleton-container">
+              <div class="skeleton-content">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-semibold">Active Programs</h3>
+                  <span class="text-xs px-3 py-2 rounded-full min-h-[44px] inline-flex items-center justify-center bg-primary-50 text-primary-700 dark:bg-primary-900/30 dark:text-primary-100">Live</span>
+                </div>
+                <p class="mt-6 text-4xl font-extrabold tracking-tight">24</p>
+                <p class="mt-2 text-sm text-neutral-500">(+3 this week)</p>
+              </div>
+              <div class="skeleton-loader hidden">
+                <div class="skeleton-line w-32 h-5 mb-3"></div>
+                <div class="skeleton-line w-20 h-10 mb-2"></div>
+                <div class="skeleton-line w-24 h-4"></div>
+              </div>
+            </article>
+
+            <article class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 p-5 transition-shadow duration-200 shadow-sm hover:shadow-lg skeleton-container">
+              <div class="skeleton-content">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-semibold">Participants</h3>
+                  <span class="text-xs px-3 py-2 rounded-full min-h-[44px] inline-flex items-center justify-center bg-info-50 text-info-700 dark:bg-info-900/30 dark:text-info-100">New</span>
+                </div>
+                <p class="mt-6 text-4xl font-extrabold tracking-tight">1,482</p>
+                <p class="mt-2 text-sm text-neutral-500">Last 30 days</p>
+              </div>
+              <div class="skeleton-loader hidden">
+                <div class="skeleton-line w-32 h-5 mb-3"></div>
+                <div class="skeleton-line w-24 h-10 mb-2"></div>
+                <div class="skeleton-line w-28 h-4"></div>
+              </div>
+            </article>
+
+            <article class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 p-5 transition-shadow duration-200 shadow-sm hover:shadow-lg skeleton-container">
+              <div class="skeleton-content">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-semibold">Completion Rate</h3>
+                  <span class="text-xs px-3 py-2 rounded-full min-h-[44px] inline-flex items-center justify-center bg-success-50 text-success-700 dark:bg-success-900/30 dark:text-success-100">Up</span>
+                </div>
+                <p class="mt-6 text-4xl font-extrabold tracking-tight">78%</p>
+                <p class="mt-2 text-sm text-neutral-500">+6% vs. prior</p>
+              </div>
+              <div class="skeleton-loader hidden">
+                <div class="skeleton-line w-36 h-5 mb-3"></div>
+                <div class="skeleton-line w-16 h-10 mb-2"></div>
+                <div class="skeleton-line w-24 h-4"></div>
+              </div>
+            </article>
+
+            <div class="md:col-span-2 xl:col-span-3 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 p-5 transition-shadow duration-200 shadow-sm hover:shadow-lg overflow-hidden">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-semibold">Recent Activity</h3>
+                <div class="flex items-center gap-2">
+                  <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] px-3 rounded-lg" style="height: 48px;">Export</button>
+                </div>
+              </div>
+              <div class="overflow-x-auto -mx-5">
+                <table class="min-w-full text-sm">
+                  <thead class="text-left text-neutral-500">
+                    <tr>
+                      <th class="px-5 py-2 font-medium">When</th>
+                      <th class="px-5 py-2 font-medium">Event</th>
+                      <th class="px-5 py-2 font-medium">Actor</th>
+                      <th class="px-5 py-2 font-medium">Details</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-neutral-100 dark:divide-neutral-800">
+                    <tr class="hover:bg-neutral-50/70 dark:hover:bg-neutral-800/40">
+                      <td class="px-5 py-3">10:12</td>
+                      <td class="px-5 py-3">Program published</td>
+                      <td class="px-5 py-3">Maria P.</td>
+                      <td class="px-5 py-3">"Servant Leadership Lab"</td>
+                    </tr>
+                    <tr class="hover:bg-neutral-50/70 dark:hover:bg-neutral-800/40">
+                      <td class="px-5 py-3">09:44</td>
+                      <td class="px-5 py-3">New participant</td>
+                      <td class="px-5 py-3">SSO (Google)</td>
+                      <td class="px-5 py-3">aiakovos@company.com</td>
+                    </tr>
+                    <tr class="hover:bg-neutral-50/70 dark:hover:bg-neutral-800/40">
+                      <td class="px-5 py-3">Yesterday</td>
+                      <td class="px-5 py-3">Session scheduled</td>
+                      <td class="px-5 py-3">Scheduler</td>
+                      <td class="px-5 py-3">3 slots offered to 24 participants</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+          {% endblock %}
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scrim that adapts to rail state -->
+  <div id="scrim" class="hidden fixed top-0 right-0 bottom-0 left-[6rem] bg-neutral-900/40 backdrop-blur-[6px] [-webkit-backdrop-filter:blur(6px)] z-30 transition-[left,opacity] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] opacity-0 data-[open=true]:opacity-100"></div>
+
+  <!-- Left Drawer (overlay, adapts to rail state) -->
+  <aside id="leftDrawer" data-open="false" data-drawer-type="programs" class="fixed top-0 left-[-22rem] h-screen w-[22rem] max-w-[85vw] z-40 drawer-slide drawer-slide-left">
+    <div class="drawer-panel bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-full overflow-y-auto [scrollbar-gutter:stable] shadow-lg backdrop-blur-[8px] [-webkit-backdrop-filter:blur(8px)] rounded-tr-2xl rounded-br-2xl">
+      <div class="h-14 px-5 flex items-center justify-between">
+        <h2 id="drawerTitle" class="font-semibold">Programs</h2>
+        <button data-close-left class="p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/70 min-h-[44px] min-w-[44px] flex items-center justify-center">
+          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible " translate="no">close</span>
+        </button>
+      </div>
+
+      <!-- Programs Content (default) -->
+      <div id="programsContent" class="px-5 pb-6 space-y-3">
+        <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold bg-primary-500 text-neutral-50 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Create Program</button>
+        <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">View All Programs</button>
+        <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Import Programs</button>
+      </div>
+
+      <!-- Invitations Content -->
+      <div id="invitationsContent" class="px-5 pb-6 space-y-3 hidden">
+        <a href="{% url 'provider:invitation_dashboard' %}" class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold {% if request.resolver_match and request.resolver_match.url_name == 'invitation_dashboard' %}bg-primary-500 text-neutral-50 hover:bg-primary-600{% else %}border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100{% endif %} focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Invitation Dashboard</a>
+        <a href="{% url 'provider:invite_user' %}" class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold {% if request.resolver_match and request.resolver_match.url_name == 'invite_user' %}bg-primary-500 text-neutral-50 hover:bg-primary-600{% else %}border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100{% endif %} focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Invite Users</a>
+        <a href="{% url 'provider:invitation_list' %}" class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold {% if request.resolver_match and request.resolver_match.url_name == 'invitation_list' %}bg-primary-500 text-neutral-50 hover:bg-primary-600{% else %}border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100{% endif %} focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Manage Invitations</a>
+      </div>
+
+      <!-- Users Content (Admin Console) -->
+      <div id="usersContent" class="px-5 pb-6 space-y-3 hidden">
+        <a href="{% url 'admin_console:user_management' %}" class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold {% if request.resolver_match and request.resolver_match.url_name == 'user_management' %}bg-primary-500 text-neutral-50 hover:bg-primary-600{% else %}border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100{% endif %} focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">User Management</a>
+        <a href="{% url 'admin_console:impersonation_dashboard' %}" class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold {% if request.resolver_match and 'impersonation' in request.resolver_match.url_name %}bg-primary-500 text-neutral-50 hover:bg-primary-600{% else %}border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100{% endif %} focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Impersonation</a>
+      </div>
+
+      <!-- Provider Users Content (Provider Console) -->
+      <div id="providerUsersContent" class="px-5 pb-6 space-y-3 hidden">
+        <a href="{% url 'provider:user_list' %}" class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold {% if request.resolver_match and request.resolver_match.url_name == 'user_list' %}bg-primary-500 text-neutral-50 hover:bg-primary-600{% else %}border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100{% endif %} focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">All Users</a>
+        <a href="{% url 'provider:user_bulk_operations' %}" class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold {% if request.resolver_match and request.resolver_match.url_name == 'user_bulk_operations' %}bg-primary-500 text-neutral-50 hover:bg-primary-600{% else %}border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100{% endif %} focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Bulk Operations</a>
+      </div>
+
+      <!-- System Insights Content (Admin Console) -->
+      <div id="systemInsightsContent" class="px-5 pb-6 space-y-3 hidden">
+        <a href="{% url 'admin_console:system_monitoring' %}" class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold {% if request.resolver_match and request.resolver_match.url_name == 'system_monitoring' %}bg-primary-500 text-neutral-50 hover:bg-primary-600{% else %}border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100{% endif %} focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">System Monitoring</a>
+        <a href="{% url 'admin_console:analytics_reports' %}" class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold {% if request.resolver_match and request.resolver_match.url_name == 'analytics_reports' %}bg-primary-500 text-neutral-50 hover:bg-primary-600{% else %}border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100{% endif %} focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Analytics Reports</a>
+        <a href="{% url 'admin_console:audit_compliance' %}" class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold {% if request.resolver_match and request.resolver_match.url_name == 'audit_compliance' %}bg-primary-500 text-neutral-50 hover:bg-primary-600{% else %}border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100{% endif %} focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Audit & Compliance</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Right Drawer (overlay, browser edge) -->
+  <aside id="rightDrawer" data-open="false" class="fixed top-0 right-[-28rem] h-screen w-[28rem] max-w-[92vw] z-40 drawer-slide drawer-slide-right">
+    <div class="drawer-panel bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-full overflow-y-auto [scrollbar-gutter:stable] shadow-lg backdrop-blur-[8px] [-webkit-backdrop-filter:blur(8px)] rounded-tl-2xl rounded-bl-2xl">
+      <div class="h-14 px-5 flex items-center justify-between">
+        <h2 class="font-semibold">Content Filters</h2>
+        <button data-close-right class="p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/70 min-h-[44px] min-w-[44px] flex items-center justify-center">
+          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible " translate="no">close</span>
+        </button>
+      </div>
+      <div class="px-5 pb-6 space-y-5">
+        <div>
+          <label class="text-sm font-medium">Status</label>
+          <div class="mt-2 flex flex-wrap gap-2">
+            <button class="px-3 rounded-full bg-neutral-100 dark:bg-neutral-800/70" style="height: 48px;">All</button>
+            <button class="px-3 rounded-full border border-neutral-200 dark:border-neutral-700" style="height: 48px;">Draft</button>
+            <button class="px-3 rounded-full border border-neutral-200 dark:border-neutral-700" style="height: 48px;">Live</button>
+            <button class="px-3 rounded-full border border-neutral-200 dark:border-neutral-700" style="height: 48px;">Archived</button>
+          </div>
+        </div>
+        <div>
+          <label class="text-sm font-medium">Owner</label>
+          <input class="mt-2 w-full input" placeholder="Type a name…" />
+        </div>
+        <div>
+          <label class="text-sm font-medium">Date range</label>
+          <div class="mt-2 grid grid-cols-2 gap-3">
+            <input type="date" class="input">
+            <input type="date" class="input">
+          </div>
+        </div>
+        <div class="pt-2 flex items-center justify-end gap-2">
+          <button data-close-right class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98]">Cancel</button>
+          <button class="btn bg-accent-500 text-neutral-50 hover:bg-accent-600">Apply</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Minimal JS for theme + drawers (using Tailwind utilities for transition timing) -->
+  <script>
+    const root = document.documentElement;
+
+    // Elements
+    const leftDrawer  = document.getElementById('leftDrawer');
+    const rightDrawer = document.getElementById('rightDrawer');
+    const scrim       = document.getElementById('scrim');
+    const inset       = document.getElementById('leftInset');
+    const avatarBtn   = document.getElementById('avatarBtn');
+    const avatarMenu  = document.getElementById('avatarMenu');
+
+    // Ensure drawers are marked as closed initially
+    if (leftDrawer) leftDrawer.dataset.open = 'false';
+    if (rightDrawer) rightDrawer.dataset.open = 'false';
+
+    // Small util
+    function swapClasses(el, remove = [], add = []) {
+      if (!el) return;
+      remove.forEach(c => el.classList.remove(c));
+      add.forEach(c => el.classList.add(c));
+    }
+
+    function openScrim() {
+      if (scrim) {
+        scrim.classList.remove('hidden');
+        // Force reflow for animation
+        void scrim.offsetWidth;
+        scrim.dataset.open = 'true';
+      }
+    }
+    function closeScrim() {
+      if (scrim) {
+        scrim.dataset.open = 'false';
+        setTimeout(() => scrim.classList.add('hidden'), 300); // Match animation duration
+      }
+    }
+
+    // Theme (robust): persists choice, syncs with system when unset, updates icon and color-scheme
+    const THEME_KEY = 'theme';
+
+    function updateThemeIcon() {
+      const el = document.getElementById('themeIcon');
+      const mobileEl = document.getElementById('mobileThemeIcon');
+      const btn = document.getElementById('toggleDark');
+      const mobileBtn = document.querySelector('[data-testid="mobile-theme-toggle"]');
+      const isDark = root.classList.contains('dark');
+      // Show the action you will switch to: sun when in dark (to go light), moon when in light (to go dark)
+      const iconText = isDark ? 'light_mode' : 'dark_mode';
+      if (el) el.textContent = iconText;
+      if (mobileEl) mobileEl.textContent = iconText;
+      if (btn) btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      if (mobileBtn) mobileBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+    }
+
+    function applyThemeState(isDark, persist = false) {
+      root.classList.toggle('dark', isDark);
+      root.style.colorScheme = isDark ? 'dark' : 'light';
+      if (persist) localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
+      updateThemeIcon();
+    }
+
+    // Initial theme
+    (function initTheme(){
+      const stored = localStorage.getItem(THEME_KEY);
+      if (stored === 'dark' || stored === 'light') {
+        applyThemeState(stored === 'dark', false);
+        return;
+      }
+      const mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+      const prefersDark = !!(mq && mq.matches);
+      applyThemeState(prefersDark, false);
+      // Auto-follow system only when there is no stored preference
+      if (mq && typeof mq.addEventListener === 'function') {
+        mq.addEventListener('change', (e) => {
+          if (!localStorage.getItem(THEME_KEY)) applyThemeState(e.matches, false);
+        });
+      }
+    })();
+
+    function applyTheme(mode) {
+      if (mode === 'toggle') {
+        const nextIsDark = !root.classList.contains('dark');
+        applyThemeState(nextIsDark, true);
+      } else if (mode === 'dark' || mode === 'light') {
+        applyThemeState(mode === 'dark', true);
+      }
+    }
+
+    // Enhanced theme toggle with dynamic text and icons
+    function updateThemeToggleElements() {
+      const isDark = root.classList.contains('dark');
+      const themeToggleIcon = document.getElementById('themeToggleIcon');
+      const themeToggleText = document.getElementById('themeToggleText');
+
+      if (themeToggleIcon) {
+        themeToggleIcon.textContent = isDark ? 'dark_mode' : 'light_mode';
+      }
+      if (themeToggleText) {
+        themeToggleText.textContent = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+      }
+    }
+
+    // Update theme toggle elements on initial load
+    function initThemeToggle() {
+      updateThemeToggleElements();
+    }
+
+    // Attach theme toggle event listeners when DOM is ready
+    function attachThemeListeners() {
+      document.getElementById('toggleDark')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        applyTheme('toggle');
+        updateThemeToggleElements();
+      });
+      document.getElementById('menuThemeToggle')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        applyTheme('toggle');
+        updateThemeToggleElements();
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        attachThemeListeners();
+        initThemeToggle();
+      });
+    } else {
+      attachThemeListeners();
+      initThemeToggle();
+    }
+
+    // Enhanced Avatar menu with keyboard navigation and accessibility
+    let focusedMenuIndex = -1;
+    const menuItems = [];
+
+    function updateMenuItems() {
+      menuItems.length = 0;
+      if (avatarMenu) {
+        const items = avatarMenu.querySelectorAll('[role="menuitem"]');
+        menuItems.push(...items);
+      }
+    }
+
+    function focusMenuItem(index) {
+      if (index >= 0 && index < menuItems.length) {
+        menuItems[index].focus();
+        focusedMenuIndex = index;
+      }
+    }
+
+    function openAvatarMenu() {
+      if (!avatarMenu) return;
+      avatarMenu.dataset.open = 'true';
+      avatarBtn.setAttribute('aria-expanded', 'true');
+      updateMenuItems();
+
+      // Announce to screen readers
+      const announcement = document.createElement('div');
+      announcement.setAttribute('aria-live', 'polite');
+      announcement.setAttribute('aria-atomic', 'true');
+      announcement.className = 'sr-only';
+      announcement.textContent = 'User menu opened';
+      document.body.appendChild(announcement);
+      setTimeout(() => document.body.removeChild(announcement), 1000);
+
+      // Focus first menu item
+      setTimeout(() => {
+        if (menuItems.length > 0) {
+          focusMenuItem(0);
+        }
+      }, 50);
+    }
+
+    function closeAvatarMenu() {
+      if (!avatarMenu || !avatarBtn) return;
+      avatarMenu.dataset.open = 'false';
+      avatarBtn.setAttribute('aria-expanded', 'false');
+      focusedMenuIndex = -1;
+
+      // Announce to screen readers
+      const announcement = document.createElement('div');
+      announcement.setAttribute('aria-live', 'polite');
+      announcement.setAttribute('aria-atomic', 'true');
+      announcement.className = 'sr-only';
+      announcement.textContent = 'User menu closed';
+      document.body.appendChild(announcement);
+      setTimeout(() => document.body.removeChild(announcement), 1000);
+
+      avatarBtn.focus();
+    }
+
+    // Avatar menu click handler
+    avatarBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!avatarMenu) return;
+      const open = avatarMenu.dataset.open === 'true';
+      if (open) {
+        closeAvatarMenu();
+      } else {
+        openAvatarMenu();
+      }
+    });
+
+    // Click outside to close
+    document.addEventListener('click', (e) => {
+      if (!avatarMenu || !avatarBtn) return;
+      // Only try to close if the menu is actually open
+      if (avatarMenu.dataset.open === 'true' && !e.target.closest('#avatarBtn') && !e.target.closest('#avatarMenu')) {
+        closeAvatarMenu();
+      }
+    });
+
+    // Enhanced keyboard navigation for avatar menu
+    document.addEventListener('keydown', (e) => {
+      if (!avatarMenu || avatarMenu.dataset.open !== 'true') return;
+
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          const nextIndex = focusedMenuIndex < menuItems.length - 1 ? focusedMenuIndex + 1 : 0;
+          focusMenuItem(nextIndex);
+          break;
+
+        case 'ArrowUp':
+          e.preventDefault();
+          const prevIndex = focusedMenuIndex > 0 ? focusedMenuIndex - 1 : menuItems.length - 1;
+          focusMenuItem(prevIndex);
+          break;
+
+        case 'Home':
+          e.preventDefault();
+          focusMenuItem(0);
+          break;
+
+        case 'End':
+          e.preventDefault();
+          focusMenuItem(menuItems.length - 1);
+          break;
+
+        case 'Enter':
+        case ' ':
+          if (focusedMenuIndex >= 0) {
+            e.preventDefault();
+            menuItems[focusedMenuIndex].click();
+          }
+          break;
+
+        case 'Escape':
+          e.preventDefault();
+          closeAvatarMenu();
+          break;
+      }
+    });
+
+    // LEFT overlay drawer with dynamic content
+    function showDrawerContent(type) {
+      // Hide all content sections
+      document.getElementById('programsContent')?.classList.add('hidden');
+      document.getElementById('invitationsContent')?.classList.add('hidden');
+      document.getElementById('usersContent')?.classList.add('hidden');
+      document.getElementById('providerUsersContent')?.classList.add('hidden');
+      document.getElementById('systemInsightsContent')?.classList.add('hidden');
+
+      // Show the requested content and update title
+      const drawerTitle = document.getElementById('drawerTitle');
+      if (type === 'invitations') {
+        document.getElementById('invitationsContent')?.classList.remove('hidden');
+        if (drawerTitle) drawerTitle.textContent = 'Invitations';
+        leftDrawer.dataset.drawerType = 'invitations';
+      } else if (type === 'users') {
+        document.getElementById('usersContent')?.classList.remove('hidden');
+        if (drawerTitle) drawerTitle.textContent = 'Users';
+        leftDrawer.dataset.drawerType = 'users';
+      } else if (type === 'provider-users') {
+        document.getElementById('providerUsersContent')?.classList.remove('hidden');
+        if (drawerTitle) drawerTitle.textContent = 'Users';
+        leftDrawer.dataset.drawerType = 'provider-users';
+      } else if (type === 'system-insights') {
+        document.getElementById('systemInsightsContent')?.classList.remove('hidden');
+        if (drawerTitle) drawerTitle.textContent = 'System Insights';
+        leftDrawer.dataset.drawerType = 'system-insights';
+      } else {
+        // Default to programs
+        document.getElementById('programsContent')?.classList.remove('hidden');
+        if (drawerTitle) drawerTitle.textContent = 'Programs';
+        leftDrawer.dataset.drawerType = 'programs';
+      }
+    }
+
+    document.querySelectorAll('[data-open-left-drawer]').forEach(b =>
+      b.addEventListener('click', () => {
+        if (!leftDrawer) return;
+
+        // Get the drawer type from the data attribute
+        const drawerType = b.getAttribute('data-open-left-drawer') || 'programs';
+
+        // Show appropriate content
+        showDrawerContent(drawerType);
+
+        // Show drawer and animate position
+        leftDrawer.dataset.open = 'true';
+        leftDrawer.classList.remove('left-[-22rem]');
+        leftDrawer.classList.add('left-[6rem]');
+        openScrim();
+      })
+    );
+
+    function closeLeft() {
+      if (!leftDrawer) return;
+      leftDrawer.dataset.open = 'false';
+      leftDrawer.classList.remove('left-[6rem]');
+      leftDrawer.classList.add('left-[-22rem]');
+      closeScrim();
+    }
+
+    // RIGHT overlay drawer (Filters)
+    const rightPanel = rightDrawer?.querySelector('.drawer-panel');
+    document.querySelectorAll('[data-open-right-drawer]').forEach(b =>
+      b.addEventListener('click', () => {
+        if (!rightDrawer) return;
+
+        // Show drawer and animate position
+        rightDrawer.dataset.open = 'true';
+        rightDrawer.classList.remove('right-[-28rem]');
+        rightDrawer.classList.add('right-0');
+        openScrim();
+      })
+    );
+
+    function closeRight() {
+      if (!rightDrawer) return;
+      rightDrawer.dataset.open = 'false';
+      rightDrawer.classList.remove('right-0');
+      rightDrawer.classList.add('right-[-28rem]');
+      closeScrim();
+    }
+
+    // INSET drawer (pushes content)
+    function openInset()  { if (inset) inset.dataset.open = 'true'; }
+    function closeInset() { if (inset) inset.dataset.open = 'false'; }
+
+    // Bind inset open buttons (IDs, not NodeList)
+    document.getElementById('openInsetFromCreate')?.addEventListener('click', openInset);
+    document.getElementById('openInsetFromButton')?.addEventListener('click', openInset);
+    document.getElementById('openInsetFromButton2')?.addEventListener('click', openInset);
+
+    // Close buttons
+    document.querySelectorAll('[data-close-left]').forEach(btn => {
+      btn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); closeLeft(); });
+    });
+    document.querySelectorAll('[data-close-right]').forEach(btn => {
+      btn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); closeRight(); });
+    });
+    document.querySelectorAll('[data-close-inset]').forEach(btn => {
+      btn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); closeInset(); });
+    });
+
+    // Scrim + ESC
+    scrim?.addEventListener('click', () => {
+      if (leftDrawer?.dataset.open === 'true') closeLeft();
+      if (rightDrawer?.dataset.open === 'true') closeRight();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        // Close avatar menu first (has priority in dropdown states)
+        if (avatarMenu && avatarMenu.dataset.open === 'true') {
+          closeAvatarMenu();
+          return; // Don't close other elements if avatar menu was open
+        }
+        // Then close drawers
+        if (leftDrawer?.dataset.open === 'true') closeLeft();
+        if (rightDrawer?.dataset.open === 'true') closeRight();
+        closeInset();
+      }
+    });
+    // --- Toasts -------------------------------------------------------------
+    function getToastList() { return document.getElementById('toasts'); }
+    const toastDemoBtn = document.getElementById('toastDemoBtn');
+
+    function makeToast({ title = 'Notification', message = '', variant = 'info', style = 'glass', timeout = 4000 } = {}) {
+      const toastList = getToastList();
+      if (!toastList) return () => {};
+
+      // Enforce maximum of 3 toasts
+      const existingToasts = toastList.querySelectorAll('li');
+      if (existingToasts.length >= 3) {
+        // Remove the oldest toast
+        const oldestToast = existingToasts[0];
+        if (oldestToast) {
+          oldestToast.dataset.open = 'false';
+          oldestToast.addEventListener('transitionend', () => oldestToast.remove(), { once: true });
+        }
+      }
+
+      const colors = {
+        success: 'bg-emerald-600 text-white dark:bg-emerald-500',
+        error:   'bg-red-600 text-white dark:bg-red-500',
+        warning: 'bg-amber-600 text-white dark:bg-amber-500',
+        info:    'bg-sky-600 text-white dark:bg-sky-500',
+      };
+      const glassMap = {
+        success: 'bg-emerald-500/20 text-neutral-900 dark:bg-emerald-400/10 dark:text-neutral-50 ring-1 ring-emerald-500/30 dark:ring-emerald-400/20 backdrop-blur-[12px] [-webkit-backdrop-filter:blur(12px)]',
+        error:   'bg-red-500/20 text-neutral-900 dark:bg-red-400/10 dark:text-neutral-50 ring-1 ring-red-500/30 dark:ring-red-400/20 backdrop-blur-[12px] [-webkit-backdrop-filter:blur(12px)]',
+        warning: 'bg-amber-500/20 text-neutral-900 dark:bg-amber-400/10 dark:text-neutral-50 ring-1 ring-amber-500/30 dark:ring-amber-400/20 backdrop-blur-[12px] [-webkit-backdrop-filter:blur(12px)]',
+        info:    'bg-sky-500/20 text-neutral-900 dark:bg-sky-400/10 dark:text-neutral-50 ring-1 ring-sky-500/30 dark:ring-sky-400/20 backdrop-blur-[12px] [-webkit-backdrop-filter:blur(12px)]',
+      };
+      const innerClasses = style === 'glass' ? (glassMap[variant] || glassMap.info) : (colors[variant] || colors.info);
+
+      const li = document.createElement('li');
+      li.setAttribute('role', variant === 'error' ? 'alert' : 'status');
+      li.className = [
+        'pointer-events-auto rounded-xl shadow-xl ring-1 ring-black/5 dark:ring-white/10',
+        'transition-all duration-300 ease-out',
+        'transform translate-y-4 opacity-0',
+        'data-[open=true]:translate-y-0 data-[open=true]:opacity-100'
+      ].join(' ');
+
+      const inner = document.createElement('div');
+      inner.className = [
+        'flex items-start gap-3 p-3 rounded-xl',
+        innerClasses,
+      ].join(' ');
+
+      // Icon
+      const icon = document.createElement('span');
+      icon.setAttribute('translate', 'no');
+      icon.className = 'material-symbols-rounded shrink-0 [font-variation-settings:\'FILL\'_0,\'wght\'_600,\'GRAD\'_0,\'opsz\'_24]';
+      icon.textContent = (
+        variant === 'success' ? 'check_circle' :
+        variant === 'error'   ? 'error'        :
+        variant === 'warning' ? 'warning'      :
+                                'info'
+      );
+
+      const content = document.createElement('div');
+      content.className = 'min-w-0';
+      const h = document.createElement('p');
+      h.className = 'font-semibold leading-snug';
+      h.textContent = title;
+      const p = document.createElement('p');
+      p.className = 'text-sm/5 opacity-90';
+      p.textContent = message;
+
+      // Close button
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'ml-auto shrink-0 rounded-md p-1/2 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-white/60';
+      const closeIcon = document.createElement('span');
+      closeIcon.className = 'material-symbols-rounded';
+      closeIcon.textContent = 'close';
+      closeBtn.appendChild(closeIcon);
+
+      // Build
+      content.appendChild(h);
+      if (message) content.appendChild(p);
+      inner.appendChild(icon);
+      inner.appendChild(content);
+      inner.appendChild(closeBtn);
+      li.appendChild(inner);
+
+      // Insert and animate
+      toastList.appendChild(li);
+
+      // Trigger reflow and animate in
+      requestAnimationFrame(() => {
+        li.dataset.open = 'true';
+
+        // Reposition existing toasts to make room
+        const allToasts = toastList.querySelectorAll('li');
+        allToasts.forEach((toast, index) => {
+          if (toast !== li) {
+            // Use positive values so toasts stack downward instead of upward
+            toast.style.transform = `translateY(${index * 12}px)`;
+          }
+        });
+      });
+
+      function dismiss() {
+        li.dataset.open = 'false';
+        li.addEventListener('transitionend', () => {
+          li.remove();
+
+          // Reposition remaining toasts
+          const remainingToasts = toastList.querySelectorAll('li');
+          remainingToasts.forEach((toast, index) => {
+            // Use positive values so toasts stack downward instead of upward
+            toast.style.transform = `translateY(${index * 12}px)`;
+          });
+        }, { once: true });
+      }
+
+      closeBtn.addEventListener('click', dismiss);
+      if (timeout > 0) setTimeout(dismiss, timeout);
+
+      return dismiss;
+    }
+
+    // Demo: toggle a toast on Tasks click
+    toastDemoBtn?.addEventListener('click', () => {
+      makeToast({
+        title: 'Tasks synced',
+        message: 'All tasks are up to date.',
+        variant: 'success',
+        style: 'glass'
+      });
+    });
+
+    // Mobile tab navigation
+    function setActiveTab(activeTabId) {
+      // Remove active class from all tabs
+      document.querySelectorAll('.mobile-tab').forEach(tab => {
+        tab.classList.remove('text-primary-600', 'dark:text-primary-400', 'bg-primary-50', 'dark:bg-primary-900/30');
+        tab.classList.add('text-neutral-600', 'dark:text-neutral-400');
+      });
+
+      // Add active class to the selected tab
+      const activeTab = document.querySelector(`[data-testid="${activeTabId}"]`);
+      if (activeTab) {
+        activeTab.classList.remove('text-neutral-600', 'dark:text-neutral-400');
+        activeTab.classList.add('text-primary-600', 'dark:text-primary-400', 'bg-primary-50', 'dark:bg-primary-900/30');
+      }
+    }
+
+    // Initialize mobile tabs when DOM is ready
+    function initializeMobileTabs() {
+      // Mobile tab click handlers
+      document.querySelectorAll('.mobile-tab[data-testid^="tab-"]').forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          e.preventDefault();
+          const testId = tab.getAttribute('data-testid');
+          setActiveTab(testId);
+        });
+      });
+
+      // Keyboard navigation for mobile tabs
+      document.querySelectorAll('.mobile-tab[data-testid^="tab-"]').forEach((tab, index, tabs) => {
+        tab.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+            e.preventDefault();
+            const direction = e.key === 'ArrowRight' ? 1 : -1;
+            const nextIndex = (index + direction + tabs.length) % tabs.length;
+            tabs[nextIndex].focus();
+          }
+        });
+      });
+
+      // Set initial active tab (Dashboard)
+      setActiveTab('tab-dashboard');
+
+      // Mobile theme toggle
+      const mobileThemeToggle = document.querySelector('[data-testid="mobile-theme-toggle"]');
+      if (mobileThemeToggle) {
+        mobileThemeToggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          applyTheme('toggle');
+        });
+      }
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeMobileTabs);
+    } else {
+      initializeMobileTabs();
+    }
+
+    // Provider Console drawer functionality is handled above in the LEFT overlay drawer section
+
+    // Rail toggle functionality (desktop only)
+    function initializeRailToggle() {
+      const rail = document.getElementById('desktopRail');
+      const toggleBtn = document.getElementById('railToggle');
+      const toggleIcon = toggleBtn?.querySelector('.material-symbols-rounded');
+      const body = document.body;
+
+      if (!rail || !toggleBtn || !toggleIcon) return;
+
+      // Check localStorage for saved rail state
+      const savedState = localStorage.getItem('railCollapsed');
+      if (savedState === 'true') {
+        rail.dataset.collapsed = 'true';
+        body.dataset.railCollapsed = 'true';
+        toggleIcon.textContent = 'menu';
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        const isCollapsed = rail.dataset.collapsed === 'true';
+        const newState = !isCollapsed;
+
+        // Update rail state
+        rail.dataset.collapsed = newState.toString();
+        body.dataset.railCollapsed = newState.toString();
+
+        // Update icon
+        toggleIcon.textContent = newState ? 'menu' : 'menu_open';
+
+        // Update ARIA
+        toggleBtn.setAttribute('aria-expanded', (!newState).toString());
+
+        // Save state
+        localStorage.setItem('railCollapsed', newState.toString());
+      });
+    }
+
+    // Initialize rail toggle on desktop
+    function initRailIfDesktop() {
+      if (window.innerWidth >= 768) {
+        initializeRailToggle();
+      }
+    }
+
+    // Call immediately if DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initRailIfDesktop);
+    } else {
+      initRailIfDesktop();
+    }
+
+    // Mobile search overlay functionality
+    function initializeMobileSearch() {
+      const searchTrigger = document.querySelector('[data-search-trigger]');
+      const searchOverlay = document.querySelector('[data-search-overlay]');
+      const searchClose = document.querySelector('[data-search-close]');
+      const mobileSearchInput = document.getElementById('mobileSearchInput');
+      const desktopSearchInput = document.getElementById('searchInput');
+
+      if (!searchTrigger || !searchOverlay || !searchClose) return;
+
+      // Open search overlay
+      searchTrigger.addEventListener('click', () => {
+        searchOverlay.dataset.open = 'true';
+        // Sync search value from desktop to mobile
+        if (desktopSearchInput && mobileSearchInput) {
+          mobileSearchInput.value = desktopSearchInput.value;
+        }
+        // Focus input after animation
+        setTimeout(() => {
+          mobileSearchInput?.focus();
+        }, 200);
+      });
+
+      // Close search overlay
+      searchClose.addEventListener('click', () => {
+        searchOverlay.dataset.open = 'false';
+        // Sync search value from mobile to desktop
+        if (desktopSearchInput && mobileSearchInput) {
+          desktopSearchInput.value = mobileSearchInput.value;
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && searchOverlay.dataset.open === 'true') {
+          searchOverlay.dataset.open = 'false';
+          // Sync search value
+          if (desktopSearchInput && mobileSearchInput) {
+            desktopSearchInput.value = mobileSearchInput.value;
+          }
+        }
+      });
+
+      // Sync values between desktop and mobile inputs
+      desktopSearchInput?.addEventListener('input', (e) => {
+        if (mobileSearchInput) {
+          mobileSearchInput.value = e.target.value;
+        }
+      });
+
+      mobileSearchInput?.addEventListener('input', (e) => {
+        if (desktopSearchInput) {
+          desktopSearchInput.value = e.target.value;
+        }
+      });
+
+      // Close overlay on window resize to desktop
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1024 && searchOverlay.dataset.open === 'true') {
+          searchOverlay.dataset.open = 'false';
+        }
+      });
+    }
+
+    // Initialize mobile search on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeMobileSearch);
+    } else {
+      initializeMobileSearch();
+    }
+
+    // Lazy loading implementation
+    function initLazyLoading() {
+      // Check if browser supports native lazy loading
+      const supportsNativeLazyLoading = 'loading' in HTMLImageElement.prototype;
+
+      // Get all images with loading="lazy"
+      const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+
+      // Add loading state to images (but not critical ones)
+      lazyImages.forEach(img => {
+        // Skip critical images (like avatar)
+        if (img.dataset.critical === 'true') {
+          img.classList.remove('loading');
+          return;
+        }
+        img.classList.add('loading');
+      });
+
+      if (supportsNativeLazyLoading) {
+        // Native lazy loading supported, add loading states
+        lazyImages.forEach(img => {
+          // Add loading class initially (may already be present in HTML)
+          if (!img.classList.contains('loading')) {
+            img.classList.add('loading');
+          }
+
+          // Skip adding loading state to critical images
+          if (img.dataset.critical === 'true') {
+            img.classList.remove('loading');
+            return;
+          }
+
+          // Remove loading class when image loads
+          img.addEventListener('load', () => {
+            img.classList.remove('loading');
+            img.classList.add('loaded');
+            img.setAttribute('complete', '');
+
+            // Remove loading from parent container
+            if (parent) {
+              parent.classList.remove('loading');
+            }
+          });
+
+          // Handle errors
+          img.addEventListener('error', () => {
+            img.classList.remove('loading');
+            img.classList.add('error');
+            img.alt = `Failed to load: ${img.alt}`;
+
+            // Remove loading from parent container
+            if (parent) {
+              parent.classList.remove('loading');
+              parent.classList.add('error');
+            }
+          });
+        });
+      } else {
+        // Fallback to Intersection Observer
+        if (typeof IntersectionObserver !== 'undefined') {
+          const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const img = entry.target;
+                img.classList.add('loading');
+                img.classList.add('lazy');
+                img.setAttribute('data-lazy-loaded', 'true');
+
+                // Load the image
+                const dataSrc = img.getAttribute('data-src');
+                if (dataSrc && img.src !== dataSrc) {
+                  img.src = dataSrc;
+                }
+
+                // Set up load handler before potentially triggering load
+                const handleLoad = () => {
+                  img.classList.remove('loading');
+                  img.classList.add('loaded');
+                  img.setAttribute('complete', '');
+                  // Remove loading from parent container
+                  const parent = img.closest('#avatarBtn');
+                  if (parent) {
+                    parent.classList.remove('loading');
+                  }
+                };
+
+                const handleError = () => {
+                  img.classList.remove('loading');
+                  img.classList.add('error', 'broken');
+                  img.alt = `Failed to load: ${img.alt}`;
+                  // Remove loading from parent container
+                  const parent = img.closest('#avatarBtn');
+                  if (parent) {
+                    parent.classList.remove('loading');
+                    parent.classList.add('error');
+                  }
+                };
+
+                // Check if image is already loaded
+                if (img.complete && img.naturalWidth > 0) {
+                  handleLoad();
+                } else {
+                  img.addEventListener('load', handleLoad, { once: true });
+                  img.addEventListener('error', handleError, { once: true });
+                }
+
+                imageObserver.unobserve(img);
+              }
+            });
+          }, {
+            rootMargin: '50px' // Start loading slightly before entering viewport
+          });
+
+          lazyImages.forEach(img => {
+            img.classList.add('lazy');
+            img.setAttribute('data-lazy-loaded', 'false');
+            // For fallback mode, don't set src initially to prevent loading
+            const currentSrc = img.getAttribute('src');
+            const dataSrc = img.getAttribute('data-src');
+            if (currentSrc && !dataSrc) {
+              img.setAttribute('data-src', currentSrc);
+              img.removeAttribute('src');
+            }
+            imageObserver.observe(img);
+          });
+        }
+      }
+    }
+
+    // Initialize lazy loading
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initLazyLoading);
+    } else {
+      initLazyLoading();
+    }
+  </script>
+
+  <!-- Final style overrides to ensure visual polish features work -->
+  <script>
+    // Apply transitions after DOM loads to override Tailwind defaults
+    document.addEventListener('DOMContentLoaded', function() {
+      const style = document.createElement('style');
+      style.textContent = `
+        /* Button micro-interactions - force override */
+        .btn-primary, .btn-outline, .btn, button.btn-primary, button.btn-outline, button.btn {
+          transition: transform 0.15s ease-out, background-color 0.15s ease-out, color 0.15s ease-out !important;
+        }
+
+        .btn-primary:active, .btn-outline:active, .btn:active,
+        button.btn-primary:active, button.btn-outline:active, button.btn:active {
+          transform: scale(0.98) !important;
+        }
+
+        /* Sidebar items */
+        .sidebar-item {
+          transition: transform 0.15s ease-out, background-color 0.15s ease-out !important;
+        }
+
+        .sidebar-item:active {
+          transform: scale(0.98) !important;
+        }
+
+        /* Mobile tabs */
+        .mobile-tab {
+          transition: transform 0.15s ease-out, color 0.15s ease-out, background-color 0.15s ease-out !important;
+        }
+
+        .mobile-tab:active {
+          transform: scale(0.98) !important;
+        }
+
+        /* Card hover enhancement */
+        .card {
+          transition: box-shadow 0.2s ease-out !important;
+        }
+
+        /* Drawer animations */
+        .drawer-panel {
+          transition: transform 0.28s ease-out, opacity 0.28s ease-out !important;
+        }
+      `;
+      document.head.appendChild(style);
+    });
+  </script>
+
+  <!-- Reveal Material Symbols only when the font is available -->
+  <script>
+    (function(){
+      const rootEl = document.documentElement;
+
+      function showIcons() {
+        rootEl.dataset.iconsReady = 'true';
+        // Force visibility for all material icon elements
+        document.querySelectorAll('.material-symbols-rounded').forEach(el => {
+          el.classList.remove('invisible');
+          el.classList.add('visible');
+        });
+      }
+
+      try {
+        const p = document.fonts?.load('24px "Material Symbols Rounded"');
+        if (p && typeof p.then === 'function') {
+          p.then(showIcons);
+        } else {
+          window.addEventListener('load', showIcons);
+        }
+        // Safety fallback so icons never stay hidden
+        setTimeout(showIcons, 1000);
+      } catch {
+        showIcons();
+      }
+    })();
+  </script>
+
+  <!-- Mobile Bottom Tab Bar - Context Aware -->
+  {% if request.resolver_match and request.resolver_match.app_name == 'participant' %}
+    <nav data-testid="mobile-bottom-tabs" class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-neutral-50 dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800" role="tablist">
+      <div class="flex items-center justify-between px-4 py-2">
+        <!-- Dashboard Tab -->
+        <button data-testid="tab-dashboard" role="tab" aria-label="Dashboard" class="text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
+          <span class="material-symbols-rounded text-lg mb-1 invisible" translate="no">dashboard</span>
+          <span>My Learning</span>
+        </button>
+
+        <!-- Content Hub Tab -->
+        <button data-testid="tab-content-hub" role="tab" aria-label="Content Hub" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
+          <span class="material-symbols-rounded text-lg mb-1 invisible" translate="no">library_books</span>
+          <span>Content Hub</span>
+        </button>
+
+        <!-- Tasks Tab -->
+        <button data-testid="tab-tasks" role="tab" aria-label="Tasks" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
+          <span class="material-symbols-rounded text-lg mb-1 invisible" translate="no">task_alt</span>
+          <span>Tasks</span>
+        </button>
+
+        <!-- Journal Tab -->
+        <button data-testid="tab-journal" role="tab" aria-label="Journal" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
+          <span class="material-symbols-rounded text-lg mb-1 invisible" translate="no">edit_note</span>
+          <span>Journal</span>
+        </button>
+
+        <!-- Progress Tab (instead of Create for participants) -->
+        <button data-testid="tab-progress" role="tab" aria-label="Progress" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
+          <span class="material-symbols-rounded text-lg mb-1 invisible" translate="no">trending_up</span>
+          <span>Progress</span>
+        </button>
+
+        <!-- Theme Toggle in Mobile Tab Bar -->
+        <button data-testid="mobile-theme-toggle" class="flex flex-col items-center justify-center p-1 text-xs font-medium text-neutral-600 dark:text-neutral-400 transition-colors" style="min-width: 48px; min-height: 48px;" aria-pressed="false" aria-label="Toggle theme">
+          <span id="mobileThemeIcon" class="material-symbols-rounded text-lg mb-1 invisible" translate="no">dark_mode</span>
+          <span class="text-xs">Theme</span>
+        </button>
+      </div>
+    </nav>
+  {% else %}
+    <!-- Provider/Admin Console Mobile Tab Bar -->
+    <nav data-testid="mobile-bottom-tabs" class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-neutral-50 dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800" role="tablist">
+      <div class="flex items-center justify-between px-4 py-2">
+        <!-- Dashboard Tab -->
+        <button data-testid="tab-dashboard" role="tab" aria-label="Dashboard" class="text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
+          <span class="material-symbols-rounded text-lg mb-1 invisible" translate="no">dashboard</span>
+          <span>Dashboard</span>
+        </button>
+
+        <!-- Content Hub Tab -->
+        <button data-testid="tab-content-hub" role="tab" aria-label="Content Hub" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
+          <span class="material-symbols-rounded text-lg mb-1 invisible" translate="no">library_books</span>
+          <span>Content Hub</span>
+        </button>
+
+        <!-- Tasks Tab -->
+        <button data-testid="tab-tasks" role="tab" aria-label="Tasks" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
+          <span class="material-symbols-rounded text-lg mb-1 invisible" translate="no">task_alt</span>
+          <span>Tasks</span>
+        </button>
+
+        <!-- Users Tab -->
+        <button data-testid="tab-users" role="tab" aria-label="Users" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
+          <span class="material-symbols-rounded text-lg mb-1 invisible" translate="no">manage_accounts</span>
+          <span>Users</span>
+        </button>
+
+        <!-- Create Tab -->
+        <button data-testid="tab-create" role="tab" aria-label="Create" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
+          <span class="material-symbols-rounded text-lg mb-1 invisible" translate="no">add_circle</span>
+          <span>Create</span>
+        </button>
+
+        <!-- Theme Toggle in Mobile Tab Bar -->
+        <button data-testid="mobile-theme-toggle" class="flex flex-col items-center justify-center p-1 text-xs font-medium text-neutral-600 dark:text-neutral-400 transition-colors" style="min-width: 48px; min-height: 48px;" aria-pressed="false" aria-label="Toggle theme">
+          <span id="mobileThemeIcon" class="material-symbols-rounded text-lg mb-1 invisible" translate="no">dark_mode</span>
+          <span class="text-xs">Theme</span>
+        </button>
+      </div>
+    </nav>
+  {% endif %}
+
+  <!-- Toast container (ARIA live region) -->
+  <div id="toastRegion" class="fixed inset-0 pointer-events-none z-[60]">
+    <ol id="toasts" class="absolute top-4 right-4 w-[min(92vw,24rem)] space-y-3" role="region" aria-label="Notifications" aria-live="polite"></ol>
+  </div>
+
+  <!-- Mobile Interactions and Responsive Modals -->
+  <script src="/static/js/mobile-interactions.js"></script>
+  <script src="/static/js/responsive-modals.js"></script>
+</body>
+</html>
