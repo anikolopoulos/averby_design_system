@@ -329,7 +329,7 @@
       <aside id="leftInset" class="w-0 overflow-hidden overflow-y-auto [scrollbar-gutter:stable] [will-change:width] drawer-slide drawer-slide-width bg-neutral-100 dark:bg-neutral-800/60 border-r border-neutral-200/70 dark:border-neutral-800 rounded-tr-2xl rounded-br-2xl">
         <div class="h-14 px-5 flex items-center justify-between">
           <h2 class="font-semibold">Create</h2>
-          <button data-close-inset class="p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/70 min-h-[44px] min-w-[44px] flex items-center justify-center">
+          <button data-action="close-inset-drawer" class="p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/70 min-h-[44px] min-w-[44px] flex items-center justify-center">
             <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">close</span>
           </button>
         </div>
@@ -3329,15 +3329,15 @@
   <aside id="leftDrawer" class="fixed top-0 h-screen w-[22rem] max-w-[85vw] z-40 drawer-slide drawer-slide-left">
     <div class="drawer-panel bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-full overflow-y-auto [scrollbar-gutter:stable] shadow-lg backdrop-blur-[8px] [-webkit-backdrop-filter:blur(8px)] rounded-tr-2xl rounded-br-2xl">
       <div class="h-14 px-5 flex items-center justify-between">
-        <h2 class="font-semibold">Programs</h2>
+        <h2 class="font-semibold">Create</h2>
         <button data-close-left class="p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/70 min-h-[44px] min-w-[44px] flex items-center justify-center">
           <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">close</span>
         </button>
       </div>
       <div class="px-5 pb-6 space-y-3">
-        <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold bg-primary-500 text-neutral-50 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Create Program</button>
-        <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Invite Owners</button>
-        <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Import CSV</button>
+        <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold bg-primary-500 text-neutral-50 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">New Program</button>
+        <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">New Path</button>
+        <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Upload Content</button>
       </div>
     </div>
   </aside>
@@ -3442,7 +3442,7 @@
         submenu: 'create',
         // Desktop action differs from mobile
         desktopAction: 'drawer',
-        desktopDrawer: 'inset'
+        desktopDrawer: 'left'
       }
     ];
 
@@ -3514,6 +3514,8 @@
             data-action="${item.action}"
             ${item.drawer ? `data-drawer="${item.drawer}"` : ''}
             ${item.submenu ? `data-submenu="${item.submenu}"` : ''}
+            ${item.desktopAction ? `data-desktop-action="${item.desktopAction}"` : ''}
+            ${item.desktopDrawer ? `data-desktop-drawer="${item.desktopDrawer}"` : ''}
             ${item.handler ? `data-handler="${item.handler}"` : ''}
             ${item.href ? `data-href="${item.href}"` : ''}
             ${item.active ? 'aria-current="page"' : ''}
@@ -3540,6 +3542,8 @@
             data-action="${item.action}"
             ${item.drawer ? `data-drawer="${item.drawer}"` : ''}
             ${item.submenu ? `data-submenu="${item.submenu}"` : ''}
+            ${item.desktopAction ? `data-desktop-action="${item.desktopAction}"` : ''}
+            ${item.desktopDrawer ? `data-desktop-drawer="${item.desktopDrawer}"` : ''}
             ${item.handler ? `data-handler="${item.handler}"` : ''}
             ${item.href ? `data-href="${item.href}"` : ''}
           >
@@ -3604,12 +3608,16 @@
             break;
             
           case 'submenu':
-            if (!this.isDesktop) {
-              const submenu = element.dataset.submenu;
-              this.openSubmenu(submenu);
+            const submenu = element.dataset.submenu;
+            const desktopAction = element.dataset.desktopAction || action;
+            const desktopDrawer = element.dataset.desktopDrawer;
+            
+            // Check if we should use desktop behavior (inset drawer)
+            if (this.isDesktop && desktopAction === 'drawer' && desktopDrawer) {
+              this.openDrawer(desktopDrawer);
             } else {
-              // On desktop, create items open inset drawer
-              this.openDrawer('inset');
+              // Use mobile behavior (bottom submenu)
+              this.openSubmenu(submenu);
             }
             break;
             
@@ -4116,6 +4124,22 @@
       if (!rightDrawer) return;
       rightDrawer.dataset.open = 'false';
       closeScrim();
+    }
+
+    function openLeft() {
+      if (!leftDrawer) return;
+      leftDrawer.dataset.open = 'true';
+      leftDrawer.classList.remove('left-[-22rem]');
+      leftDrawer.classList.add('left-[6rem]');
+      openScrim();
+    }
+
+    function openRight() {
+      if (!rightDrawer) return;
+      rightDrawer.dataset.open = 'true';
+      rightDrawer.classList.remove('right-[-28rem]');
+      rightDrawer.classList.add('right-0');
+      openScrim();
     }
 
     function openInset() { if (inset) inset.dataset.open = 'true'; }
@@ -4776,6 +4800,14 @@
       setupCopyButtons();
       // Initialize unified navigation system
       window.navigationManager = new UnifiedNavigationManager();
+      
+      // Make drawer functions available globally for navigation manager
+      window.openLeft = openLeft;
+      window.openRight = openRight;
+      window.openInset = openInset;
+      window.closeLeft = closeLeft;
+      window.closeRight = closeRight;
+      window.closeInset = closeInset;
       
       // Keep rail toggle functionality for desktop
       initRailIfDesktop();
