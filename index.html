@@ -100,7 +100,7 @@
     input[type="checkbox"]:not(.sr-only) {
       appearance: none;
       background-color: white;
-      border: 1.5px solid rgb(209 213 219);
+      border: 1.5px solid var(--color-neutral-300);
       border-radius: 0.25rem;
       width: 1rem;
       height: 1rem;
@@ -110,8 +110,8 @@
     }
 
     input[type="checkbox"]:not(.sr-only):checked {
-      background-color: rgb(234 88 12);
-      border-color: rgb(234 88 12);
+      background-color: var(--color-primary-600);
+      border-color: var(--color-primary-600);
     }
 
     input[type="checkbox"]:not(.sr-only):checked::before {
@@ -130,42 +130,42 @@
 
     input[type="checkbox"]:not(.sr-only):focus {
       outline: none;
-      ring: 2px solid rgb(234 88 12 / 0.5);
+      ring: 2px solid rgb(var(--color-primary-600) / 0.5);
       ring-offset: 2px;
-      box-shadow: 0 0 0 2px white, 0 0 0 4px rgb(234 88 12 / 0.5);
+      box-shadow: 0 0 0 2px white, 0 0 0 4px rgb(var(--color-primary-600) / 0.5);
     }
 
     input[type="checkbox"]:not(.sr-only):disabled {
-      background-color: rgb(243 244 246);
-      border-color: rgb(209 213 219);
+      background-color: var(--color-neutral-100);
+      border-color: var(--color-neutral-300);
       cursor: not-allowed;
     }
 
     /* Dark mode checkboxes */
     .dark input[type="checkbox"]:not(.sr-only) {
-      background-color: rgb(17 24 39);
-      border-color: rgb(75 85 99);
+      background-color: var(--color-neutral-900);
+      border-color: var(--color-neutral-600);
     }
 
     .dark input[type="checkbox"]:not(.sr-only):checked {
-      background-color: rgb(234 88 12);
-      border-color: rgb(234 88 12);
+      background-color: var(--color-primary-600);
+      border-color: var(--color-primary-600);
     }
 
     .dark input[type="checkbox"]:not(.sr-only):focus {
-      box-shadow: 0 0 0 2px rgb(17 24 39), 0 0 0 4px rgb(234 88 12 / 0.5);
+      box-shadow: 0 0 0 2px var(--color-neutral-900), 0 0 0 4px rgb(var(--color-primary-600) / 0.5);
     }
 
     .dark input[type="checkbox"]:not(.sr-only):disabled {
-      background-color: rgb(31 41 55);
-      border-color: rgb(75 85 99);
+      background-color: var(--color-neutral-800);
+      border-color: var(--color-neutral-600);
     }
 
     /* Radio Buttons */
     input[type="radio"] {
       appearance: none;
       background-color: white;
-      border: 1.5px solid rgb(209 213 219);
+      border: 1.5px solid var(--color-neutral-300);
       border-radius: 50%;
       width: 1rem;
       height: 1rem;
@@ -176,7 +176,7 @@
 
     input[type="radio"]:checked {
       background-color: white;
-      border-color: rgb(234 88 12);
+      border-color: var(--color-primary-600);
     }
 
     input[type="radio"]:checked::before {
@@ -187,39 +187,39 @@
       transform: translate(-50%, -50%);
       width: 0.5rem;
       height: 0.5rem;
-      background-color: rgb(234 88 12);
+      background-color: var(--color-primary-600);
       border-radius: 50%;
     }
 
     input[type="radio"]:focus {
       outline: none;
-      box-shadow: 0 0 0 2px white, 0 0 0 4px rgb(234 88 12 / 0.5);
+      box-shadow: 0 0 0 2px white, 0 0 0 4px rgb(var(--color-primary-600) / 0.5);
     }
 
     input[type="radio"]:disabled {
-      background-color: rgb(243 244 246);
-      border-color: rgb(209 213 219);
+      background-color: var(--color-neutral-100);
+      border-color: var(--color-neutral-300);
       cursor: not-allowed;
     }
 
     /* Dark mode radio buttons */
     .dark input[type="radio"] {
-      background-color: rgb(17 24 39);
-      border-color: rgb(75 85 99);
+      background-color: var(--color-neutral-900);
+      border-color: var(--color-neutral-600);
     }
 
     .dark input[type="radio"]:checked {
-      background-color: rgb(17 24 39);
-      border-color: rgb(234 88 12);
+      background-color: var(--color-neutral-900);
+      border-color: var(--color-primary-600);
     }
 
     .dark input[type="radio"]:focus {
-      box-shadow: 0 0 0 2px rgb(17 24 39), 0 0 0 4px rgb(234 88 12 / 0.5);
+      box-shadow: 0 0 0 2px var(--color-neutral-900), 0 0 0 4px rgb(var(--color-primary-600) / 0.5);
     }
 
     .dark input[type="radio"]:disabled {
-      background-color: rgb(31 41 55);
-      border-color: rgb(75 85 99);
+      background-color: var(--color-neutral-800);
+      border-color: var(--color-neutral-600);
     }
 
     /* Select Dropdown */
@@ -245,7 +245,7 @@
       padding: 8px 12px;
     }
     .dark select option {
-      background-color: rgb(17 24 39);
+      background-color: var(--color-neutral-900);
       color: white;
     }
 
@@ -270,7 +270,7 @@
       outline: none;
     }
     button:focus-visible {
-      outline: 2px solid rgb(234 88 12);
+      outline: 2px solid var(--color-primary-600);
       outline-offset: 2px;
     }
     /* Override default button focus for status indicator buttons */
@@ -395,7 +395,7 @@
           <!-- Desktop Search Bar -->
           <div data-search-container class="hidden lg:flex flex-1 justify-center items-center px-8">
             <label class="relative block w-full max-w-xl">
-              <input id="searchInput" type="search" placeholder="Search programs, people, content…" aria-label="Search programs, people, and content" class="w-full rounded-full pl-10 pr-4 bg-neutral-100/80 dark:bg-neutral-900/90 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-400/60 dark:focus:ring-primary-400/50 border border-transparent dark:border-neutral-700/60" style="height: 48px;" />
+              <input id="searchInput" type="search" placeholder="Search programs, people, content…" aria-label="Search programs, people, and content" class="w-full h-12 rounded-full pl-10 pr-4 bg-neutral-100/80 dark:bg-neutral-900/90 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-400/60 dark:focus:ring-primary-400/50 border border-transparent dark:border-neutral-700/60" />
               <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-400 dark:text-neutral-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
             </label>
           </div>
@@ -432,7 +432,7 @@
           </div>
 
           <div class="relative">
-            <button id="avatarBtn" class="flex items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-primary-500" style="width: 48px; height: 48px;" aria-controls="avatarMenu" aria-expanded="false">
+            <button id="avatarBtn" class="w-12 h-12 flex items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-primary-500" aria-controls="avatarMenu" aria-expanded="false">
               <img class="h-9 w-9 rounded-full ring-1 ring-neutral-200 dark:ring-neutral-700" src="https://i.pravatar.cc/80?img=3" alt="User avatar" loading="lazy" data-src="https://i.pravatar.cc/80?img=3" data-critical="true" fetchpriority="high" />
             </button>
             <div id="avatarMenu" class="absolute right-0 mt-2 w-56 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 shadow-2xl p-1 origin-top-right transition-all duration-150 opacity-0 scale-95 pointer-events-none data-[open=true]:opacity-100 data-[open=true]:scale-100 data-[open=true]:pointer-events-auto" role="menu" aria-labelledby="avatarBtn">
@@ -3386,10 +3386,10 @@
         <div>
           <label class="text-sm font-medium">Status</label>
           <div class="mt-2 flex flex-wrap gap-2">
-            <button class="px-3 rounded-full bg-neutral-100 dark:bg-neutral-800/70" style="height: 48px;">All</button>
-            <button class="px-3 rounded-full border border-neutral-200 dark:border-neutral-700" style="height: 48px;">Draft</button>
-            <button class="px-3 rounded-full border border-neutral-200 dark:border-neutral-700" style="height: 48px;">Live</button>
-            <button class="px-3 rounded-full border border-neutral-200 dark:border-neutral-700" style="height: 48px;">Archived</button>
+            <button class="px-3 h-12 rounded-full bg-neutral-100 dark:bg-neutral-800/70">All</button>
+            <button class="px-3 h-12 rounded-full border border-neutral-200 dark:border-neutral-700">Draft</button>
+            <button class="px-3 h-12 rounded-full border border-neutral-200 dark:border-neutral-700">Live</button>
+            <button class="px-3 h-12 rounded-full border border-neutral-200 dark:border-neutral-700">Archived</button>
           </div>
         </div>
         <div>
@@ -4937,7 +4937,7 @@
     <div class="fixed inset-0 bg-black/20 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-280 opacity-0 data-[open=true]:opacity-100 pointer-events-none data-[open=true]:pointer-events-auto" data-submenu-backdrop></div>
     
     <!-- Submenu Panel -->
-    <div data-submenu-panel class="bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-700/50 rounded-t-2xl shadow-2xl dark:shadow-black/30 transition-transform duration-280 ease-[cubic-bezier(0.2,0.8,0.2,1)] transform translate-y-full data-[open=true]:translate-y-0" style="margin-bottom: 64px;">
+    <div data-submenu-panel class="bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-700/50 rounded-t-2xl shadow-2xl dark:shadow-black/30 transition-transform duration-280 ease-[cubic-bezier(0.2,0.8,0.2,1)] transform translate-y-full data-[open=true]:translate-y-0 mb-16">
       <!-- Handle -->
       <div class="flex justify-center pt-3 pb-2">
         <div class="w-10 h-1 bg-neutral-300 dark:bg-neutral-600 rounded-full"></div>
