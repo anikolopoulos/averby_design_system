@@ -175,17 +175,176 @@
 
 /* Rail collapse functionality */
 [data-rail] {
-  transition: width 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: width 300ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* Override Tailwind width classes with higher specificity */
 [data-rail][data-collapsed="true"] {
   width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  overflow: hidden !important;
+  border-right-width: 0 !important;
 }
 
 [data-rail][data-collapsed="true"] .rail-logo,
 [data-rail][data-collapsed="true"] .nav-label {
-  opacity: 0;
-  transition: opacity 150ms ease-out;
+  opacity: 0 !important;
+  transform: translateX(-100%) !important;
+  transition: opacity 150ms ease-out, transform 150ms ease-out;
+}
+
+/* Ensure expanded state visibility */
+[data-rail]:not([data-collapsed="true"]) .rail-logo,
+[data-rail]:not([data-collapsed="true"]) .nav-label {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  transition: opacity 200ms ease-in, transform 200ms ease-in;
 }
 
 /* All component styles are now handled directly with Tailwind utilities */
+
+/* Temporary dark mode styles - for immediate fix while Tailwind v4.1 dark mode is configured */
+.dark {
+  color-scheme: dark;
+}
+
+/* Essential dark mode background and text colors */
+.dark .bg-white {
+  background-color: var(--color-neutral-900) !important;
+}
+
+.dark .bg-neutral-50 {
+  background-color: var(--color-neutral-900) !important;
+}
+
+.dark .bg-neutral-100 {
+  background-color: var(--color-neutral-800) !important;
+}
+
+.dark .bg-neutral-200 {
+  background-color: var(--color-neutral-900) !important;
+}
+
+.dark .bg-neutral-900\/60 {
+  background-color: rgba(17, 24, 39, 0.6) !important;
+}
+
+.dark .bg-neutral-800\/60 {
+  background-color: rgba(31, 41, 55, 0.6) !important;
+}
+
+.dark .bg-neutral-50\/70 {
+  background-color: rgba(17, 24, 39, 0.7) !important;
+}
+
+.dark .bg-neutral-900\/70 {
+  background-color: rgba(17, 24, 39, 0.7) !important;
+}
+
+.dark .bg-neutral-800\/70 {
+  background-color: rgba(31, 41, 55, 0.7) !important;
+}
+
+/* Dark mode backdrop overlays */
+.dark .bg-black\/20 {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.dark .bg-black\/40 {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Text colors */
+.dark .text-neutral-900 {
+  color: var(--color-neutral-100) !important;
+}
+
+.dark .text-neutral-700 {
+  color: var(--color-neutral-200) !important;
+}
+
+.dark .text-neutral-200 {
+  color: var(--color-neutral-200) !important;
+}
+
+.dark .text-neutral-100 {
+  color: var(--color-neutral-100) !important;
+}
+
+.dark .text-neutral-50 {
+  color: var(--color-neutral-50) !important;
+}
+
+/* Border colors */
+.dark .border-neutral-200\/70 {
+  border-color: rgba(75, 85, 99, 0.7) !important;
+}
+
+.dark .border-neutral-800 {
+  border-color: var(--color-neutral-800) !important;
+}
+
+.dark .border-neutral-700 {
+  border-color: var(--color-neutral-700) !important;
+}
+
+/* Hover states */
+.dark .hover\:bg-neutral-900\/5:hover {
+  background-color: rgba(75, 85, 99, 0.4) !important;
+}
+
+.dark .hover\:bg-neutral-700\/40:hover {
+  background-color: rgba(75, 85, 99, 0.4) !important;
+}
+
+.dark .hover\:bg-neutral-100:hover {
+  background-color: rgba(75, 85, 99, 0.7) !important;
+}
+
+.dark .hover\:bg-neutral-800\/70:hover {
+  background-color: rgba(31, 41, 55, 0.7) !important;
+}
+
+/* Primary colors in dark mode */
+.dark .bg-primary-50 {
+  background-color: rgba(124, 45, 18, 0.3) !important;
+}
+
+.dark .bg-primary-900\/30 {
+  background-color: rgba(124, 45, 18, 0.3) !important;
+}
+
+.dark .text-primary-600 {
+  color: var(--color-primary-300) !important;
+}
+
+.dark .text-primary-300 {
+  color: var(--color-primary-300) !important;
+}
+
+/* Placeholder colors */
+.dark .placeholder-neutral-400::placeholder {
+  color: var(--color-neutral-400) !important;
+}
+
+/* Bottom submenu drawer animations */
+[data-submenu-panel] {
+  transition: transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform: translateY(100%);
+}
+
+[data-submenu-panel][data-open="true"] {
+  transform: translateY(0);
+}
+
+[data-submenu-backdrop] {
+  transition: opacity 280ms ease-out;
+  opacity: 0;
+  pointer-events: none;
+}
+
+[data-submenu-backdrop][data-open="true"] {
+  opacity: 1;
+  pointer-events: auto;
+}

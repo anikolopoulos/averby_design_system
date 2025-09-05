@@ -398,8 +398,8 @@
           <!-- Desktop Search Bar -->
           <div data-search-container class="hidden lg:flex flex-1 justify-center items-center px-8">
             <label class="relative block w-full max-w-xl">
-              <input id="searchInput" type="search" placeholder="Search programs, people, content…" aria-label="Search programs, people, and content" class="w-full rounded-full pl-10 pr-4 bg-neutral-100/80 dark:bg-neutral-800/70 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-400/60" style="height: 48px;" />
-              <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+              <input id="searchInput" type="search" placeholder="Search programs, people, content…" aria-label="Search programs, people, and content" class="w-full rounded-full pl-10 pr-4 bg-neutral-100/80 dark:bg-neutral-900/90 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-400/60 dark:focus:ring-primary-400/50 border border-transparent dark:border-neutral-700/60" style="height: 48px;" />
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-400 dark:text-neutral-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
             </label>
           </div>
 
@@ -410,16 +410,13 @@
               <span id="mobileTopBarThemeIcon" class="material-symbols-rounded text-neutral-700 dark:text-neutral-200 invisible [[data-icons-ready=true]_&]:visible" translate="no">dark_mode</span>
             </button>
             
-            <!-- Search Button -->
-            <button data-search-trigger class="relative z-50 flex items-center justify-center w-11 h-11 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800/70 transition-colors" aria-label="Open search">
+            <!-- Search Button (mobile only) -->
+            <button data-search-trigger class="lg:hidden relative z-50 flex items-center justify-center w-11 h-11 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800/70 transition-colors" aria-label="Open search">
               <span class="material-symbols-rounded text-neutral-700 dark:text-neutral-200" translate="no">search</span>
             </button>
           </div>
           
-          <!-- Desktop Search Button -->
-          <button data-search-trigger class="hidden lg:flex items-center justify-center w-11 h-11 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800/70 transition-colors ml-auto mr-2" aria-label="Open search">
-            <span class="material-symbols-rounded text-neutral-700 dark:text-neutral-200" translate="no">search</span>
-          </button>
+          <!-- Desktop Search Button - REMOVED: Not needed since we have centered search bar on desktop -->
 
           <!-- Enhanced Mobile Search Overlay -->
           <div data-search-overlay data-open="false" class="fixed inset-x-0 top-0 z-50 lg:hidden pointer-events-none data-[open=true]:pointer-events-auto">
@@ -430,8 +427,8 @@
                   <span class="material-symbols-rounded text-neutral-700 dark:text-neutral-200" translate="no">arrow_back</span>
                 </button>
                 <label class="relative flex-1">
-                  <input id="mobileSearchInput" type="search" placeholder="Search programs, people, and content" aria-label="Search" class="w-full h-11 rounded-full pl-10 pr-4 bg-neutral-100/80 dark:bg-neutral-800/70 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-400/60" />
-                  <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+                  <input id="mobileSearchInput" type="search" placeholder="Search programs, people, and content" aria-label="Search" class="w-full h-11 rounded-full pl-10 pr-4 bg-neutral-100/80 dark:bg-neutral-900/90 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-400/60 dark:focus:ring-primary-400/50 border border-transparent dark:border-neutral-700/60" />
+                  <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-400 dark:text-neutral-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
                 </label>
               </div>
             </div>
@@ -3869,16 +3866,28 @@
 
     // === BOTTOM SUBMENU MANAGEMENT ===
     function openBottomSubmenu(submenuId) {
+      console.log('Opening bottom submenu:', submenuId);
       const submenu = document.querySelector(`[data-bottom-submenu="${submenuId}"]`);
-      if (!submenu) return;
+      if (!submenu) {
+        console.log('Submenu not found:', submenuId);
+        return;
+      }
+      console.log('Found submenu element:', submenu);
       
       // Close any open submenus first
       closeAllBottomSubmenus();
       
       submenu.dataset.open = 'true';
-      // Also set data-open on the submenu panel for CSS transitions
-      const submenuPanel = submenu.querySelector('.bg-white');
-      if (submenuPanel) submenuPanel.dataset.open = 'true';
+      console.log('Set submenu data-open to true');
+      
+      // Set data-open on the submenu panel for CSS transitions
+      const submenuPanel = submenu.querySelector('[data-submenu-panel]');
+      if (submenuPanel) {
+        submenuPanel.dataset.open = 'true';
+        console.log('Set panel data-open to true, element:', submenuPanel);
+      } else {
+        console.log('Submenu panel not found with selector [data-submenu-panel]');
+      }
       // Set on backdrop too
       const backdrop = submenu.querySelector('[data-submenu-backdrop]');
       if (backdrop) backdrop.dataset.open = 'true';
@@ -3899,9 +3908,11 @@
       if (!submenu) return;
       
       submenu.dataset.open = 'false';
-      // Also remove data-open from the submenu panel for CSS transitions
-      const submenuPanel = submenu.querySelector('.bg-white');
-      if (submenuPanel) submenuPanel.dataset.open = 'false';
+      // Remove data-open from the submenu panel for CSS transitions
+      const submenuPanel = submenu.querySelector('[data-submenu-panel]');
+      if (submenuPanel) {
+        submenuPanel.dataset.open = 'false';
+      }
       // Remove from backdrop too
       const backdrop = submenu.querySelector('[data-submenu-backdrop]');
       if (backdrop) backdrop.dataset.open = 'false';
@@ -3925,24 +3936,7 @@
     }
     
     function initBottomSubmenus() {
-      // Handle submenu trigger buttons
-      document.querySelectorAll('[data-submenu-trigger]').forEach(trigger => {
-        trigger.addEventListener('click', () => {
-          const submenuId = trigger.getAttribute('data-submenu-trigger');
-          const submenu = document.querySelector(`[data-bottom-submenu="${submenuId}"]`);
-          if (submenu) {
-            const isOpen = submenu.getAttribute('data-open') === 'true';
-            if (isOpen) {
-              closeBottomSubmenu(submenuId);
-            } else {
-              // Close any open submenus first
-              closeAllBottomSubmenus();
-              // Then open this one
-              openBottomSubmenu(submenuId);
-            }
-          }
-        });
-      });
+      // Note: Submenu trigger buttons are handled in initializeMobileTabs() to avoid conflicts
       
       // Handle close buttons
       document.querySelectorAll('[data-submenu-close]').forEach(closeBtn => {
@@ -4141,30 +4135,70 @@
       const toggleIcon = toggleBtn?.querySelector('.material-symbols-rounded');
       const body = document.body;
 
-      if (!rail || !toggleBtn || !toggleIcon) return;
+      // Debug logging
+      console.log('Rail toggle init:', {
+        rail: !!rail,
+        toggleBtn: !!toggleBtn,
+        toggleIcon: !!toggleIcon,
+        railClasses: rail?.className
+      });
 
-      const savedState = localStorage.getItem('railCollapsed');
-      if (savedState === 'true') {
-        rail.dataset.collapsed = 'true';
-        body.dataset.railCollapsed = 'true';
-        toggleIcon.textContent = 'menu';
-        toggleBtn.setAttribute('aria-expanded', 'false');
+      if (!rail || !toggleBtn || !toggleIcon) {
+        console.warn('Rail toggle initialization failed - missing elements');
+        return;
       }
 
-      toggleBtn.addEventListener('click', () => {
-        const isCollapsed = rail.dataset.collapsed === 'true';
-        const newState = !isCollapsed;
-        rail.dataset.collapsed = newState.toString();
-        body.dataset.railCollapsed = newState.toString();
-        toggleIcon.textContent = newState ? 'menu' : 'menu_open';
-        toggleBtn.setAttribute('aria-expanded', (!newState).toString());
-        localStorage.setItem('railCollapsed', newState.toString());
+      // Ensure rail starts in expanded state unless saved as collapsed
+      const savedState = localStorage.getItem('railCollapsed');
+      const shouldBeCollapsed = savedState === 'true';
+      
+      // Initialize rail state
+      rail.dataset.collapsed = shouldBeCollapsed.toString();
+      body.dataset.railCollapsed = shouldBeCollapsed.toString();
+      toggleIcon.textContent = shouldBeCollapsed ? 'menu' : 'menu_open';
+      toggleBtn.setAttribute('aria-expanded', (!shouldBeCollapsed).toString());
+
+      // Add click handler with better debugging
+      toggleBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isCurrentlyCollapsed = rail.dataset.collapsed === 'true';
+        const newCollapsedState = !isCurrentlyCollapsed;
+        
+        console.log('Rail toggle clicked:', {
+          wasCollapsed: isCurrentlyCollapsed,
+          willBeCollapsed: newCollapsedState,
+          railWidth: rail.offsetWidth
+        });
+        
+        // Update all states
+        rail.dataset.collapsed = newCollapsedState.toString();
+        body.dataset.railCollapsed = newCollapsedState.toString();
+        toggleIcon.textContent = newCollapsedState ? 'menu' : 'menu_open';
+        toggleBtn.setAttribute('aria-expanded', (!newCollapsedState).toString());
+        localStorage.setItem('railCollapsed', newCollapsedState.toString());
+        
+        // Force style recalculation
+        rail.style.display = 'none';
+        rail.offsetHeight; // Force reflow
+        rail.style.display = '';
+        
+        console.log('Rail toggle completed:', {
+          newState: rail.dataset.collapsed,
+          newWidth: rail.offsetWidth
+        });
       });
+      
+      console.log('Rail toggle initialized successfully');
     }
 
     function initRailIfDesktop() {
+      console.log('Checking desktop rail init, window width:', window.innerWidth);
       if (window.innerWidth >= 768) {
         initializeRailToggle();
+      } else {
+        console.log('Skipping rail init - not desktop viewport');
       }
     }
 
@@ -4485,9 +4519,34 @@
       setupCopyButtons();
       initializeMobileTabs();
       initRailIfDesktop();
+      
+      // Add resize handler for rail toggle
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+          // Re-initialize rail toggle on desktop
+          const rail = document.getElementById('desktopRail');
+          const toggleBtn = document.getElementById('railToggle');
+          if (rail && toggleBtn && !toggleBtn.dataset.initialized) {
+            toggleBtn.dataset.initialized = 'true';
+            initializeRailToggle();
+          }
+        }
+      });
       initializeMobileSearch();
       initBottomSubmenus();
       initLazyLoading();
+      
+      // Test submenu functionality
+      window.testSubmenu = function() {
+        console.log('Testing submenu...');
+        const createButton = document.querySelector('[data-testid="tab-create"]');
+        if (createButton) {
+          console.log('Found create button, clicking...');
+          createButton.click();
+        } else {
+          console.log('Create button not found');
+        }
+      };
 
       // Apply style overrides after DOM is ready
       applyStyleOverrides();
@@ -4548,10 +4607,10 @@
   <!-- Bottom Menu Submenu Drawer -->
   <div data-bottom-submenu="create" data-open="false" class="fixed bottom-0 left-0 right-0 z-40 md:hidden">
     <!-- Backdrop -->
-    <div class="fixed inset-0 bg-black/20 backdrop-blur-sm transition-opacity duration-280 opacity-0 data-[open=true]:opacity-100 pointer-events-none data-[open=true]:pointer-events-auto" data-submenu-backdrop></div>
+    <div class="fixed inset-0 bg-black/20 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-280 opacity-0 data-[open=true]:opacity-100 pointer-events-none data-[open=true]:pointer-events-auto" data-submenu-backdrop></div>
     
     <!-- Submenu Panel -->
-    <div class="bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800 rounded-t-2xl shadow-2xl transition-transform duration-280 ease-[cubic-bezier(0.2,0.8,0.2,1)] transform translate-y-full data-[open=true]:translate-y-0" style="margin-bottom: 64px;">
+    <div data-submenu-panel class="bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-700/50 rounded-t-2xl shadow-2xl dark:shadow-black/30 transition-transform duration-280 ease-[cubic-bezier(0.2,0.8,0.2,1)] transform translate-y-full data-[open=true]:translate-y-0" style="margin-bottom: 64px;">
       <!-- Handle -->
       <div class="flex justify-center pt-3 pb-2">
         <div class="w-10 h-1 bg-neutral-300 dark:bg-neutral-600 rounded-full"></div>
