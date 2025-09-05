@@ -348,3 +348,87 @@
   opacity: 1;
   pointer-events: auto;
 }
+
+/* ===== UNIFIED NAVIGATION SYSTEM ===== */
+
+/* Base navigation styles */
+.nav-item {
+  transition: all 150ms ease-out;
+  @apply flex flex-col items-center justify-center text-center rounded-xl min-h-[48px] min-w-[48px];
+}
+
+/* Desktop rail navigation */
+.nav-rail {
+  @apply hidden md:flex flex-col w-24 bg-neutral-200 dark:bg-neutral-900/60 border-r border-neutral-200/70 dark:border-neutral-800 sticky left-0 top-0 h-screen z-50 pt-2 overflow-y-auto;
+  box-shadow: 4px 0 12px -8px rgb(0 0 0 / 0.25);
+  transition: width 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav-rail .nav-item {
+  @apply px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40;
+}
+
+.nav-rail .nav-item.active {
+  @apply bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300;
+}
+
+.nav-rail .nav-item .nav-icon {
+  @apply w-6 h-6 mb-1;
+}
+
+.nav-rail .nav-label {
+  @apply text-[13px] font-bold;
+}
+
+/* Mobile bottom navigation */
+.nav-bottom {
+  @apply md:hidden fixed bottom-0 left-0 right-0 z-50 bg-neutral-50 dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between px-4 py-2;
+}
+
+.nav-bottom .nav-item {
+  @apply text-xs font-medium transition-all duration-150 p-1;
+  min-width: 48px;
+  min-height: 48px;
+}
+
+.nav-bottom .nav-item.active {
+  @apply text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30;
+}
+
+.nav-bottom .nav-item:not(.active) {
+  @apply text-neutral-600 dark:text-neutral-400;
+}
+
+.nav-bottom .nav-item .nav-icon {
+  @apply text-lg mb-1;
+}
+
+/* Responsive submenu handling */
+.submenu-drawer {
+  @apply fixed bottom-0 left-0 right-0 z-40 md:hidden;
+}
+
+.submenu-drawer[data-open="true"] .submenu-panel {
+  transform: translateY(0);
+}
+
+.submenu-panel {
+  @apply bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-700/50 rounded-t-2xl shadow-2xl dark:shadow-black/30;
+  transition: transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform: translateY(100%);
+  margin-bottom: 64px;
+}
+
+/* Navigation state management */
+.nav-item:active {
+  transform: scale(0.98);
+}
+
+/* Theme toggle positioning */
+.theme-toggle {
+  @apply mt-auto shrink-0 p-2 grid place-items-center;
+}
+
+.theme-toggle .nav-item {
+  @apply min-h-[44px] min-w-[44px];
+}

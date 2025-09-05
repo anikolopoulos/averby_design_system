@@ -294,8 +294,8 @@
 <body class="h-full bg-neutral-50 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100 antialiased">
   <div class="flex h-screen w-screen overflow-hidden pb-0 md:pb-0">
 
-    <!-- Fixed Vertical Rail with inline SVG logo on top -->
-    <aside id="desktopRail" data-rail class="hidden md:flex flex-col w-24 bg-neutral-200 dark:bg-neutral-900/60 border-r border-neutral-200/70 dark:border-neutral-800 sticky left-0 top-0 h-screen z-50 pt-2 overflow-y-auto [box-shadow:4px_0_12px_-8px_rgb(0_0_0_/_0.25)] transition-all duration-300" data-collapsed="false">
+    <!-- Unified Navigation Rail (Desktop) -->
+    <aside id="desktopRail" data-rail class="nav-rail" data-collapsed="false">
       <!-- Logo area (20% larger) -->
       <div class="rail-logo shrink-0 h-14 px-3 flex items-center justify-center">
         <div class="h-[2.88rem] w-[2.88rem] text-neutral-900 dark:text-neutral-50" aria-label="Averby">
@@ -309,49 +309,15 @@
         </div>
       </div>
 
-      <!-- Nav icons with vertical labels (13px, bold) -->
+      <!-- Navigation items (populated by UnifiedNavigationManager) -->
       <nav class="mt-2 flex-1 flex flex-col gap-1 px-2">
-        <!-- DASHBOARD -->
-        <button aria-current="page" class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px] bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300" data-active="true">
-          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" data-filled="true" translate="no">dashboard</span>
-          <span class="nav-label font-bold">My Snapshot</span>
-        </button>
-        <!-- CONTENT HUB -->
-        <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]" data-open-right-drawer>
-          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">library_books</span>
-          <span class="nav-label">Content Hub</span>
-        </button>
-        <!-- TASKS -->
-        <button id="toastDemoBtn" class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]">
-          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">task_alt</span>
-          <span class="nav-label">Tasks</span>
-        </button>
-        <!-- JOURNAL -->
-        <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]">
-          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">edit_note</span>
-          <span class="nav-label">Journal</span>
-        </button>
-        <!-- PATHS -->
-        <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]">
-          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">route</span>
-          <span class="nav-label">Learning Paths</span>
-        </button>
-        <!-- PROGRAMS -> LEFT overlay drawer -->
-        <button class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]" data-open-left-drawer>
-          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">video_library</span>
-          <span class="nav-label">Programs</span>
-        </button>
-        <!-- CREATE -> INSET drawer example -->
-        <button id="openInsetFromCreate" class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 transition-all duration-150 min-h-[48px] min-w-[48px]">
-          <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">add_circle</span>
-          <span class="nav-label">Create</span>
-        </button>
+        <!-- Navigation items will be rendered here by JavaScript -->
       </nav>
 
-      <!-- Rail Footer: Theme toggle -->
-      <div class="rail-footer mt-auto shrink-0 p-2 grid place-items-center">
-        <button id="toggleDark" data-action="toggle-theme" class="group flex flex-col items-center justify-center text-center rounded-xl px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-900/5 dark:hover:bg-neutral-700/40 min-h-[44px] min-w-[44px]" aria-pressed="false">
-          <span id="themeIcon" class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">dark_mode</span>
+      <!-- Theme toggle -->
+      <div class="theme-toggle">
+        <button id="toggleDark" data-action="toggle-theme" class="nav-item" aria-pressed="false">
+          <span id="themeIcon" class="nav-icon material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">dark_mode</span>
           <span class="nav-label">Theme</span>
         </button>
       </div>
@@ -3420,6 +3386,297 @@
     const THEME_KEY = 'theme';
     const root = document.documentElement;
 
+    // ===== UNIFIED NAVIGATION CONFIGURATION =====
+    const NAVIGATION_CONFIG = [
+      {
+        id: 'dashboard',
+        label: 'My Snapshot',
+        icon: 'dashboard',
+        iconFilled: true,
+        active: true,
+        action: 'navigate',
+        href: '#dashboard'
+      },
+      {
+        id: 'content-hub',
+        label: 'Content Hub', 
+        icon: 'library_books',
+        action: 'drawer',
+        drawer: 'right'
+      },
+      {
+        id: 'tasks',
+        label: 'Tasks',
+        icon: 'task_alt',
+        action: 'demo', // Toast demo
+        handler: 'toastDemo'
+      },
+      {
+        id: 'journal',
+        label: 'Journal',
+        icon: 'edit_note',
+        action: 'navigate',
+        href: '#journal'
+      },
+      {
+        id: 'learning-paths',
+        label: 'Learning Paths',
+        icon: 'route',
+        action: 'navigate',
+        href: '#paths',
+        // Show different label on mobile
+        mobileLabel: 'Paths'
+      },
+      {
+        id: 'programs',
+        label: 'Programs',
+        icon: 'video_library', 
+        action: 'drawer',
+        drawer: 'left'
+      },
+      {
+        id: 'create',
+        label: 'Create',
+        icon: 'add_circle',
+        action: 'submenu',
+        submenu: 'create',
+        // Desktop action differs from mobile
+        desktopAction: 'drawer',
+        desktopDrawer: 'inset'
+      }
+    ];
+
+    const SUBMENU_CONFIG = {
+      create: {
+        title: 'Create New',
+        items: [
+          {
+            id: 'create-program',
+            label: 'Create Program',
+            icon: 'add_box',
+            primary: true
+          },
+          {
+            id: 'invite-owners',
+            label: 'Invite Owners',
+            icon: 'person_add'
+          },
+          {
+            id: 'import-csv',
+            label: 'Import CSV',
+            icon: 'upload_file'
+          }
+        ]
+      }
+    };
+
+    // Unified Navigation Manager
+    class UnifiedNavigationManager {
+      constructor() {
+        this.activeItem = null;
+        this.isDesktop = false;
+        this.init();
+      }
+
+      init() {
+        this.updateViewport();
+        this.render();
+        this.attachEventListeners();
+        window.addEventListener('resize', () => this.handleResize());
+      }
+
+      updateViewport() {
+        this.isDesktop = window.innerWidth >= 768;
+      }
+
+      handleResize() {
+        const wasDesktop = this.isDesktop;
+        this.updateViewport();
+        if (wasDesktop !== this.isDesktop) {
+          this.render(); // Re-render when crossing breakpoints
+        }
+      }
+
+      render() {
+        this.renderDesktopRail();
+        this.renderMobileBottomNav();
+        this.renderSubmenus();
+      }
+
+      renderDesktopRail() {
+        const railNav = document.querySelector('.nav-rail nav');
+        if (!railNav) return;
+
+        railNav.innerHTML = NAVIGATION_CONFIG.map(item => `
+          <button 
+            class="nav-item ${item.active ? 'active' : ''}" 
+            data-nav-id="${item.id}"
+            data-action="${item.action}"
+            ${item.drawer ? `data-drawer="${item.drawer}"` : ''}
+            ${item.submenu ? `data-submenu="${item.submenu}"` : ''}
+            ${item.handler ? `data-handler="${item.handler}"` : ''}
+            ${item.href ? `data-href="${item.href}"` : ''}
+            ${item.active ? 'aria-current="page"' : ''}
+          >
+            <span class="nav-icon material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" 
+                  ${item.iconFilled ? 'data-filled="true"' : ''} 
+                  translate="no">${item.icon}</span>
+            <span class="nav-label font-bold">${item.label}</span>
+          </button>
+        `).join('');
+      }
+
+      renderMobileBottomNav() {
+        const bottomNav = document.querySelector('.nav-bottom');
+        if (!bottomNav) return;
+
+        bottomNav.innerHTML = NAVIGATION_CONFIG.map(item => `
+          <button 
+            class="nav-item ${item.active ? 'active' : ''}" 
+            data-nav-id="${item.id}"
+            data-testid="tab-${item.id}"
+            role="tab" 
+            aria-label="${item.label}"
+            data-action="${item.action}"
+            ${item.drawer ? `data-drawer="${item.drawer}"` : ''}
+            ${item.submenu ? `data-submenu="${item.submenu}"` : ''}
+            ${item.handler ? `data-handler="${item.handler}"` : ''}
+            ${item.href ? `data-href="${item.href}"` : ''}
+          >
+            <span class="nav-icon material-symbols-rounded text-lg mb-1 invisible [[data-icons-ready=true]_&]:visible" 
+                  translate="no">${item.icon}</span>
+            <span>${item.mobileLabel || item.label}</span>
+          </button>
+        `).join('');
+      }
+
+      renderSubmenus() {
+        Object.entries(SUBMENU_CONFIG).forEach(([key, config]) => {
+          const submenuElement = document.querySelector(`[data-bottom-submenu="${key}"]`);
+          if (!submenuElement) return;
+
+          const contentArea = submenuElement.querySelector('.submenu-content');
+          if (contentArea) {
+            contentArea.innerHTML = config.items.map(item => `
+              <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold 
+                           ${item.primary ? 'bg-primary-500 text-neutral-50 hover:bg-primary-600 focus:ring-primary-400/60' : 'border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:ring-primary-400/60'} 
+                           focus:outline-none focus:ring-2 transition-all duration-150 active:scale-[0.98] w-full"
+                      data-submenu-action="${item.id}">
+                ${item.icon ? `<span class="material-symbols-rounded text-lg invisible [[data-icons-ready=true]_&]:visible" translate="no">${item.icon}</span>` : ''}
+                ${item.label}
+              </button>
+            `).join('');
+          }
+        });
+      }
+
+      attachEventListeners() {
+        document.addEventListener('click', (e) => {
+          const navItem = e.target.closest('[data-nav-id]');
+          if (navItem) {
+            this.handleNavigation(e, navItem);
+          }
+        });
+      }
+
+      handleNavigation(event, element) {
+        event.preventDefault();
+        
+        const action = element.dataset.action;
+        const navId = element.dataset.navId;
+        
+        // Update active state
+        this.setActiveItem(navId);
+        
+        // Execute action based on type
+        switch (action) {
+          case 'navigate':
+            const href = element.dataset.href;
+            if (href) {
+              // Handle navigation (could integrate with router)
+              console.log(`Navigate to: ${href}`);
+            }
+            break;
+            
+          case 'drawer':
+            const drawer = element.dataset.drawer;
+            this.openDrawer(drawer);
+            break;
+            
+          case 'submenu':
+            if (!this.isDesktop) {
+              const submenu = element.dataset.submenu;
+              this.openSubmenu(submenu);
+            } else {
+              // On desktop, create items open inset drawer
+              this.openDrawer('inset');
+            }
+            break;
+            
+          case 'demo':
+            const handler = element.dataset.handler;
+            if (handler === 'toastDemo' && window[handler]) {
+              window[handler]();
+            }
+            break;
+        }
+      }
+
+      setActiveItem(navId) {
+        // Update both desktop and mobile nav items
+        document.querySelectorAll('[data-nav-id]').forEach(item => {
+          const isActive = item.dataset.navId === navId;
+          item.classList.toggle('active', isActive);
+          
+          // Handle mobile-specific classes
+          if (!this.isDesktop) {
+            if (isActive) {
+              item.classList.remove('text-neutral-600', 'dark:text-neutral-400');
+              item.classList.add('text-primary-600', 'dark:text-primary-400', 'bg-primary-50', 'dark:bg-primary-900/30');
+            } else {
+              item.classList.add('text-neutral-600', 'dark:text-neutral-400');
+              item.classList.remove('text-primary-600', 'dark:text-primary-400', 'bg-primary-50', 'dark:bg-primary-900/30');
+            }
+          }
+        });
+        
+        this.activeItem = navId;
+      }
+
+      openDrawer(type) {
+        // Integrate with existing drawer system
+        switch (type) {
+          case 'left':
+            if (window.openLeft) window.openLeft();
+            break;
+          case 'right':
+            if (window.openRight) window.openRight();
+            break;
+          case 'inset':
+            if (window.openInset) window.openInset();
+            break;
+        }
+      }
+
+      openSubmenu(submenuId) {
+        // Close all other submenus first
+        if (window.closeAllBottomSubmenus) {
+          window.closeAllBottomSubmenus();
+        }
+        
+        // Open the requested submenu
+        const submenuElement = document.querySelector(`[data-bottom-submenu="${submenuId}"]`);
+        if (submenuElement) {
+          submenuElement.dataset.open = 'true';
+          const backdrop = submenuElement.querySelector('[data-submenu-backdrop]');
+          const panel = submenuElement.querySelector('[data-submenu-panel]');
+          
+          if (backdrop) backdrop.dataset.open = 'true';
+          if (panel) panel.dataset.open = 'true';
+        }
+      }
+    }
+
     function updateThemeIcon() {
       const el = document.getElementById('themeIcon');
       const mobileEl = document.getElementById('mobileThemeIcon');
@@ -4517,7 +4774,10 @@
       initializeDropdowns();
       initializeComboboxes();
       setupCopyButtons();
-      initializeMobileTabs();
+      // Initialize unified navigation system
+      window.navigationManager = new UnifiedNavigationManager();
+      
+      // Keep rail toggle functionality for desktop
       initRailIfDesktop();
       
       // Add resize handler for rail toggle
@@ -4564,44 +4824,9 @@
   </script>
 
   <!-- Mobile Bottom Tab Bar -->
-  <nav data-testid="mobile-bottom-tabs" class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-neutral-50 dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800" role="tablist">
-    <div class="flex items-center justify-between px-4 py-2">
-      <!-- Dashboard Tab -->
-      <button data-testid="tab-dashboard" role="tab" aria-label="Dashboard" class="text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
-        <span class="material-symbols-rounded text-lg mb-1 invisible [[data-icons-ready=true]_&]:visible" translate="no">dashboard</span>
-        <span>Dashboard</span>
-      </button>
-
-      <!-- Content Hub Tab -->
-      <button data-testid="tab-content-hub" role="tab" aria-label="Content Hub" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
-        <span class="material-symbols-rounded text-lg mb-1 invisible [[data-icons-ready=true]_&]:visible" translate="no">library_books</span>
-        <span>Content Hub</span>
-      </button>
-
-      <!-- Tasks Tab -->
-      <button data-testid="tab-tasks" role="tab" aria-label="Tasks" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
-        <span class="material-symbols-rounded text-lg mb-1 invisible [[data-icons-ready=true]_&]:visible" translate="no">task_alt</span>
-        <span>Tasks</span>
-      </button>
-
-      <!-- Journal Tab -->
-      <button data-testid="tab-journal" role="tab" aria-label="Journal" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
-        <span class="material-symbols-rounded text-lg mb-1 invisible [[data-icons-ready=true]_&]:visible" translate="no">edit_note</span>
-        <span>Journal</span>
-      </button>
-
-      <!-- Create Tab (now with submenu) -->
-      <button data-testid="tab-create" data-submenu-trigger="create" role="tab" aria-label="Create" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;" aria-expanded="false">
-        <span class="material-symbols-rounded text-lg mb-1 invisible [[data-icons-ready=true]_&]:visible" translate="no">add_circle</span>
-        <span>Create</span>
-      </button>
-
-      <!-- Settings Tab (replaces theme toggle) -->
-      <button data-testid="tab-settings" role="tab" aria-label="Settings" class="text-neutral-600 dark:text-neutral-400 transition-all duration-150 min-h-[44px] min-w-[44px] flex flex-col items-center justify-center p-1 text-xs font-medium" style="min-width: 48px; min-height: 48px;">
-        <span class="material-symbols-rounded text-lg mb-1 invisible [[data-icons-ready=true]_&]:visible" translate="no">settings</span>
-        <span>Settings</span>
-      </button>
-    </div>
+  <!-- Unified Navigation (Mobile) -->
+  <nav data-testid="mobile-bottom-tabs" class="nav-bottom" role="tablist">
+    <!-- Navigation items will be rendered here by JavaScript -->
   </nav>
 
   <!-- Bottom Menu Submenu Drawer -->
@@ -4627,7 +4852,7 @@
       </div>
       
       <!-- Menu Items -->
-      <div class="px-6 pb-6 space-y-3">
+      <div class="submenu-content px-6 pb-6 space-y-3">
         <button class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors text-left">
           <div class="w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
             <span class="material-symbols-rounded text-primary-600 dark:text-primary-400" translate="no">event</span>
