@@ -594,4 +594,26 @@
   transform: rotate(180deg) scale(1.1);
 }
 
+/* Topbar theme toggle animations */
+.theme-toggle-btn .theme-toggle-icon {
+  transition: all 200ms ease-out;
+}
+
+.theme-toggle-btn:hover .theme-toggle-icon {
+  transform: rotate(15deg) scale(1.1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.dark .theme-toggle-btn:hover .theme-toggle-icon {
+  filter: drop-shadow(0 2px 8px rgba(251, 146, 60, 0.3));
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle-btn[aria-pressed="true"] .theme-toggle-icon {
+  transform: rotate(180deg) scale(1.1);
+}
+
 }

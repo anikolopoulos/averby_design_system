@@ -369,15 +369,15 @@
             </label>
           </div>
 
-          <!-- Mobile Theme Toggle and Search -->
-          <div class="flex items-center gap-2 md:hidden ml-auto">
-            <!-- Theme Toggle (mobile only) -->
-            <button id="mobileTopBarThemeToggle" data-action="toggle-theme" class="relative z-50 flex items-center justify-center w-11 h-11 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800/70 transition-colors" aria-label="Toggle theme" aria-pressed="false">
-              <span id="mobileTopBarThemeIcon" class="material-symbols-rounded text-neutral-700 dark:text-neutral-200 invisible [[data-icons-ready=true]_&]:visible" translate="no">dark_mode</span>
+          <!-- Right-aligned button group -->
+          <div class="flex items-center gap-1 ml-auto">
+            <!-- Mobile Theme Toggle (mobile only) -->
+            <button id="mobileTopBarThemeToggle" data-action="toggle-theme" class="flex md:hidden items-center justify-center w-11 h-11 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800/70 transition-colors theme-toggle-btn" aria-label="Toggle theme" aria-pressed="false">
+              <span id="mobileTopBarThemeIcon" class="material-symbols-rounded text-neutral-700 dark:text-neutral-200 invisible [[data-icons-ready=true]_&]:visible theme-toggle-icon" translate="no">dark_mode</span>
             </button>
             
-            <!-- Search Button (mobile only) -->
-            <button data-search-trigger class="lg:hidden relative z-50 flex items-center justify-center w-11 h-11 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800/70 transition-colors" aria-label="Open search">
+            <!-- Search Button (medium and mobile, but not large) -->
+            <button data-search-trigger class="flex lg:hidden items-center justify-center w-11 h-11 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800/70 transition-colors" aria-label="Open search">
               <span class="material-symbols-rounded text-neutral-700 dark:text-neutral-200" translate="no">search</span>
             </button>
           </div>
