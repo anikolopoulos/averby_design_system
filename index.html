@@ -3876,6 +3876,13 @@
       closeAllBottomSubmenus();
       
       submenu.dataset.open = 'true';
+      // Also set data-open on the submenu panel for CSS transitions
+      const submenuPanel = submenu.querySelector('.bg-white');
+      if (submenuPanel) submenuPanel.dataset.open = 'true';
+      // Set on backdrop too
+      const backdrop = submenu.querySelector('[data-submenu-backdrop]');
+      if (backdrop) backdrop.dataset.open = 'true';
+      
       document.body.style.overflow = 'hidden'; // Prevent background scrolling
       
       // Update tab state
@@ -3892,6 +3899,13 @@
       if (!submenu) return;
       
       submenu.dataset.open = 'false';
+      // Also remove data-open from the submenu panel for CSS transitions
+      const submenuPanel = submenu.querySelector('.bg-white');
+      if (submenuPanel) submenuPanel.dataset.open = 'false';
+      // Remove from backdrop too
+      const backdrop = submenu.querySelector('[data-submenu-backdrop]');
+      if (backdrop) backdrop.dataset.open = 'false';
+      
       document.body.style.overflow = '';
       
       // Reset tab state
@@ -3911,6 +3925,25 @@
     }
     
     function initBottomSubmenus() {
+      // Handle submenu trigger buttons
+      document.querySelectorAll('[data-submenu-trigger]').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+          const submenuId = trigger.getAttribute('data-submenu-trigger');
+          const submenu = document.querySelector(`[data-bottom-submenu="${submenuId}"]`);
+          if (submenu) {
+            const isOpen = submenu.getAttribute('data-open') === 'true';
+            if (isOpen) {
+              closeBottomSubmenu(submenuId);
+            } else {
+              // Close any open submenus first
+              closeAllBottomSubmenus();
+              // Then open this one
+              openBottomSubmenu(submenuId);
+            }
+          }
+        });
+      });
+      
       // Handle close buttons
       document.querySelectorAll('[data-submenu-close]').forEach(closeBtn => {
         closeBtn.addEventListener('click', () => {
