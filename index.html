@@ -3330,7 +3330,7 @@
     <div class="drawer-panel bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-full overflow-y-auto [scrollbar-gutter:stable] shadow-lg backdrop-blur-[8px] [-webkit-backdrop-filter:blur(8px)] rounded-tr-2xl rounded-br-2xl">
       <div class="h-14 px-5 flex items-center justify-between">
         <h2 class="font-semibold">Create</h2>
-        <button data-close-left class="p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/70 min-h-[44px] min-w-[44px] flex items-center justify-center">
+        <button data-action="close-left-drawer" class="p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/70 min-h-[44px] min-w-[44px] flex items-center justify-center">
           <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">close</span>
         </button>
       </div>
@@ -3347,7 +3347,7 @@
     <div class="drawer-panel bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-full overflow-y-auto [scrollbar-gutter:stable] shadow-lg backdrop-blur-[8px] [-webkit-backdrop-filter:blur(8px)] rounded-tl-2xl rounded-bl-2xl">
       <div class="h-14 px-5 flex items-center justify-between">
         <h2 class="font-semibold">Content Filters</h2>
-        <button data-close-right class="p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/70 min-h-[44px] min-w-[44px] flex items-center justify-center">
+        <button data-action="close-right-drawer" class="p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/70 min-h-[44px] min-w-[44px] flex items-center justify-center">
           <span class="material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">close</span>
         </button>
       </div>
@@ -3373,7 +3373,7 @@
           </div>
         </div>
         <div class="pt-2 flex items-center justify-end gap-2">
-          <button data-close-right class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98]">Cancel</button>
+          <button data-action="close-right-drawer" class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98]">Cancel</button>
           <button class="btn bg-accent-500 text-neutral-50 hover:bg-accent-600">Apply</button>
         </div>
       </div>
@@ -3493,7 +3493,10 @@
         const wasDesktop = this.isDesktop;
         this.updateViewport();
         if (wasDesktop !== this.isDesktop) {
-          this.render(); // Re-render when crossing breakpoints
+          // Close all open UI elements when crossing viewport boundaries
+          this.closeAllUIElements();
+          // Re-render when crossing breakpoints
+          this.render();
         }
       }
 
@@ -3681,6 +3684,50 @@
           
           if (backdrop) backdrop.dataset.open = 'true';
           if (panel) panel.dataset.open = 'true';
+        }
+      }
+      
+      closeAllUIElements() {
+        // Close all desktop drawers
+        if (window.closeLeft) window.closeLeft();
+        if (window.closeRight) window.closeRight();
+        if (window.closeInset) window.closeInset();
+        
+        // Close all mobile bottom submenus
+        if (window.closeAllBottomSubmenus) {
+          window.closeAllBottomSubmenus();
+        }
+        
+        // Reset any active states that might be viewport-specific
+        this.resetActiveStates();
+        
+        // Force close any scrim/backdrop
+        if (window.closeScrim) window.closeScrim();
+        
+        // Reset body overflow that might be set by mobile submenus
+        document.body.style.overflow = '';
+      }
+      
+      resetActiveStates() {
+        // Reset navigation button states for clean viewport transition
+        document.querySelectorAll('[data-nav-id]').forEach(item => {
+          const navId = item.dataset.navId;
+          
+          // Only keep the active state for the current active item
+          if (navId === this.activeItem) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+          
+          // Reset mobile-specific classes
+          item.classList.remove('text-primary-600', 'dark:text-primary-400', 'bg-primary-50', 'dark:bg-primary-900/30');
+          item.classList.add('text-neutral-600', 'dark:text-neutral-400');
+        });
+        
+        // Re-apply active state styling for current viewport
+        if (this.activeItem) {
+          this.setActiveItem(this.activeItem);
         }
       }
     }
@@ -4129,16 +4176,12 @@
     function openLeft() {
       if (!leftDrawer) return;
       leftDrawer.dataset.open = 'true';
-      leftDrawer.classList.remove('left-[-22rem]');
-      leftDrawer.classList.add('left-[6rem]');
       openScrim();
     }
 
     function openRight() {
       if (!rightDrawer) return;
       rightDrawer.dataset.open = 'true';
-      rightDrawer.classList.remove('right-[-28rem]');
-      rightDrawer.classList.add('right-0');
       openScrim();
     }
 
@@ -4733,16 +4776,12 @@
           case 'open-left-drawer':
             if (leftDrawer) {
               leftDrawer.dataset.open = 'true';
-              leftDrawer.classList.remove('left-[-22rem]');
-              leftDrawer.classList.add('left-[6rem]');
               openScrim();
             }
             break;
           case 'open-right-drawer':
             if (rightDrawer) {
               rightDrawer.dataset.open = 'true';
-              rightDrawer.classList.remove('right-[-28rem]');
-              rightDrawer.classList.add('right-0');
               openScrim();
             }
             break;
