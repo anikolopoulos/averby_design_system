@@ -202,6 +202,24 @@
   transition: opacity 200ms ease-in, transform 200ms ease-in;
 }
 
+/* Adjust scrim and drawers when rail is collapsed */
+body[data-rail-collapsed="true"] #scrim {
+  left: 0 !important;
+}
+
+body[data-rail-collapsed="true"] #leftDrawer {
+  left: 0 !important;
+}
+
+/* Default positioning when rail is expanded */
+body:not([data-rail-collapsed="true"]) #scrim {
+  left: 6rem !important;
+}
+
+body:not([data-rail-collapsed="true"]) #leftDrawer {
+  left: 6rem !important;
+}
+
 /* All component styles are now handled directly with Tailwind utilities */
 
 /* Temporary dark mode styles - for immediate fix while Tailwind v4.1 dark mode is configured */

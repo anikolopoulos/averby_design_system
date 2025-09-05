@@ -285,6 +285,37 @@
     .color-swatch:hover {
       transform: scale(1.05);
     }
+
+    /* Responsive submenu drawer positioning */
+    /* Large screens: Dynamic positioning based on rail state */
+    @media (min-width: 768px) {
+      body[data-rail-collapsed="true"] #leftDrawer {
+        left: 0 !important;
+      }
+      
+      body:not([data-rail-collapsed="true"]) #leftDrawer {
+        left: 6rem !important;
+      }
+      
+      body[data-rail-collapsed="true"] #scrim {
+        left: 0 !important;
+      }
+      
+      body:not([data-rail-collapsed="true"]) #scrim {
+        left: 6rem !important;
+      }
+    }
+
+    /* Small screens: Hide left drawer completely */
+    @media (max-width: 767px) {
+      #leftDrawer {
+        display: none !important;
+      }
+      
+      #scrim {
+        display: none !important;
+      }
+    }
   </style>
 
 
