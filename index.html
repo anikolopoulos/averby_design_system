@@ -3977,10 +3977,15 @@
 
       const existingToasts = toastList.querySelectorAll('li');
       if (existingToasts.length >= 3) {
-        const oldestToast = existingToasts[0];
+        // Since we insert new toasts at the beginning, the oldest toast is now at the end
+        const oldestToast = existingToasts[existingToasts.length - 1];
         if (oldestToast) {
           oldestToast.dataset.open = 'false';
-          oldestToast.addEventListener('transitionend', () => oldestToast.remove(), { once: true });
+          oldestToast.addEventListener('transitionend', () => {
+            oldestToast.remove();
+            // Reposition remaining toasts after removal
+            repositionToasts();
+          }, { once: true });
         }
       }
 
@@ -4028,7 +4033,14 @@
       inner.appendChild(content);
       inner.appendChild(closeBtn);
       li.appendChild(inner);
-      toastList.appendChild(li);
+      
+      // Insert new toasts at the top (beginning) of the list
+      // This ensures they appear above existing toasts
+      if (toastList.firstChild) {
+        toastList.insertBefore(li, toastList.firstChild);
+      } else {
+        toastList.appendChild(li);
+      }
 
       requestAnimationFrame(() => {
         li.dataset.open = 'true';
@@ -4036,12 +4048,40 @@
 
       function dismiss() {
         li.dataset.open = 'false';
-        li.addEventListener('transitionend', () => li.remove(), { once: true });
+        li.addEventListener('transitionend', () => {
+          li.remove();
+          // Reposition remaining toasts after removal
+          repositionToasts();
+        }, { once: true });
       }
 
       closeBtn.addEventListener('click', dismiss);
       if (timeout > 0) setTimeout(dismiss, timeout);
       return dismiss;
+    }
+
+    // Reposition toasts to ensure they always appear in correct order
+    function repositionToasts() {
+      const toastList = document.getElementById('toasts');
+      if (!toastList) return;
+      
+      // Get all visible toasts (those that are still in the DOM and not being removed)
+      const toasts = Array.from(toastList.querySelectorAll('li[data-open="true"]'));
+      
+      // Sort toasts by their creation order (newest first)
+      // Since we append new toasts, they naturally appear in chronological order
+      // We want to maintain this order after removals
+      toasts.forEach((toast, index) => {
+        // Clear any leftover transforms
+        toast.style.transform = '';
+        toast.style.opacity = '1';
+        
+        // Ensure proper stacking order
+        toast.style.zIndex = (1000 - index).toString();
+      });
+      
+      // Force a layout recalculation
+      toastList.offsetHeight;
     }
 
 
@@ -4238,8 +4278,8 @@
         // Handle different actions
         switch (action) {
           case 'toggle-theme':
-            if (window.app && window.app.getModule('theme')) {
-              window.app.getModule('theme').toggle();
+            if (window.toggleTheme) {
+              window.toggleTheme();
             }
             break;
           case 'open-left-drawer':
