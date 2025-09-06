@@ -418,14 +418,16 @@ body:not([data-rail-collapsed="true"]) #leftDrawer {
 }
 
 .nav-rail .nav-item {
-  @apply px-2 py-3 text-[13px] font-semibold text-neutral-700 hover:bg-neutral-100/60 focus:bg-neutral-100/80;
+  @apply px-2 py-3 text-[13px] font-semibold text-neutral-700 hover:bg-neutral-200 focus:bg-neutral-100/80;
   transition: all 180ms ease-out;
 }
 
+
 .dark .nav-rail .nav-item {
-  @apply text-neutral-200 hover:bg-neutral-700/50 focus:bg-neutral-700/60;
+  @apply text-neutral-200 hover:bg-neutral-600/50 focus:bg-neutral-700/60;
 }
 
+.dark 
 /* Enhanced hover and focus states for dark mode */
 .nav-rail .nav-item:hover {
   @apply transform scale-[1.02];
@@ -445,10 +447,12 @@ body:not([data-rail-collapsed="true"]) #leftDrawer {
   border: 1px solid transparent;
 }
 
+
 .dark .nav-rail .nav-item.active {
   @apply bg-primary-900/40 text-primary-300 shadow-primary-900/30;
 }
 
+.dark 
 /* Enhanced active state for dark mode */
 .dark .nav-rail .nav-item.active {
   background: linear-gradient(135deg, 
@@ -483,12 +487,14 @@ body:not([data-rail-collapsed="true"]) #leftDrawer {
 }
 
 .nav-bottom .nav-item {
-  @apply text-xs font-medium transition-all duration-180 p-1 hover:bg-neutral-100/60 dark:hover:bg-neutral-700/50 focus:bg-neutral-100/80 dark:focus:bg-neutral-700/60;
+  @apply text-xs font-medium transition-all duration-180 p-1 hover:bg-neutral-200 dark:hover:bg-neutral-600/50 focus:bg-neutral-100/80 dark:focus:bg-neutral-700/60;
   min-width: 48px;
   min-height: 48px;
   border-radius: 12px;
 }
 
+
+.dark 
 /* Enhanced hover effects for mobile nav items */
 .nav-bottom .nav-item:hover {
   @apply transform scale-[1.05];
@@ -504,6 +510,8 @@ body:not([data-rail-collapsed="true"]) #leftDrawer {
   border: 1px solid transparent;
 }
 
+
+.dark 
 /* Enhanced active state for mobile dark mode */
 .dark .nav-bottom .nav-item.active {
   background: linear-gradient(135deg, 
