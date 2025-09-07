@@ -32,7 +32,7 @@
   <div class="flex h-screen w-screen overflow-hidden pb-0 md:pb-0">
 
     <!-- Unified Navigation Rail (Desktop) -->
-    <aside id="desktopRail" data-rail class="nav-rail" data-collapsed="false">
+    <aside id="desktopRail" data-rail class="hidden md:flex flex-col w-24 bg-neutral-200 dark:bg-neutral-900 border-r border-neutral-200/70 dark:border-neutral-700/60 sticky left-0 top-0 h-screen z-50 pt-2 overflow-y-auto shadow-[4px_0_12px_-8px_rgba(0,0,0,0.1)] dark:shadow-[4px_0_20px_-8px_rgba(0,0,0,0.7)] backdrop-blur-sm" style="transition: width 300ms cubic-bezier(0.2, 0.8, 0.2, 1);" data-collapsed="false">
       <!-- Logo area (20% larger) -->
       <div class="rail-logo shrink-0 h-14 px-3 flex items-center justify-center">
         <div class="h-[2.88rem] w-[2.88rem] text-neutral-900 dark:text-neutral-50" aria-label="Averby">
@@ -52,10 +52,10 @@
       </nav>
 
       <!-- Theme toggle -->
-      <div class="theme-toggle">
-        <button id="toggleDark" data-action="toggle-theme" class="nav-item" aria-pressed="false">
-          <span id="themeIcon" class="nav-icon material-symbols-rounded inline-block align-middle w-6 h-6 leading-none invisible [[data-icons-ready=true]_&]:visible" translate="no">dark_mode</span>
-          <span class="nav-label">Theme</span>
+      <div class="mt-auto shrink-0 p-2 grid place-items-center">
+        <button id="toggleDark" data-action="toggle-theme" class="flex flex-col items-center justify-center text-center rounded-xl min-h-[44px] min-w-[44px] transition-all duration-[180ms] ease-out px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100/70 dark:hover:bg-neutral-700/60 hover:border-neutral-200/50 dark:hover:border-neutral-600/50 hover:scale-105 focus:bg-neutral-100/80 dark:focus:bg-neutral-700/60 focus:outline-none focus:ring-2 focus:ring-primary-500/50 dark:focus:ring-primary-400/60 focus:ring-offset-2 focus:ring-offset-transparent dark:focus:ring-offset-neutral-900 active:scale-95 border border-transparent relative" aria-pressed="false">
+          <span id="themeIcon" class="w-6 h-6 mb-1 material-symbols-rounded inline-block align-middle leading-none invisible [[data-icons-ready=true]_&]:visible transition-all duration-200 ease-out hover:rotate-[15deg] hover:scale-110 hover:drop-shadow-sm" translate="no">dark_mode</span>
+          <span class="text-[13px] font-bold">Theme</span>
         </button>
       </div>
     </aside>
@@ -161,7 +161,7 @@
           <div class="py-6">
             <div class="flex items-center justify-between gap-4">
               <div class="flex items-center gap-4">
-                <a class="inline-flex items-center justify-center px-4 py-1.5 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800 font-medium rounded-xl transition-all" href="#">
+                <a class="inline-flex items-center justify-center px-4 py-1.5 border border-neutral-300 dark:border-neutral-700 transition-all duration-200  group-hover:icon-weight-600 group-hover:icon-size-28 hover:bg-neutral-100 hover:dark:bg-neutral-800 font-medium rounded-xl" href="#">
                   <span class="material-symbols-rounded text-lg" translate="no">arrow_back</span>
                 </a>
                 <div>
@@ -3121,7 +3121,7 @@
   <script src="js/main.js"></script>
   <!-- Mobile Bottom Tab Bar -->
   <!-- Unified Navigation (Mobile) -->
-  <nav data-testid="mobile-bottom-tabs" class="nav-bottom" role="tablist">
+  <nav data-testid="mobile-bottom-tabs" class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-neutral-200 dark:bg-neutral-900 border-t border-neutral-200/80 dark:border-neutral-700/60 flex items-center justify-between px-4 py-2 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.3)]" role="tablist">
     <!-- Navigation items will be rendered here by JavaScript -->
   </nav>
 

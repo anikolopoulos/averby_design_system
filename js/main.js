@@ -196,11 +196,11 @@ function renderDesktopNavigation() {
         ${item.submenu ? `data-submenu="${item.submenu}"` : ''}
         ${item.href ? `data-href="${item.href}"` : ''}
         ${item.handler ? `data-handler="${item.handler}"` : ''}
-        class="nav-item ${isActive} group flex flex-col items-center justify-center gap-1 p-3 rounded-xl text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-all duration-200 active:scale-[0.96] min-h-[60px] focus:outline-none focus:ring-2 focus:ring-primary-400/60"
+        class="flex flex-col items-center justify-center text-center rounded-xl min-h-[48px] min-w-[48px] transition-all duration-[180ms] ease-out ${isActive} group gap-1 px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-600/50 hover:scale-[1.02] focus:bg-neutral-100/80 dark:focus:bg-neutral-700/60 focus:outline-none focus:ring-2 focus:ring-primary-500/50 dark:focus:ring-primary-400/60 focus:ring-offset-2 focus:ring-offset-transparent dark:focus:ring-offset-neutral-900 active:scale-[0.96] ${isActive.includes('active') ? 'bg-primary-50 dark:bg-primary-900/40 text-primary-600 dark:text-primary-300 shadow-sm dark:shadow-primary-900/30' : ''}"
         aria-label="${item.label}"
       >
-        <span class="material-symbols-rounded text-2xl transition-all duration-200 group-[.active]:text-primary-600 dark:group-[.active]:text-primary-400 group-[.active]:icon-fill-1 group-hover:icon-weight-600 group-hover:icon-size-28 ${iconClass}" translate="no">${item.icon}</span>
-        <span class="text-xs font-medium transition-all duration-200 group-[.active]:text-primary-600 dark:group-[.active]:text-primary-400">${item.label}</span>
+        <span class="w-6 h-6 mb-1 material-symbols-rounded text-2xl transition-all duration-200 group-[.active]:text-primary-600 dark:group-[.active]:text-primary-400 group-[.active]:icon-fill-1 group-hover:icon-weight-600 group-hover:icon-size-28 ${iconClass}" translate="no">${item.icon}</span>
+        <span class="text-[13px] font-bold transition-all duration-200 group-[.active]:text-primary-600 dark:group-[.active]:text-primary-400">${item.label}</span>
       </button>
     `;
   }).join('');
@@ -231,7 +231,7 @@ function renderMobileNavigation() {
         ${item.href ? `data-href="${item.href}"` : ''}
         ${item.handler ? `data-handler="${item.handler}"` : ''}
         ${item.submenu ? `data-submenu-trigger="${item.submenu}"` : ''}
-        class="nav-item ${isActive} group flex-1 flex flex-col items-center justify-center py-2 px-1 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-all duration-200 active:scale-95 min-h-[60px] focus:outline-none focus:ring-2 focus:ring-primary-400/60 rounded-lg"
+        class="flex flex-col items-center justify-center text-center rounded-xl min-w-[48px] min-h-[48px] transition-all duration-[180ms] ease-out ${isActive} group flex-1 text-xs font-medium p-1 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-600/50 hover:scale-105 focus:bg-neutral-100/80 dark:focus:bg-neutral-700/60 focus:outline-none focus:ring-2 focus:ring-primary-500/50 dark:focus:ring-primary-400/60 focus:ring-offset-2 focus:ring-offset-transparent dark:focus:ring-offset-neutral-900 ${isActive.includes('active') ? 'text-primary-600 dark:text-primary-300 bg-primary-50/80 dark:bg-primary-900/40 shadow-sm dark:shadow-primary-900/30 border border-transparent' : ''}"
         role="tab"
         aria-selected="${item.active ? 'true' : 'false'}"
         aria-label="${label}"
