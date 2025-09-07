@@ -287,6 +287,27 @@ button[class*="bg-error-100"]:focus {
   transform: scale(1.05);
 }
 
+/* Rail collapse functionality */
+[data-rail] {
+  transition: width 300ms cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+  width: 6rem !important;
+}
+
+[data-rail][data-collapsed="true"] {
+  width: 0px !important;
+  overflow: hidden !important;
+  border-right-width: 0px !important;
+}
+
+/* Hide rail content when collapsed */
+[data-rail][data-collapsed="true"] .rail-logo,
+[data-rail][data-collapsed="true"] nav,
+[data-rail][data-collapsed="true"] .mt-auto {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 150ms ease-out !important;
+}
+
 /* Responsive submenu drawer positioning */
 /* Large screens: Dynamic positioning based on rail state */
 @media (min-width: 768px) {
