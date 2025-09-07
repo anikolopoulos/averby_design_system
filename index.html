@@ -53,7 +53,7 @@
 
       <!-- Theme toggle -->
       <div class="mt-auto shrink-0 p-2 grid place-items-center">
-        <button id="toggleDark" data-action="toggle-theme" class="flex flex-col items-center justify-center text-center rounded-xl min-h-[44px] min-w-[44px] transition-all duration-[180ms] ease-out px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100/70 dark:hover:bg-neutral-700/60 hover:border-neutral-200/50 dark:hover:border-neutral-600/50 hover:scale-105 focus:bg-neutral-100/80 dark:focus:bg-neutral-700/60 focus:outline-none focus:ring-2 focus:ring-primary-500/50 dark:focus:ring-primary-400/60 focus:ring-offset-2 focus:ring-offset-transparent dark:focus:ring-offset-neutral-900 active:scale-95 border border-transparent relative" aria-pressed="false">
+        <button id="toggleDark" data-action="toggle-theme" class="flex flex-col items-center justify-center text-center rounded-xl min-h-[44px] min-w-[44px] transition-all duration-[180ms] ease-out px-2 py-3 text-[13px] font-semibold text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100/70 dark:hover:bg-neutral-700/60 hover:border-neutral-200/50 dark:hover:border-neutral-600/50 hover:scale-105 focus:outline-none active:scale-95 border border-transparent relative" aria-pressed="false">
           <span id="themeIcon" class="w-6 h-6 mb-1 material-symbols-rounded inline-block align-middle leading-none invisible [[data-icons-ready=true]_&]:visible transition-all duration-200 ease-out hover:rotate-[15deg] hover:scale-110 hover:drop-shadow-sm" translate="no">dark_mode</span>
           <span class="text-[13px] font-bold">Theme</span>
         </button>
@@ -71,9 +71,9 @@
           </button>
         </div>
         <div class="px-5 pb-6 space-y-3 w-[22rem]">
-          <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold bg-primary-500 text-neutral-50 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11" id="openInsetFromButton">New Program</button>
-          <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">New Path</button>
-          <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98] w-full h-11">Upload Content</button>
+          <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold bg-primary-500 text-neutral-50 hover:bg-primary-600 focus:outline-none transition-all duration-150 active:scale-[0.98] w-full h-11" id="openInsetFromButton">New Program</button>
+          <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none transition-all duration-150 active:scale-[0.98] w-full h-11">New Path</button>
+          <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none transition-all duration-150 active:scale-[0.98] w-full h-11">Upload Content</button>
         </div>
       </aside>
 
@@ -101,7 +101,7 @@
           <!-- Desktop Search Bar -->
           <div data-search-container class="hidden lg:flex flex-1 justify-center items-center px-8">
             <label class="relative block w-full max-w-xl">
-              <input id="searchInput" type="search" placeholder="Search programs, people, content…" aria-label="Search programs, people, and content" class="w-full h-12 rounded-full pl-10 pr-4 bg-neutral-100/80 dark:bg-neutral-900/90 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-400/60 dark:focus:ring-primary-400/50 border border-transparent dark:border-neutral-700/60" />
+              <input id="searchInput" type="search" placeholder="Search programs, people, content…" aria-label="Search programs, people, and content" class="w-full h-12 rounded-full pl-10 pr-4 bg-neutral-100/80 dark:bg-neutral-900/90 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-400 focus:outline-none border border-transparent dark:border-neutral-700/60" />
               <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-400 dark:text-neutral-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
             </label>
           </div>
@@ -130,7 +130,7 @@
                   <span class="material-symbols-rounded text-neutral-700 dark:text-neutral-200" translate="no">arrow_back</span>
                 </button>
                 <label class="relative flex-1">
-                  <input id="mobileSearchInput" type="search" placeholder="Search programs, people, and content" aria-label="Search" class="w-full h-11 rounded-full pl-10 pr-4 bg-neutral-100/80 dark:bg-neutral-900/90 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-400/60 dark:focus:ring-primary-400/50 border border-transparent dark:border-neutral-700/60" />
+                  <input id="mobileSearchInput" type="search" placeholder="Search programs, people, and content" aria-label="Search" class="w-full h-11 rounded-full pl-10 pr-4 bg-neutral-100/80 dark:bg-neutral-900/90 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-400 focus:outline-none border-transparent dark:border-neutral-700/60" />
                   <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-400 dark:text-neutral-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
                 </label>
               </div>
@@ -138,7 +138,7 @@
           </div>
 
           <div class="relative">
-            <button id="avatarBtn" class="w-12 h-12 flex items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-primary-500" aria-controls="avatarMenu" aria-expanded="false">
+            <button id="avatarBtn" class="w-12 h-12 flex items-center justify-center rounded-full focus:outline-none" aria-controls="avatarMenu" aria-expanded="false">
               <img class="h-9 w-9 rounded-full ring-1 ring-neutral-200 dark:ring-neutral-700" src="https://i.pravatar.cc/80?img=3" alt="User avatar" loading="lazy" data-src="https://i.pravatar.cc/80?img=3" data-critical="true" fetchpriority="high" />
             </button>
             <div id="avatarMenu" class="absolute right-0 mt-2 w-56 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 shadow-2xl p-1 origin-top-right transition-all duration-150 opacity-0 scale-95 pointer-events-none data-[open=true]:opacity-100 data-[open=true]:scale-100 data-[open=true]:pointer-events-auto" role="menu" aria-labelledby="avatarBtn">
@@ -161,8 +161,8 @@
           <div class="py-6">
             <div class="flex items-center justify-between gap-4">
               <div class="flex items-center gap-4">
-                <a class="inline-flex items-center justify-center px-4 py-1.5 border border-neutral-300 dark:border-neutral-700 transition-all duration-200  group-hover:icon-weight-600 group-hover:icon-size-28 hover:bg-neutral-100 hover:dark:bg-neutral-800 font-medium rounded-xl" href="#">
-                  <span class="material-symbols-rounded text-lg" translate="no">arrow_back</span>
+                <a class="inline-flex items-center justify-center px-4 py-1.5 border border-neutral-300 dark:border-neutral-700 transition-all duration-200 hover:bg-neutral-100 hover:dark:bg-neutral-800 rounded-xl" href="#">
+                  <span class="material-symbols-rounded text-lg group-hover:icon-weight-600 group-hover:icon-size-28" translate="no">arrow_back</span>
                 </a>
                 <div>
                   <h2 class="text-xl md:text-2xl font-bold tracking-tight">Design System & Style Guide</h2>
@@ -170,8 +170,8 @@
                 </div>
               </div>
               <div class="flex items-center gap-4">
-                <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold bg-primary-500 text-neutral-50 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98]" id="openInsetFromButton2">New Program</button>
-                <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98]" data-open-right-drawer>Filters</button>
+                <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold bg-primary-500 text-neutral-50 hover:bg-primary-600 focus:outline-nonetransition-all duration-150 active:scale-[0.98]" id="openInsetFromButton2">New Program</button>
+                <button class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none transition-all duration-150 active:scale-[0.98]" data-open-right-drawer>Filters</button>
               </div>
             </div>
           </div>
@@ -588,7 +588,7 @@
           <div>
             <p class="font-medium mb-2">Button with Multiple Utilities</p>
             <code class="block p-3 bg-white dark:bg-neutral-900 rounded-lg text-sm font-mono">
-              &lt;button class="inline-flex items-center justify-center gap-2 rounded-xl h-10 px-4 text-sm font-semibold bg-primary-500 text-neutral-50 hover:bg-primary-600 shadow-sm hover:shadow-lg transition-all hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary-400/60"&gt;<br/>
+              &lt;button class="inline-flex items-center justify-center gap-2 rounded-xl h-10 px-4 text-sm font-semibold bg-primary-500 text-neutral-50 hover:bg-primary-600 shadow-sm hover:shadow-lg transition-all hover:scale-[1.02] focus:outline-none"&gt;<br/>
               &nbsp;&nbsp;Click me<br/>
               &lt;/button&gt;
             </code>
@@ -959,7 +959,7 @@
                 id="text-input"
                 type="text"
                 placeholder="Enter text here"
-                class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950 transition-all"
+                class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:outline-none transition-all"
               />
             </div>
 
@@ -970,7 +970,7 @@
                 id="email-input"
                 type="email"
                 placeholder="user@example.com"
-                class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950 transition-all"
+                class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:outline-none transition-all"
               />
             </div>
 
@@ -981,7 +981,7 @@
                 id="password-input"
                 type="password"
                 placeholder="••••••••"
-                class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950 transition-all"
+                class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:outline-none transition-all"
               />
             </div>
 
@@ -994,7 +994,7 @@
                 placeholder="0"
                 min="0"
                 max="100"
-                class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950 transition-all"
+                class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:outline-none transition-all"
               />
             </div>
 
@@ -1004,7 +1004,7 @@
               <input
                 id="date-input"
                 type="date"
-                class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950 transition-all"
+                class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:outline-none transition-all"
               />
             </div>
 
@@ -1013,7 +1013,7 @@
               <label class="block caption-text font-medium mb-1.5 text-neutral-700 dark:text-neutral-300">Combobox Selection</label>
               <div class="relative">
                 <div class="combobox w-full" data-combobox="basic">
-                  <button type="button" class="combobox-button w-full px-4 py-2.5 text-left rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950 transition-all cursor-pointer hover:border-neutral-400 dark:hover:border-neutral-600" aria-expanded="false" aria-haspopup="listbox">
+                  <button type="button" class="combobox-button w-full px-4 py-2.5 text-left rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:outline-none transition-all cursor-pointer hover:border-neutral-400 dark:hover:border-neutral-600" aria-expanded="false" aria-haspopup="listbox">
                     <span class="combobox-value text-neutral-900 dark:text-neutral-100">Choose an option</span>
                     <span class="material-symbols-rounded absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 dark:text-neutral-400 transition-transform duration-200" data-icons-ready="true">expand_more</span>
                   </button>
@@ -1033,7 +1033,7 @@
               <div class="relative">
                 <div class="combobox w-full" data-combobox="searchable">
                   <div class="relative">
-                    <input type="text" class="combobox-input w-full px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950 transition-all" placeholder="Search users..." autocomplete="off" role="combobox" aria-expanded="false" aria-haspopup="listbox">
+                    <input type="text" class="combobox-input w-full px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:outline-none transition-all" placeholder="Search users..." autocomplete="off" role="combobox" aria-expanded="false" aria-haspopup="listbox">
                     <span class="material-symbols-rounded absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 dark:text-neutral-400 transition-transform duration-200" data-icons-ready="true">expand_more</span>
                   </div>
                   <div class="combobox-options absolute z-10 w-full mt-1 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-xl shadow-lg max-h-60 overflow-auto hidden" role="listbox">
@@ -1070,7 +1070,7 @@
                 id="textarea-input"
                 rows="3"
                 placeholder="Enter your message here..."
-                class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950 transition-all resize-none"
+                class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:outline-none transition-all resize-none"
               ></textarea>
             </div>
 
@@ -1080,7 +1080,7 @@
               <input
                 id="file-input"
                 type="file"
-                class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 dark:file:bg-primary-900/30 dark:file:text-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950 transition-all"
+                class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 dark:file:bg-primary-900/30 dark:file:text-primary-300 focus:outline-none transition-all"
               />
             </div>
 
@@ -1092,7 +1092,7 @@
                   id="search-input"
                   type="search"
                   placeholder="Search..."
-                  class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950 transition-all"
+                  class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:outline-none transition-all"
                 />
                 <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-rounded text-neutral-400">search</span>
               </div>
@@ -1117,15 +1117,15 @@
                 <p class="text-[13px] leading-normal font-normal tracking-wide font-medium mb-3 text-neutral-700 dark:text-neutral-300">Checkboxes</p>
                 <div class="space-y-2">
                   <div class="flex items-center gap-3">
-                    <input type="checkbox" id="check1" class="w-4 h-4 rounded border-neutral-300 text-primary-600 focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950">
+                    <input type="checkbox" id="check1" class="w-4 h-4 rounded border-neutral-300 text-primary-600">
                     <label for="check1" class="text-[15px] leading-relaxed font-normal">Option 1</label>
                   </div>
                   <div class="flex items-center gap-3">
-                    <input type="checkbox" id="check2" class="w-4 h-4 rounded border-neutral-300 text-primary-600 focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950" checked>
+                    <input type="checkbox" id="check2" class="w-4 h-4 rounded border-neutral-300 text-primary-600" checked>
                     <label for="check2" class="text-[15px] leading-relaxed font-normal">Option 2 (checked)</label>
                   </div>
                   <div class="flex items-center gap-3">
-                    <input type="checkbox" id="check3" class="w-4 h-4 rounded border-neutral-300 text-primary-600 focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950" disabled>
+                    <input type="checkbox" id="check3" class="w-4 h-4 rounded border-neutral-300 text-primary-600" disabled>
                     <label for="check3" class="text-[15px] leading-relaxed font-normal text-neutral-400">Option 3 (disabled)</label>
                   </div>
                 </div>
@@ -1135,15 +1135,15 @@
                 <p class="text-[13px] leading-normal font-normal tracking-wide font-medium mb-3 text-neutral-700 dark:text-neutral-300">Radio Buttons</p>
                 <div class="space-y-2">
                   <div class="flex items-center gap-3">
-                    <input type="radio" id="radio1" name="radio-group" class="w-4 h-4 border-neutral-300 text-primary-600 focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950">
+                    <input type="radio" id="radio1" name="radio-group" class="w-4 h-4 border-neutral-300 text-primary-600">
                     <label for="radio1" class="text-[15px] leading-relaxed font-normal">Option A</label>
                   </div>
                   <div class="flex items-center gap-3">
-                    <input type="radio" id="radio2" name="radio-group" class="w-4 h-4 border-neutral-300 text-primary-600 focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950" checked>
+                    <input type="radio" id="radio2" name="radio-group" class="w-4 h-4 border-neutral-300 text-primary-600" checked>
                     <label for="radio2" class="text-[15px] leading-relaxed font-normal">Option B (selected)</label>
                   </div>
                   <div class="flex items-center gap-3">
-                    <input type="radio" id="radio3" name="radio-group" class="w-4 h-4 border-neutral-300 text-primary-600 focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950" disabled>
+                    <input type="radio" id="radio3" name="radio-group" class="w-4 h-4 border-neutral-300 text-primary-600" disabled>
                     <label for="radio3" class="text-[15px] leading-relaxed font-normal text-neutral-400">Option C (disabled)</label>
                   </div>
                 </div>
@@ -1343,7 +1343,7 @@
           <h3 class="text-xl font-semibold mb-4 text-neutral-800 dark:text-neutral-200">Basic Dropdown</h3>
           <div class="flex flex-wrap gap-4">
             <div class="dropdown relative" data-dropdown="basic">
-              <button type="button" class="dropdown-button px-5 py-2.5 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 font-medium rounded-xl text-sm transition-all hover:border-neutral-400 dark:hover:border-neutral-600 hover:scale-[1.02] shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950" aria-expanded="false" aria-haspopup="menu">
+              <button type="button" class="dropdown-button px-5 py-2.5 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 font-medium rounded-xl text-sm transition-all hover:border-neutral-400 dark:hover:border-neutral-600 hover:scale-[1.02] shadow-sm focus:outline-none" aria-expanded="false" aria-haspopup="menu">
                 <span class="flex items-center gap-2">
                   Options
                   <span class="material-symbols-rounded text-lg transition-transform duration-200" data-icons-ready="true">expand_more</span>
@@ -1373,7 +1373,7 @@
             </div>
 
             <div class="dropdown relative" data-dropdown="colored">
-              <button type="button" class="dropdown-button px-5 py-2.5 bg-primary-500 hover:bg-primary-600 text-white font-medium rounded-xl text-sm transition-all hover:scale-[1.02] shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950" aria-expanded="false" aria-haspopup="menu">
+              <button type="button" class="dropdown-button px-5 py-2.5 bg-primary-500 hover:bg-primary-600 text-white font-medium rounded-xl text-sm transition-all hover:scale-[1.02] shadow-sm focus:outline-none" aria-expanded="false" aria-haspopup="menu">
                 <span class="flex items-center gap-2">
                   Actions
                   <span class="material-symbols-rounded text-lg transition-transform duration-200" data-icons-ready="true">expand_more</span>
@@ -1395,7 +1395,7 @@
           <h3 class="text-xl font-semibold mb-4 text-neutral-800 dark:text-neutral-200">Avatar Dropdown</h3>
           <div class="flex flex-wrap gap-4">
             <div class="dropdown relative" data-dropdown="avatar">
-              <button type="button" class="dropdown-button w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center text-white font-medium text-sm hover:bg-primary-600 transition-all focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950" aria-expanded="false" aria-haspopup="menu" aria-label="User menu">
+              <button type="button" class="dropdown-button w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center text-white font-medium text-sm hover:bg-primary-600 transition-all focus:outline-none" aria-expanded="false" aria-haspopup="menu" aria-label="User menu">
                 JD
               </button>
               <div class="dropdown-menu absolute z-10 right-0 mt-1 w-56 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-xl shadow-lg hidden" role="menu">
@@ -1448,7 +1448,7 @@
 
             <!-- Small Dropdown -->
             <div class="dropdown relative" data-dropdown="small">
-              <button type="button" class="dropdown-button px-3 py-1.5 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 font-medium rounded-lg text-xs transition-all hover:border-neutral-400 dark:hover:border-neutral-600 hover:scale-[1.02] shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-950" aria-expanded="false" aria-haspopup="menu">
+              <button type="button" class="dropdown-button px-3 py-1.5 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 font-medium rounded-lg text-xs transition-all hover:border-neutral-400 dark:hover:border-neutral-600 hover:scale-[1.02] shadow-sm focus:outline-none" aria-expanded="false" aria-haspopup="menu">
                 <span class="flex items-center gap-1">
                   Small
                   <span class="material-symbols-rounded text-sm transition-transform duration-200" data-icons-ready="true">expand_more</span>
@@ -3110,7 +3110,7 @@
           </div>
         </div>
         <div class="pt-2 flex items-center justify-end gap-2">
-          <button data-action="close-right-drawer" class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-400/60 transition-all duration-150 active:scale-[0.98]">Cancel</button>
+          <button data-action="close-right-drawer" class="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-4 text-sm font-semibold border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 text-neutral-900 dark:text-neutral-100 focus:outline-none transition-all duration-150 active:scale-[0.98]">Cancel</button>
           <button class="btn bg-accent-500 text-neutral-50 hover:bg-accent-600">Apply</button>
         </div>
       </div>
